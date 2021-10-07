@@ -6,6 +6,7 @@ const helper = require("./helper");
 const categoryRoute = require("./routes/category");
 const productRoute = require("./routes/product");
 const bannerRoute = require("./routes/banner");
+const userRoute = require("./routes/user");
 const siteRoute = require("./routes/site");
 const app = express();
 
@@ -21,6 +22,7 @@ helper.dbConnect();
 app.listen(3000, () => {
   console.log("server started");
 });
+app.use("/api/user", userRoute);
 app.use("/api/banner", bannerRoute);
 app.use("/api/product", productRoute);
 app.use("/api/category", categoryRoute);

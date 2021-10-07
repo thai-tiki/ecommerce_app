@@ -9,6 +9,16 @@ module.exports = {
   FAILURE: "FAILURE",
   UNAUTHORIZED: "UNAUTHORIZED",
   //MESSAGE
-  CODE_500: "Something went wrong please try again latter!",
-  CODE_401: "No document found with that id!",
+  CODE_401: "Không tìm thấy !",
+  WRONG_PASSWORD: "Mật khẩu không chính xác",
+  CODE_500: "Có lỗi xảy ra vui lòng thử lại sau !",
+  PHONE_REGISTERED: "Số điện thoại đã được đăng ký",
+  PHONE_NOT_REGISTERED: "Số điện thoại chưa đăng ký",
+  LOGIN_MISSING_INFO: "Vui lòng cung cấp đầy đủ thông tin đăng nhập",
+  //ROLE
+  ADMIN: "ADMIN",
+  CUSTOMER: "CUSTOMER",
+  //HASH
+  JWT_SECRET: "12KDJAKE21",
+  SALT_SECRET: "$2a$12$t7M3OgpA4ML85VAwnlI10.",
 };

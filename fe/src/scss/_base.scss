@@ -1,0 +1,243 @@
+* {
+  border: none;
+  outline: none;
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+  font-family: Roboto, sans-serif;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+button,
+a {
+  cursor: pointer;
+  color: $text-color;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+body {
+  background: #f2f3f8;
+}
+.row {
+  display: flex;
+}
+.cancel-btn {
+  background: $price-color;
+  color: white;
+}
+.confirm-btn {
+  background: $main-color;
+  color: white;
+}
+.err-msg {
+  font-size: 14px;
+  color: $light-red;
+}
+.img-container {
+  display: block;
+  position: relative;
+  margin: auto;
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 100%;
+  height: 100%;
+  display: none;
+  background: rgba($color: #000000, $alpha: 0.2);
+}
+.modal.active {
+  display: block;
+}
+.center {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+}
+.mobile,
+.mobile-paginate {
+  display: none;
+}
+.dropdown {
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.5s;
+  z-index: 7;
+  background-color: white;
+  border-radius: 0.25em;
+  box-shadow: 0 0 8px 0 $border-color;
+}
+.dropdown.active {
+  opacity: 1;
+  visibility: visible;
+}
+.custom-select {
+  position: relative;
+  color: #333;
+  z-index: 2;
+  .select-btn {
+    display: flex;
+    padding: 1em;
+    align-items: center;
+    justify-content: space-between;
+    width: 14em;
+    height: 3em;
+    font-size: 16px;
+    border: 1px solid rgb(180, 180, 180);
+    border-radius: 0;
+    cursor: pointer;
+  }
+  .options {
+    transition: 0.3s;
+    max-height: 0;
+    overflow: hidden;
+    position: absolute;
+    background-color: white;
+    border-left: 1px solid $border-color;
+    border-bottom: 1px solid $border-color;
+    border-right: 1px solid $border-color;
+    width: 100%;
+    > div {
+      cursor: pointer;
+      padding: 0.5em;
+      padding-left: 1em;
+      padding-right: 1em;
+    }
+    > div:hover {
+      background-color: rgb(245, 245, 245);
+    }
+  }
+}
+.desktop-paginate {
+  margin: auto;
+  margin-top: 1em;
+  width: fit-content;
+  button {
+    width: 2.5em;
+    height: 2.5em;
+    border-radius: 100%;
+    margin-left: 0.25em;
+    margin-right: 0.25em;
+    cursor: pointer;
+    font-size: 16px;
+    background: white;
+  }
+  button.active {
+    background: $main-color;
+    color: white;
+  }
+  .pre-btn,
+  .next-btn {
+    color: $sub-text-color;
+  }
+  button.disable {
+    opacity: 0.5;
+  }
+}
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.slick-prev,
+.slick-next {
+  background-color: rgba($color: #000000, $alpha: 0.2) !important;
+  padding: 0.5em;
+  width: 30px;
+  height: 40px;
+  z-index: 3;
+  border-radius: 4px;
+}
+.slick-next {
+  right: 0px;
+}
+.slick-prev {
+  left: 0px;
+}
+.hide-scroll {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+}
+@media only screen and (max-width: 600px) {
+  .desktop-paginate {
+    display: none;
+  }
+  .mobile-paginate {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    margin-bottom: 1em;
+    width: fit-content;
+    button {
+      width: 2.5em;
+      height: 2.5em;
+      border-radius: 100%;
+      cursor: pointer;
+      font-size: 16px;
+      background: white;
+    }
+    div {
+      color: $sub-text-color;
+      font-size: 20px;
+      margin-left: 1em;
+      margin-right: 1em;
+      span {
+        color: $main-color;
+      }
+    }
+    button.disable {
+      opacity: 0.5;
+    }
+  }
+  .mobile {
+    display: block;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .container {
+    max-width: 540px;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+@media only screen and (min-width: 1500px) {
+  .container {
+    max-width: 1400px;
+  }
+}
