@@ -3,7 +3,7 @@ import { appServices } from "../services/appServices";
 function getHomeInfo() {
   return (dispatch) => {
     appServices.getHomeInfo().then((res) => {
-      if (res.code === 200) dispatch(success(res.data));
+      if (res.status === c.SUCCESS) dispatch(success(res.data));
       else dispatch(failure());
     });
   };
@@ -19,10 +19,10 @@ function changePopup(popupType, messageInfo, rattingInfo) {
     dispatch({ type: c.CHANGE_POPUP, popupType, messageInfo, rattingInfo });
   };
 }
-function getProvincesList() {
+function getLocation() {
   return (dispatch) => {
-    appServices.getProvincesList().then((res) => {
-      if (res.code === 200) {
+    appServices.getLocation().then((res) => {
+      if (res.status === c.SUCCESS) {
         dispatch(success(res.data));
       } else {
         dispatch(failure());
@@ -30,7 +30,7 @@ function getProvincesList() {
     });
   };
   function success(provinces) {
-    localStorage.setItem("provinces", JSON.stringify(provinces));
+    localStorage.setItem("location", JSON.stringify(provinces));
     return {
       type: c.GET_PROVINCES_LIST_SUCCESS,
       provinces,
@@ -88,7 +88,6 @@ function getWardsList(districtID) {
 }
 function getInfoStore() {
   return (dispatch) => {
-
     const info_store = appServices.getInfoStore();
     if (info_store != null) {
       let info = { ...info_store, status: c.SUCCESS };
@@ -132,12 +131,12 @@ function setChatStatus(status) {
   return (dispatch) => dispatch({ type: c.TOGGLE_CHAT_STATUS, status });
 }
 export const appActions = {
-  getProvincesList,
+  getLocation,
   getDistrictsList,
   setChatStatus,
   getWardsList,
   getHomeInfo,
   changePopup,
   getWebTheme,
-  getInfoStore
+  getInfoStore,
 };

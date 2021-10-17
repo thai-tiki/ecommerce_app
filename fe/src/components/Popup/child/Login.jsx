@@ -20,7 +20,7 @@ export default function Login(props) {
   }
   function handleLogin() {
     dispatch(userActions.accountLogin({
-      phone_number: phone,
+      phone,
       password
     }))
   }

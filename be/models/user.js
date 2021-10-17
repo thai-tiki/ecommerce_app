@@ -6,7 +6,23 @@ const userSchema = mongoose.Schema({
   name: String,
   password: String,
   phone: String,
+  email: String,
   sex: Number,
+  address: {
+    type: [
+      {
+        name: String,
+        ward: Number,
+        phone: String,
+        email: String,
+        detail: String,
+        province: Number,
+        district: Number,
+        is_default: Boolean,
+      },
+    ],
+    default: [],
+  },
   role: {
     type: String,
     default: c.CUSTOMER,
@@ -16,6 +32,7 @@ const validate = (user) => {
   const schema = joi
     .object({
       name: joi.string().min(1).required(),
+      email: joi.string().min(1).required(),
       password: joi.string().min(6).required(),
       phone: joi.string().min(7).required(),
       sex: joi.number().required(),

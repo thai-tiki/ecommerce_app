@@ -3,7 +3,7 @@ import { productServices as s } from "../services/productServices";
 function getProductInfo(id) {
   return (dispatch) => {
     s.getProductInfo(id).then((res) => {
-      if (res.code === 200) dispatch(success(res.data));
+      if (res.status === c.SUCCESS) dispatch(success(res.data));
       else dispatch(failure(res.code, res.msg));
     });
   };
@@ -14,6 +14,27 @@ function getProductInfo(id) {
     return { type: c.GET_PRODUCT_FAILURE, code, message };
   }
 }
+function getAllProducts(params) {
+  return (dispatch) => {
+    s.getAllProducts(params).then((res) => {
+      if (res.status === c.SUCCESS)
+        dispatch(success(res.data, res.current_page, res.total_page));
+      else dispatch(failure(res.code, res.msg));
+    });
+  };
+  function success(productsList, currentPage, totalPage) {
+    return {
+      type: c.GET_PRODUCTS_SUCCESS,
+      productsList,
+      currentPage,
+      totalPage,
+    };
+  }
+  function failure(code, message) {
+    return { type: c.GET_PRODUCTS_FAILURE, code, message };
+  }
+}
+//OK
 function getSimilarProducts(id) {
   return (dispatch) => {
     s.getSimilarProducts(id).then((res) => {
@@ -26,23 +47,6 @@ function getSimilarProducts(id) {
   }
   function failure() {
     return { type: c.GET_SIMILAR_PRODUCTS_FAILURE };
-  }
-}
-function setErrorDistribute(mess) {
-  return (dispatch) => dispatch({ type: c.SET_ERROR_SELECT_DISTRIBUTE,data: mess });
-}
-function getAllProducts(params) {
-  return (dispatch) => {
-    s.getAllProducts(params).then((res) => {
-      if (res.code === 200) dispatch(success(res.data));
-      else dispatch(failure(res.code, res.msg));
-    });
-  };
-  function success(data) {
-    return { type: c.GET_PRODUCTS_SUCCESS, data };
-  }
-  function failure(code, message) {
-    return { type: c.GET_PRODUCTS_FAILURE, code, message };
   }
 }
 function getFavoriteProducts() {
@@ -122,7 +126,6 @@ function reviewProduct(id, reviewInfo) {
   }
 }
 function getPurchasedProducts() {
-  console.log("1111");
   return (dispatch) => {
     s.getPurchasedProducts().then((res) => {
       if (res.code === 201 || res.code === 200) {
@@ -165,5 +168,4 @@ export const productActions = {
   getSimilarProducts,
   getFavoriteProducts,
   getPurchasedProducts,
-  setErrorDistribute,
 };

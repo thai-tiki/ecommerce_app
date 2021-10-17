@@ -5,7 +5,7 @@ import { userActions } from "../actions/userActions";
 function addCart(product, willShowPopup) {
   return (dispatch) => {
     s.addCart(product).then((res) => {
-      if (res.code === 200) {
+      if (res.status === c.SUCCESS) {
         localStorage.setItem("cartInfo", JSON.stringify(res.data));
         dispatch(success(res.data));
         if (product.quantity) {
@@ -32,7 +32,7 @@ function addCart(product, willShowPopup) {
         dispatch({
           type: c.CHANGE_POPUP,
           popupType: c.AUTOHIDE_POPUP,
-          messageInfo: "Có lỗi xảy ra vui lòng thử lại sau !",
+          messageInfo: res.msg,
         });
       }
       dispatch(userActions.getUserBadges());
@@ -45,42 +45,10 @@ function addCart(product, willShowPopup) {
     return { type: c.ADD_CART_FAILURE };
   }
 }
-function changeNumberInCart(product) {
-  return (dispatch) => {
-    s.changeNumberInCart(product).then((res) => {
-      if (res.code === 200) {
-        console.log("success");
-        localStorage.setItem("cartInfo", JSON.stringify(res.data));
-        if (product.quantity === 0) {
-          dispatch({
-            type: c.CHANGE_POPUP,
-            popupType: c.AUTOHIDE_POPUP,
-            messageInfo: "Xóa sản phẩm khỏi giỏ hàng thành công !",
-          });
-        }
-        dispatch(userActions.getUserBadges());
-        dispatch(getCartInfo());
-      } else {
-        dispatch(failure());
-        dispatch({
-          type: c.CHANGE_POPUP,
-          popupType: c.AUTOHIDE_POPUP,
-          messageInfo: "Có lỗi xảy ra vui lòng thử lại sau !",
-        });
-      }
-    });
-  };
-  function success(cartInfo) {
-    return { type: c.CHANGE_NUMBER_SUCCESS, cartInfo };
-  }
-  function failure() {
-    return { type: c.ADD_CART_FAILURE };
-  }
-}
 function getCartInfo() {
   return (dispatch) => {
     s.getCartInfo().then((res) => {
-      if (res.code === 200) {
+      if (res.status === c.SUCCESS) {
         localStorage.setItem("cartInfo", JSON.stringify(res.data));
         dispatch(success(res.data));
       } else {
@@ -98,30 +66,10 @@ function getCartInfo() {
     return { type: c.GET_CART_FAILURE };
   }
 }
-function getShipmentFee(idAddress) {
-  return (dispatch) => {
-    s.getShipmentFee(idAddress).then((res) => {
-      if (res.code === 200) {
-        dispatch(success(res.data.data));
-      } else {
-        dispatch(failure());
-      }
-    });
-  };
-  function success(shipmentFee) {
-    return {
-      type: c.GET_SHIPMENT_FEE_SUCCESS,
-      shipmentFee,
-    };
-  }
-  function failure() {
-    return { type: c.GET_SHIPMENT_FEE_FAILURE };
-  }
-}
 function getPaymentMethods() {
   return (dispatch) => {
     s.getPaymentMethods().then((res) => {
-      if (res.code === 200) {
+      if (res.status === c.SUCCESS) {
         dispatch(success(res.data));
       } else {
         dispatch(failure());
@@ -138,10 +86,65 @@ function getPaymentMethods() {
     return { type: c.GET_PAYMENT_METHODS_FAILURE };
   }
 }
+function getShipmentMethods() {
+  return (dispatch) => {
+    s.getShipmentMethods().then((res) => {
+      if (res.status === c.SUCCESS) {
+        dispatch(success(res.data));
+      } else {
+        dispatch(failure());
+      }
+    });
+  };
+  function success(shipmentMethods) {
+    return {
+      type: c.GET_SHIPMENT_FEE_SUCCESS,
+      shipmentMethods,
+    };
+  }
+  function failure() {
+    return { type: c.GET_SHIPMENT_FEE_FAILURE };
+  }
+}
+function applyDiscount(type, value) {
+  const msg = {
+    apply_voucher: "Áp dụng voucher thành công !",
+    cancel_voucher: "Hủy voucher thành công !",
+  };
+  return (dispatch) => {
+    s.applyDiscount(type, value).then((res) => {
+      if (res.status === c.SUCCESS) {
+        localStorage.setItem("cartInfo", JSON.stringify(res.data));
+        dispatch(success(res.data));
+        dispatch({
+          type: c.CHANGE_POPUP,
+          popupType: c.AUTOHIDE_POPUP,
+          messageInfo: value ? msg["apply_voucher"] : msg["cancel_voucher"],
+        });
+      } else {
+        dispatch(failure(res.code, res.msg));
+        dispatch({
+          type: c.CHANGE_POPUP,
+          popupType: c.AUTOHIDE_POPUP,
+          messageInfo: res.msg,
+        });
+      }
+    });
+  };
+  function success(cartInfo) {
+    return {
+      type: c.APPLY_VOUCHER_SUCCESS,
+      cartInfo,
+    };
+  }
+  function failure(code, message) {
+    return { type: c.APPLY_VOUCHER_FAILURE, code, message };
+  }
+}
 function order(orderInfo) {
   return (dispatch) => {
     s.order(orderInfo).then((res) => {
-      if (res.code === 201) {
+      if (res.status === c.SUCCESS) {
         window.localStorage.removeItem("cartInfo");
         dispatch(success());
         dispatch({
@@ -175,6 +178,78 @@ function order(orderInfo) {
     };
   }
 }
+function changeNumberInCart(id, quantity) {
+  return (dispatch) => {
+    s.changeNumberInCart(id, quantity).then((res) => {
+      if (res.status === c.SUCCESS) {
+        if (quantity === 0)
+          dispatch({
+            type: c.CHANGE_POPUP,
+            popupType: c.AUTOHIDE_POPUP,
+            messageInfo: "Xóa sản phẩm khỏi giỏ hàng thành công !",
+          });
+        dispatch(getCartInfo());
+      } else {
+        dispatch({
+          type: c.CHANGE_POPUP,
+          popupType: c.AUTOHIDE_POPUP,
+          messageInfo: "Có lỗi xảy ra vui lòng thử lại sau !",
+        });
+      }
+    });
+  };
+}
+function getOrdersList(query) {
+  return (dispatch) => {
+    s.getOrdersList(query).then((res) => {
+      if (res.status === c.SUCCESS) {
+        dispatch(success(res.data, res.current_page, res.total_page));
+      } else {
+        dispatch(failure(res.code, res.msg));
+      }
+    });
+  };
+  function success(ordersList, currentPage, totalPage) {
+    return {
+      totalPage,
+      ordersList,
+      currentPage,
+      type: c.GET_ORDERS_LIST_SUCCESS,
+    };
+  }
+  function failure(code, message) {
+    return {
+      type: c.GET_ORDERS_LIST_FAILURE,
+      code,
+      message,
+    };
+  }
+}
+function getOrderInfo(id) {
+  return (dispatch) => {
+    s.getOrderInfo(id).then((res) => {
+      if (res.status === c.SUCCESS) {
+        dispatch(success(res.data));
+      } else {
+        dispatch(failure(res.code, res.msg));
+      }
+    });
+  };
+  function success(orderInfo) {
+    return {
+      type: c.GET_ORDER_INFO_SUCCESS,
+      orderInfo,
+    };
+  }
+  function failure(code, message) {
+    return {
+      type: c.GET_ORDER_INFO_FAILURE,
+      code,
+      message,
+    };
+  }
+}
+//OK
 function changePaymentMethod(info) {
   return (dispatch) => {
     s.changePaymentMethod(info).then((res) => {
@@ -211,54 +286,6 @@ function changePaymentMethod(info) {
     };
   }
 }
-function getOrdersList(query) {
-  return (dispatch) => {
-    s.getOrdersList(query).then((res) => {
-      if (res.code === 200) {
-        dispatch(success(res.data));
-      } else {
-        dispatch(failure(res.code, res.msg));
-      }
-    });
-  };
-  function success(ordersList) {
-    return {
-      type: c.GET_ORDERS_LIST_SUCCESS,
-      ordersList,
-    };
-  }
-  function failure(code, message) {
-    return {
-      type: c.GET_ORDERS_LIST_FAILURE,
-      code,
-      message,
-    };
-  }
-}
-function getOrderInfo(orderCode) {
-  return (dispatch) => {
-    s.getOrderInfo(orderCode).then((res) => {
-      if (res.code === 200) {
-        dispatch(success(res.data));
-      } else {
-        dispatch(failure(res.code, res.msg));
-      }
-    });
-  };
-  function success(orderInfo) {
-    return {
-      type: c.GET_ORDER_INFO_SUCCESS,
-      orderInfo,
-    };
-  }
-  function failure(code, message) {
-    return {
-      type: c.GET_ORDER_INFO_FAILURE,
-      code,
-      message,
-    };
-  }
-}
 function cancelOrder(info) {
   return (dispatch) => {
     s.cancelOrder(info).then((res) => {
@@ -282,48 +309,11 @@ function cancelOrder(info) {
     return { type: c.CANCEL_ORDER_FAILURE, code, message };
   }
 }
-function applyDiscount(info, type) {
-  const msg = {
-    code_voucher: "Áp dụng voucher thành công !",
-    is_use_points: "Sử dụng xu thành công !",
-    is_use_balance_collaborator: "Sử dụng số dư CTV thành công !",
-  };
-  return (dispatch) => {
-    s.applyDiscount(info).then((res) => {
-      if (res.code === 200) {
-        localStorage.setItem("cartInfo", JSON.stringify(res.data));
-        dispatch(success(res.data));
-        if (info[type])
-          dispatch({
-            type: c.CHANGE_POPUP,
-            popupType: c.AUTOHIDE_POPUP,
-            messageInfo: msg[type],
-          });
-      } else {
-        dispatch(failure(res.code, res.msg));
-        dispatch({
-          type: c.CHANGE_POPUP,
-          popupType: c.AUTOHIDE_POPUP,
-          messageInfo: res.msg,
-        });
-      }
-    });
-  };
-  function success(cartInfo) {
-    return {
-      type: c.APPLY_VOUCHER_SUCCESS,
-      cartInfo,
-    };
-  }
-  function failure(code, message) {
-    return { type: c.APPLY_VOUCHER_FAILURE, code, message };
-  }
-}
 export const cartActions = {
   order,
   addCart,
   getCartInfo,
-  getShipmentFee,
+  getShipmentMethods,
   getPaymentMethods,
   changeNumberInCart,
   changePaymentMethod,

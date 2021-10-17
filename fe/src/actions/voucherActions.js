@@ -3,7 +3,7 @@ import { voucherServices } from "../services/voucherServices";
 function getAllVoucher() {
   return (dispatch) => {
     voucherServices.getAllVoucher().then((res) => {
-      if (res.code === 200) {
+      if (res.status === c.SUCCESS) {
         dispatch(success(res.data));
       } else {
         dispatch(failure(res.code, res.msg));

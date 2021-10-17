@@ -11,8 +11,11 @@ export function voucher(state = initialState, action) {
       return {
         ...state,
         list: {
-          data: [...action.data],
+          data: action.data,
           status: c.SUCCESS,
+          total: action.total,
+          last_page: action.last_page,
+          total_page: action.total_page,
         },
       };
     case c.GET_ALL_VOUCHERS_FAILURE:

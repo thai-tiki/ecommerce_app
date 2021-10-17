@@ -1,6 +1,6 @@
 import { constants as c } from "../constants";
 import { isHexColor, isImageUrl, isNullText } from "../helper";
-const provinces = localStorage.getItem("provinces");
+const location = localStorage.getItem("location");
 const initialState = {
   home: {
     status: c.LOADING,
@@ -42,11 +42,9 @@ const initialState = {
     status: c.NONE,
   },
   message: "",
-  addressData: {
+  location: {
     status: c.LOADING,
-    provinces: provinces ? JSON.parse(provinces) : [],
-    districts: [],
-    wards: [],
+    data: location ? JSON.parse(location) : [],
   },
   chatStatus: "",
   orderPopup: {},
@@ -181,18 +179,19 @@ export function app(state = initialState, action) {
         ...state,
         message: action.msg,
       };
-    case c.GET_NEWS_CATEGORY_FAILURE:
-    case c.GET_ORDERS_LIST_FAILURE:
-    case c.GET_ORDER_INFO_FAILURE:
+    //case c.GET_ORDERS_LIST_FAILURE:
+    case c.GET_CART_FAILURE:
+    case c.GET_NEWS_FAILURE:
+    case c.GET_PRODUCT_FAILURE:
+    case c.GET_PROFILE_FAILURE:
     case c.GET_ALL_NEWS_FAILURE:
     case c.GET_PRODUCTS_FAILURE:
-    case c.GET_PRODUCT_FAILURE:
-    case c.GET_NEWS_FAILURE:
-    case c.GET_PROFILE_FAILURE:
-    case c.GET_PURCHASED_PRODUCTS_FAILURE:
+    case c.GET_ORDER_INFO_FAILURE:
+    case c.GET_NEWS_CATEGORY_FAILURE:
+    case c.GET_FAVORITE_PRODUCT_FAILURE:
     case c.GET_COLLABORATOR_INFO_FAILURE:
-    case c.GET_FAVORITE_PRODUCT_FAILURE: {
-      window.location.href = `/${action.code}?code=${action.code}&message=${action.message}`;
+    case c.GET_PURCHASED_PRODUCTS_FAILURE: {
+      //window.location.href = `/${action.code}?code=${action.code}&message=${action.msg}`;
       break;
     }
     case c.TOGGLE_CHAT_STATUS:

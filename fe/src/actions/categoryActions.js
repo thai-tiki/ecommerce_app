@@ -3,7 +3,7 @@ import { categoryServices as s } from "../services/categoryServices";
 function getCategories() {
   return (dispatch) => {
     s.getCategories().then((res) => {
-      if (res.code === 200) {
+      if (res.status === c.SUCCESS) {
         localStorage.setItem("categories", JSON.stringify(res.data));
         dispatch(success(res.data));
       } else dispatch(failure(res.code, res.msg));

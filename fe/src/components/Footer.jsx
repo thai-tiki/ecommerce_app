@@ -1,28 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { appActions } from "../actions/appActions";
 import { userActions } from "../actions/userActions";
 import { constants as c } from "../constants";
 import { validURL } from "../helper";
-import HotlineContact from "./HotlineContact/HotlineContact";
 export default function Footer() {
   const dispatch = useDispatch();
-  const [phone, setPhone] = useState("");
-  const tokenInfo = useSelector(state => state.user.tokenInfo);
+  const token = useSelector(state => state.user.token);
   const cartInfo = useSelector(state => state.cart.cartInfo);
   const appTheme = useSelector(state => state.app.appTheme);
   const infoStore = useSelector((state) => state.app.infoStore);
-  const cartNumber = cartInfo ? cartInfo.line_items.length : 0;
-  function handlePhoneChange(e) {
-    setPhone(e.target.value);
-  }
-  function handlePhoneCheck() {
-    if (tokenInfo || phone.length < 7)
-      return;
-    dispatch(userActions.accountCheck({ email: null, phone_number: phone }));
-  };
+  const cartNumber = cartInfo ? cartInfo.items.length : 0;
   function handleAccountClick(e) {
-    if (!tokenInfo) {
+    if (!token) {
       e.preventDefault();
       dispatch(appActions.changePopup(c.PHONE_POPUP));
     }
@@ -40,14 +30,13 @@ export default function Footer() {
     dispatch(userActions.accountLogout());
   }
   function checkToken(e) {
-    if (!tokenInfo) {
+    if (!token) {
       e.preventDefault();
       handleShowPhonePopup();
     }
   }
   return (
     <React.Fragment>
-      <HotlineContact />
       <div className="top-footer">
         <div className="container row">
           <div className="policy-card"
@@ -171,7 +160,7 @@ export default function Footer() {
                 Tài khoản của tôi
               </h2>
               {
-                tokenInfo ?
+                token ?
                   <div
                     style={{ opacity: "0.35", cursor: "pointer", lineHeight: "1.5em" }}
                     onClick={handleLogout}>
@@ -236,15 +225,6 @@ export default function Footer() {
             Cá nhân
           </a>
         </div>
-      </div>
-      <div className="text-center" style={{
-        backgroundColor: "#111723",
-        textAlign: "center",
-        color: "#f2f3f8",
-        paddingBottom: "10px",
-        fontSize: "13px",
-      }} >
-        Design by <a href="https://doapp.vn" style={{ color: "#f2f3f8", }}>DoApp.vn</a>
       </div>
     </React.Fragment>
   )

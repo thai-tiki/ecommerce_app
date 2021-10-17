@@ -19,43 +19,38 @@ function AddressPage() {
       top: 0,
       behavior: "smooth"
     });
-    if (userAddress.status === c.LOADING) {
+    if (userAddress.status === c.LOADING)
       dispatch(userActions.getUserAddress());
-    }
-    if (userAddress.status === c.FAILURE) {
-      window.location.href = "/";
-      console.log("fail");
-    }
-  });
-  function handleShowForm(info) {
-    if (info && (!currentAddress || currentAddress.id !== info.id)) {
-      setCurrentAddress(info);
-    }
-    if (!info) {
-      setCurrentAddress(null);
-    }
+  }, []);
+  function handleShowForm(info, index) {
     setFormClass("active");
+    if (info) {
+      setCurrentAddress({ ...info, index });
+      return;
+    }
+    setCurrentAddress(null);
   };
   function handleCloseForm() {
     setFormClass("");
   }
   function handleAddAddress(info) {
-    console.log(info);
+    dispatch(appActions.changePopup(c.MESSAGE_POPUP));
     dispatch(userActions.addUserAddress(info));
   }
-  function handleUpdateAddress(info) {
-    console.log(info);
-    dispatch(userActions.updateUserAddress(info));
+  function handleUpdateAddress(info, index) {
+    dispatch(appActions.changePopup(c.MESSAGE_POPUP));
+    dispatch(userActions.updateUserAddress(info, index));
   }
   function handleDeleteAddress(id) {
     dispatch(appActions.changePopup(c.MESSAGE_POPUP));
     dispatch(userActions.deleteUserAddress(id));
   }
-  function setDefault(index) {
-    dispatch(userActions.setAddressDefault({
-      ...userAddress.list[index],
+  function setDefault(info, index) {
+    dispatch(appActions.changePopup(c.MESSAGE_POPUP));
+    dispatch(userActions.updateUserAddress({
+      ...info,
       is_default: true
-    }));
+    }, index));
   }
   return (
     <React.Fragment>
@@ -67,21 +62,11 @@ function AddressPage() {
               userAddress.list.map((v, i) =>
                 <AddressCard
                   key={i}
-                  id={v.id}
-                  name={v.name}
-                  email={v.email}
-                  detail={v.address_detail}
-                  handleEdit={handleShowForm}
-                  isDefault={v.is_default}
-                  province={v.province}
-                  provinceName={v.province_name}
-                  district={v.district}
-                  districtName={v.district_name}
-                  ward={v.wards}
-                  wardName={v.wards_name}
-                  phone={v.phone}
+                  index={i}
+                  {...v}
+                  handleEdit={() => handleShowForm(v, i)}
                   handleDelete={handleDeleteAddress}
-                  setDefault={() => setDefault(i)}
+                  setDefault={() => setDefault(v, i)}
                 />
               )
             }

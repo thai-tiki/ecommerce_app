@@ -22,7 +22,7 @@ exports.constants = {
   DEFAULT_PHONE: "0246.0278.753",
   DEFAULT_COLOR: "#e62e04",
   //STATUS
-  API_URL: getMeta("domain_api") + "/api",
+  API_URL: "http://localhost:3001/api",
   CLEAR_MESSAGE: "CLEAR_MESSAGE",
   LOADING: "LOADING",
   NONE: "NONE",
@@ -169,4 +169,7 @@ exports.constants = {
   //COMBO
   GET_ALL_COMBO_SUCCESS: "GET_ALL_COMBO_SUCCESS",
   GET_ALL_COMBO_FAILURE: "GET_ALL_COMBO_FAILURE",
+  //CODE
+  VALUE_DISCOUNT: "VALUE_DISCOUNT",
+  PERCENT_DISCOUNT: "PERCENT_DISCOUNT",
 };

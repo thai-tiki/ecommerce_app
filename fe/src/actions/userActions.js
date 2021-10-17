@@ -3,37 +3,32 @@ import { userServices as s } from "../services/userServices";
 function accountCheck(info) {
   return (dispatch) => {
     s.accountCheck(info).then((res) => {
-      if (res.code === 200) {
-        let result = res.data.filter((v) => v.value === true);
-        if (result.length === 0) {
-          if (info.phone_number !== null) {
-            dispatch({ type: c.PHONE_NOT_REGISTERED, info });
-          }
+      if (res.status === c.SUCCESS) {
+        if (!res.is_registered) {
+          dispatch({ type: c.PHONE_NOT_REGISTERED, info });
         } else {
-          if (result[0].name === "phone_number") {
-            dispatch({ type: c.PHONE_REGISTERED, info });
-          }
+          dispatch({ type: c.PHONE_REGISTERED, info });
         }
       }
     });
   };
 }
-
 function accountLogin(info) {
   console.log(info);
   return (dispatch) => {
     s.accountLogin(info).then((res) => {
-      if (res.code === 200) {
-        dispatch(success(res.data));
+      if (res.status === c.SUCCESS) {
+        dispatch(success(res.data, res.token));
       } else {
         dispatch(failure(res.msg));
       }
     });
   };
-  function success(tokenInfo) {
-    localStorage.setItem("tokenInfo", JSON.stringify(tokenInfo));
+  function success(profile, token) {
+    localStorage.setItem("profile", JSON.stringify(profile));
+    localStorage.setItem("token", JSON.stringify(token));
     window.location.reload();
-    return { type: c.LOGIN_SUCCESS, tokenInfo };
+    return { type: c.LOGIN_SUCCESS, token };
   }
   function failure(msg) {
     console.log(msg);
@@ -43,30 +38,71 @@ function accountLogin(info) {
 function accountRegis(info) {
   return (dispatch) => {
     s.accountRegis(info).then((res) => {
-      if (res.code === 200 || res.code === 201) {
-        console.log("ok");
-        s.accountLogin(info).then((res2) => {
-          console.log("res2", res2);
-          if (res2.code === 200) {
-            dispatch(success(res2.data));
-          } else {
-            window.location.reload();
-          }
-        });
+      if (res.status === c.SUCCESS) {
+        dispatch(success(res.data, res.token));
       } else {
         dispatch(failure(res.msg));
       }
     });
   };
-  function success(tokenInfo) {
-    localStorage.setItem("tokenInfo", JSON.stringify(tokenInfo));
+  function success(info, token) {
+    localStorage.setItem("profile", JSON.stringify(info));
+    localStorage.setItem("token", JSON.stringify(token));
     window.location.reload();
-    return { type: c.LOGIN_SUCCESS, tokenInfo };
+    return { type: c.REGIS_SUCCESS, token };
   }
   function failure(message) {
     return { type: c.REGIS_FAILURE, message };
   }
 }
+function accountLogout() {
+  localStorage.removeItem("token");
+  localStorage.removeItem("profile");
+  localStorage.removeItem("cartInfo");
+  return (dispatch) => {
+    dispatch({ type: c.LOGOUT });
+    window.location.reload();
+  };
+}
+function getUserAddress() {
+  return (dispatch) => {
+    s.getUserAddress().then((res) => {
+      if (res.status === c.SUCCESS) {
+        dispatch(success(res.data));
+      } else {
+        dispatch(failure(res.msg));
+      }
+    });
+  };
+  function success(address) {
+    return { type: c.GET_USER_ADDRESS_SUCCESS, address };
+  }
+  function failure() {
+    return { type: c.GET_USER_ADDRESS_FAILURE };
+  }
+}
+function updateUserAddress(addressInfo, index) {
+  return (dispatch) => {
+    s.updateUserAddress(addressInfo, index).then((res) => {
+      if (res.status === c.SUCCESS) {
+        dispatch(success(res.data));
+      } else {
+        dispatch(failure(res.msg));
+      }
+    });
+  };
+  function success(address) {
+    return {
+      type: c.UPDATE_USER_ADDRESS_SUCCESS,
+      address,
+      message: "Cập nhật thông tin giao hàng thành công",
+    };
+  }
+  function failure(message) {
+    return { type: c.UPDATE_USER_ADDRESS_FAILURE, message };
+  }
+}
+//OK
 function resetPassword(info) {
   return (dispatch) => {
     s.resetPassword(info).then((res) => {
@@ -84,37 +120,10 @@ function resetPassword(info) {
     return { type: c.RESET_PASSWORD_FAILURE, msg };
   }
 }
-function accountLogout() {
-  localStorage.removeItem("tokenInfo");
-  localStorage.removeItem("userInfo");
-  localStorage.removeItem("cartInfo");
-  localStorage.removeItem("profile");
-  return (dispatch) => {
-    dispatch({ type: c.LOGOUT });
-    window.location.reload();
-  };
-}
-function getUserAddress() {
-  return (dispatch) => {
-    s.getUserAddress().then((res) => {
-      if (res.code === 200) {
-        dispatch(success(res.data));
-      } else {
-        dispatch(failure(res.msg));
-      }
-    });
-  };
-  function success(userAddress) {
-    return { type: c.GET_USER_ADDRESS_SUCCESS, userAddress };
-  }
-  function failure() {
-    return { type: c.GET_USER_ADDRESS_FAILURE };
-  }
-}
 function addUserAddress(addressInfo) {
   return (dispatch) => {
     s.addUserAddress(addressInfo).then((res) => {
-      if (res.code === 201) {
+      if (res.status === c.SUCCESS) {
         dispatch(success());
       } else {
         dispatch(failure(res.msg));
@@ -129,26 +138,6 @@ function addUserAddress(addressInfo) {
   }
   function failure(message) {
     return { type: c.ADD_USER_ADDRESS_FAILURE, message };
-  }
-}
-function updateUserAddress(addressInfo) {
-  return (dispatch) => {
-    s.updateUserAddress(addressInfo).then((res) => {
-      if (res.code === 200) {
-        dispatch(success());
-      } else {
-        dispatch(failure(res.msg));
-      }
-    });
-  };
-  function success() {
-    return {
-      type: c.UPDATE_USER_ADDRESS_SUCCESS,
-      message: "Cập nhật thông tin giao hàng thành công",
-    };
-  }
-  function failure(message) {
-    return { type: c.UPDATE_USER_ADDRESS_FAILURE, message };
   }
 }
 function setAddressDefault(addressInfo) {
@@ -177,7 +166,7 @@ function setAddressDefault(addressInfo) {
 function deleteUserAddress(id) {
   return (dispatch) => {
     s.deleteUserAddress(id).then((res) => {
-      if (res.code === 200) {
+      if (res.status === c.SUCCESS) {
         dispatch(success());
       } else {
         dispatch(failure(res.msg));

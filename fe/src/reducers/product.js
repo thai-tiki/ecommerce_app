@@ -2,6 +2,7 @@ import { constants as c } from "../constants";
 const initialState = {
   list: {
     status: c.LOADING,
+    list: [],
   },
   favorite: {
     status: c.LOADING,
@@ -42,8 +43,15 @@ export function product(state = initialState, action) {
           list: [],
         },
       };
+    case c.RESET_PRODUCTS_LIST_STATUS:
+      return {
+        ...state,
+        list: {
+          status: c.LOADING,
+        },
+      };
     case c.SET_ERROR_SELECT_DISTRIBUTE:
-     return {
+      return {
         ...state,
         error_distribute: action.data,
       };
@@ -55,13 +63,6 @@ export function product(state = initialState, action) {
           status: c.SUCCESS,
         },
         status: c.SUCCESS,
-      };
-    case c.RESET_PRODUCTS_LIST_STATUS:
-      return {
-        ...state,
-        list: {
-          status: c.LOADING,
-        },
       };
     case c.GET_FAVORITE_PRODUCT_SUCCESS:
       return {
@@ -83,8 +84,10 @@ export function product(state = initialState, action) {
       return {
         ...state,
         list: {
-          ...action.data,
+          list: action.productsList,
           status: c.SUCCESS,
+          totalPage: action.totalPage,
+          currentPage: action.currentPage,
         },
       };
     case c.GET_SIMILAR_PRODUCTS_SUCCESS:

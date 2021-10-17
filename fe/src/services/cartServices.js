@@ -1,51 +1,19 @@
 import { constants as c } from "../constants";
 import { appServices } from "./appServices";
-import { DeviceUUID } from "device-uuid";
-const uuid = new DeviceUUID().get();
 const store_code = appServices.store_code;
 function addCart(product) {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
-      "device-id": `${store_code}-${uuid}`,
+      token: token ? token : "",
     },
     body: JSON.stringify(product),
   };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/carts/items`,
-    requestOptions
-  )
+  return fetch(`${c.API_URL}/cart/item`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
-      console.log(json);
-      return json;
-    })
-    .catch((err) => {
-      console.log(err);
-      return {};
-    });
-}
-function changeNumberInCart(product) {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
-  const requestOptions = {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
-      "device-id": `${store_code}-${uuid}`,
-    },
-    body: JSON.stringify(product),
-  };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/carts/items`,
-    requestOptions
-  )
-    .then((res) => res.json())
-    .then((json) => {
-      console.log(product);
       console.log(json);
       return json;
     })
@@ -55,42 +23,15 @@ function changeNumberInCart(product) {
     });
 }
 function getCartInfo() {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
-    method: "POST",
+    method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
-      "device-id": `${store_code}-${uuid}`,
+      token: token ? token : "",
     },
   };
-  return fetch(`${c.API_URL}/customer/${store_code}/carts`, requestOptions)
-    .then((res) => res.json())
-    .then((json) => {
-      console.log(json);
-      return json;
-    })
-    .catch((err) => {
-      console.log(err);
-      return {};
-    });
-}
-function getShipmentFee(idAddress) {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
-  const requestOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
-    },
-    body: JSON.stringify({
-      id_address_customer: idAddress,
-    }),
-  };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/shipment/fee`,
-    requestOptions
-  )
+  return fetch(`${c.API_URL}/cart`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -102,18 +43,56 @@ function getShipmentFee(idAddress) {
     });
 }
 function getPaymentMethods() {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
+      token: token ? token : "",
     },
   };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/payment_methods`,
-    requestOptions
-  )
+  return fetch(`${c.API_URL}/payment_method`, requestOptions)
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json);
+      return json;
+    })
+    .catch((err) => {
+      console.log(err);
+      return {};
+    });
+}
+function getShipmentMethods(idAddress) {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      token: token ? token : "",
+    },
+  };
+  return fetch(`${c.API_URL}/shipment_method`, requestOptions)
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json);
+      return json;
+    })
+    .catch((err) => {
+      console.log(err);
+      return {};
+    });
+}
+function applyDiscount(type, value) {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      token: token ? token : "",
+    },
+    body: JSON.stringify({ type, value }),
+  };
+  return fetch(`${c.API_URL}/cart/discount`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -125,19 +104,37 @@ function getPaymentMethods() {
     });
 }
 function order(orderInfo) {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
+      token: token ? token : "",
     },
     body: JSON.stringify(orderInfo),
   };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/carts/orders`,
-    requestOptions
-  )
+  return fetch(`${c.API_URL}/cart/order`, requestOptions)
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json);
+      return json;
+    })
+    .catch((err) => {
+      console.log(err);
+      return {};
+    });
+}
+function changeNumberInCart(id, quantity) {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const requestOptions = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      token: token ? token : "",
+    },
+    body: JSON.stringify({ id, quantity }),
+  };
+  return fetch(`${c.API_URL}/cart/item`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -149,18 +146,15 @@ function order(orderInfo) {
     });
 }
 function getOrdersList(query) {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
+      token: token ? token : "",
     },
   };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/carts/orders${query}`,
-    requestOptions
-  )
+  return fetch(`${c.API_URL}/order${query}`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -171,19 +165,16 @@ function getOrdersList(query) {
       return {};
     });
 }
-function getOrderInfo(orderCode) {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+function getOrderInfo(id) {
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
+      token: token ? token : "",
     },
   };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/carts/orders/${orderCode}`,
-    requestOptions
-  )
+  return fetch(`${c.API_URL}/order/${id}`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -194,13 +185,14 @@ function getOrderInfo(orderCode) {
       return {};
     });
 }
+//OK
 function cancelOrder(info) {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
+      "customer-token": token ? token : "",
     },
     body: JSON.stringify(info),
   };
@@ -219,12 +211,12 @@ function cancelOrder(info) {
     });
 }
 function changePaymentMethod(info) {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
+      "customer-token": token ? token : "",
     },
     body: JSON.stringify({
       payment_method_id: info.paymentMethodId,
@@ -244,32 +236,11 @@ function changePaymentMethod(info) {
       return {};
     });
 }
-function applyDiscount(info) {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
-  const requestOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
-    },
-    body: JSON.stringify(info),
-  };
-  return fetch(`${c.API_URL}/customer/${store_code}/carts`, requestOptions)
-    .then((res) => res.json())
-    .then((json) => {
-      console.log(json);
-      return json;
-    })
-    .catch((err) => {
-      console.log(err);
-      return {};
-    });
-}
 export const cartServices = {
   order,
   addCart,
   getCartInfo,
-  getShipmentFee,
+  getShipmentMethods,
   getPaymentMethods,
   changeNumberInCart,
   getOrdersList,

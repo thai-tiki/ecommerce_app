@@ -7,7 +7,11 @@ const productSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  price: {
+  before_discount_price: {
+    type: Number,
+    default: 0,
+  },
+  after_discount_price: {
     type: Number,
     default: 0,
   },
@@ -51,11 +55,12 @@ const productSchema = new mongoose.Schema({
 const validate = (product) => {
   const schema = joi
     .object({
-      price: joi.number().min(0).required(),
       name: joi.string().min(1).required(),
       price: joi.number().min(0).required(),
       quantity: joi.number().min(0).required(),
       images: joi.array().items(joi.string()).required(),
+      after_discount_price: joi.number().min(0).required(),
+      before_discount_price: joi.number().min(0).required(),
       categories: joi.array().items(joi.string()).required(),
     })
     .unknown(true);

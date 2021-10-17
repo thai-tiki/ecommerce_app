@@ -1,18 +1,17 @@
-import { useSelector, useDispatch } from "react-redux"; import Select from "../../../components/Select";
+import { useSelector } from "react-redux";
+import Select from "../../../components/Select";
 import { hideParentElement } from "../../../helper";
-import { appActions as a } from "../../../actions/appActions";
-import { constants as c } from "../../../constants";
 import { useState } from "react";
 import { useEffect } from "react";
 export default function AddressForm(props) {
   const { customClass, currentAddress } = props;
-  const dispatch = useDispatch();
-  const provinces = useSelector(state => state.app.addressData.provinces);
-  const districts = useSelector(state => state.app.addressData.districts);
-  const wards = useSelector(state => state.app.addressData.wards);
+  const location = useSelector(state => state.app.location.data);
+  const [currentWard, setCurrentWard] = useState(null);
   const [currentProvince, setCurrentProvince] = useState(null);
   const [currentDistrict, setCurrentDistrict] = useState(null);
-  const [currentWard, setCurrentWard] = useState(null);
+  const [selectedWard, setSelectedWard] = useState(0);
+  const [selectedProvince, setSelectedProvince] = useState(0);
+  const [selectedDistrict, setSelectedDistrict] = useState(0);
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
@@ -20,34 +19,37 @@ export default function AddressForm(props) {
   const [errMsg, setMessage] = useState("");
   useEffect(() => {
     if (currentAddress) {
-      dispatch(a.getDistrictsList(currentAddress.province));
-      dispatch(a.getWardsList(currentAddress.district));
-      setCurrentWard({
-        title: currentAddress.wardName,
-        id: currentAddress.ward
-      });
       setCurrentProvince({
-        title: currentAddress.provinceName,
-        id: currentAddress.province
+        title: location[currentAddress.province].name
       });
       setCurrentDistrict({
-        title: currentAddress.districtName,
-        id: currentAddress.district
+        title: location[currentAddress.province]
+          .sub[currentAddress.district]
+          .name
       });
+      setCurrentWard({
+        title: location[currentAddress.province]
+          .sub[currentAddress.district]
+          .sub[currentAddress.ward]
+          .name
+      });
+      setSelectedProvince(currentAddress.province);
+      setSelectedDistrict(currentAddress.district);
+      setSelectedWard(currentAddress.ward);
       setName(currentAddress.name);
-      setPhone(currentAddress.phone ? currentAddress.phone : "");
+      setPhone(currentAddress.phone);
       setEmail(currentAddress.email);
       setDetail(currentAddress.detail);
     } else {
-      setCurrentWard(null);
-      setCurrentProvince(null);
-      setCurrentDistrict(null)
       setName("");
       setPhone("");
       setEmail("");
       setDetail("");
+      setCurrentDistrict(null);
+      setCurrentProvince(null);
+      setCurrentWard(null);
     }
-  }, [currentAddress, dispatch])
+  }, [currentAddress])
   function showDetail(e) {
     let currentElement = e.currentTarget;
     let nextElement = currentElement.nextElementSibling;
@@ -68,20 +70,23 @@ export default function AddressForm(props) {
   function handleProvinceSelect(v, e) {
     hideParentElement(e);
     setCurrentProvince(v);
+    setSelectedProvince(v.index);
     setCurrentDistrict(null);
+    setSelectedDistrict(0);
     setCurrentWard(null);
-    dispatch(a.getDistrictsList(v.id));
+    setSelectedWard(0);
   }
   function handleDistrictSelect(v, e) {
     hideParentElement(e);
     setCurrentDistrict(v);
+    setSelectedDistrict(v.index);
     setCurrentWard(null);
-    dispatch(a.getWardsList(v.id));
+    setSelectedWard(0);
   }
   function handleWardSelect(v, e) {
     hideParentElement(e);
     setCurrentWard(v);
-    console.log(v);
+    setSelectedWard(v.index);
   }
   function handleChangeName(e) {
     setName(e.target.value);
@@ -104,24 +109,20 @@ export default function AddressForm(props) {
     };
     const addressInfo = {
       name,
-      address_detail: detail,
-      country: 1,
-      province: currentProvince.id,
-      district: currentDistrict.id,
-      wards: currentWard.id,
       phone,
       email,
+      detail,
+      ward: selectedWard,
+      province: selectedProvince,
+      district: selectedDistrict,
     };
     if (!currentAddress) {
-      dispatch(a.changePopup(c.MESSAGE_POPUP));
       addressInfo.is_default = true;
       props.handleAddAddress(addressInfo);
       return;
     }
-    dispatch(a.changePopup(c.MESSAGE_POPUP));
-    addressInfo.is_default = currentAddress.isDefault;
-    addressInfo.id = currentAddress.id;
-    props.handleUpdateAddress(addressInfo);
+    addressInfo.is_default = currentAddress.is_default;
+    props.handleUpdateAddress(addressInfo, currentAddress.index);
   }
   return (
     <div className={"form-container " + customClass}>
@@ -145,10 +146,12 @@ export default function AddressForm(props) {
           placeholder={currentProvince ? currentProvince.title : "Tỉnh/Thành phố"}
           handleSelect={handleProvinceSelect}
           showDetail={showDetail}
-          values={provinces.map((v) => {
+          values={location.map((v, i) => {
             return {
               title: v.name,
-              id: v.id
+              id: v.id,
+              index: i,
+              sub: v.sub
             }
           })}
         />
@@ -156,23 +159,31 @@ export default function AddressForm(props) {
           placeholder={currentDistrict ? currentDistrict.title : "Quận/Huyện"}
           handleSelect={handleDistrictSelect}
           showDetail={showDetail}
-          values={districts.map((v) => {
-            return {
-              title: v.name,
-              id: v.id
-            }
-          })}
+          values={
+            location[selectedProvince]
+              .sub.map((v, i) => {
+                return {
+                  title: v.name,
+                  id: v.id,
+                  index: i,
+                  sub: v.sub
+                }
+              })}
         />
         <Select
           placeholder={currentWard ? currentWard.title : "Phường/Xã"}
           handleSelect={handleWardSelect}
           showDetail={showDetail}
-          values={wards.map((v) => {
-            return {
-              title: v.name,
-              id: v.id
-            }
-          })}
+          values={
+            location[selectedProvince]
+              .sub[selectedDistrict]
+              .sub.map((v, i) => {
+                return {
+                  title: v.name,
+                  id: v.id,
+                  index: i
+                }
+              })}
         />
         <input type="text" name="detail" id="detail"
           value={detail}

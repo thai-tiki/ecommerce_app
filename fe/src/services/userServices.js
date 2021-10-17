@@ -1,6 +1,6 @@
 import { constants as c } from "../constants";
 import { appServices } from "./appServices";
-import { DeviceUUID } from  "device-uuid";
+import { DeviceUUID } from "device-uuid";
 const store_code = appServices.store_code;
 const uuid = new DeviceUUID().get();
 function accountCheck(info) {
@@ -11,10 +11,7 @@ function accountCheck(info) {
     },
     body: JSON.stringify(info),
   };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/login/check_exists`,
-    requestOptions
-  )
+  return fetch(`${c.API_URL}/user/phone_check`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -33,7 +30,7 @@ function accountLogin(info) {
     },
     body: JSON.stringify(info),
   };
-  return fetch(`${c.API_URL}/customer/${store_code}/login`, requestOptions)
+  return fetch(`${c.API_URL}/user/login`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -52,7 +49,7 @@ function accountRegis(info) {
     },
     body: JSON.stringify(info),
   };
-  return fetch(`${c.API_URL}/customer/${store_code}/register`, requestOptions)
+  return fetch(`${c.API_URL}/user/register`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -64,15 +61,15 @@ function accountRegis(info) {
     });
 }
 function getUserAddress() {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
+      token: token ? token : "",
     },
   };
-  return fetch(`${c.API_URL}/customer/${store_code}/address`, requestOptions)
+  return fetch(`${c.API_URL}/user/address`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -84,16 +81,16 @@ function getUserAddress() {
     });
 }
 function addUserAddress(addressInfo) {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
+      token: token ? token : "",
     },
     body: JSON.stringify(addressInfo),
   };
-  return fetch(`${c.API_URL}/customer/${store_code}/address`, requestOptions)
+  return fetch(`${c.API_URL}/user/address`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -104,20 +101,17 @@ function addUserAddress(addressInfo) {
       return {};
     });
 }
-function updateUserAddress(addressInfo) {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+function updateUserAddress(addressInfo, index) {
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
+      token: token ? token : "",
     },
     body: JSON.stringify(addressInfo),
   };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/address/${addressInfo.id}`,
-    requestOptions
-  )
+  return fetch(`${c.API_URL}/user/address/${index}`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -128,19 +122,16 @@ function updateUserAddress(addressInfo) {
       return {};
     });
 }
-function deleteUserAddress(id) {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+function deleteUserAddress(index) {
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
+      token: token ? token : "",
     },
   };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/address/${id}`,
-    requestOptions
-  )
+  return fetch(`${c.API_URL}/user/address/${index}`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -152,12 +143,12 @@ function deleteUserAddress(id) {
     });
 }
 function getUserProfile() {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
+      token: token ? token : "",
     },
   };
   return fetch(`${c.API_URL}/customer/${store_code}/profile`, requestOptions)
@@ -172,12 +163,12 @@ function getUserProfile() {
     });
 }
 function updateUserProfile(profile) {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
+      "customer-token": token ? token.token : "",
     },
     body: JSON.stringify(profile),
   };
@@ -193,12 +184,12 @@ function updateUserProfile(profile) {
     });
 }
 function getUserReview() {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
+      "customer-token": token ? token.token : "",
     },
   };
   return fetch(`${c.API_URL}/customer/${store_code}/reviews`, requestOptions)
@@ -213,13 +204,13 @@ function getUserReview() {
     });
 }
 function getUserBadges() {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
-      "device-id": uuid
+      "customer-token": token ? token.token : "",
+      "device-id": uuid,
     },
   };
   return fetch(`${c.API_URL}/customer/${store_code}/badges`, requestOptions)
@@ -234,12 +225,12 @@ function getUserBadges() {
     });
 }
 function getuserNotify() {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
+      "customer-token": token ? token.token : "",
     },
   };
   return fetch(

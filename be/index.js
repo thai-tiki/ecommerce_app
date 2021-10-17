@@ -3,9 +3,14 @@ const helmet = require("helmet");
 const cors = require("cors");
 const path = require("path");
 const helper = require("./helper");
+const shipmentMethodRoute = require("./routes/shipmentMethod");
+const paymentMethodRoute = require("./routes/paymentMethod");
 const categoryRoute = require("./routes/category");
+const voucherRoute = require("./routes/voucher");
 const productRoute = require("./routes/product");
 const bannerRoute = require("./routes/banner");
+const orderRoute = require("./routes/order");
+const cartRoute = require("./routes/cart");
 const userRoute = require("./routes/user");
 const siteRoute = require("./routes/site");
 const app = express();
@@ -19,11 +24,16 @@ app.use(cors());
 //bodt parser
 app.use(express.json());
 helper.dbConnect();
-app.listen(3000, () => {
+app.listen(3001, () => {
   console.log("server started");
 });
 app.use("/api/user", userRoute);
+app.use("/api/cart", cartRoute);
+app.use("/api/order", orderRoute);
 app.use("/api/banner", bannerRoute);
+app.use("/api/voucher", voucherRoute);
 app.use("/api/product", productRoute);
 app.use("/api/category", categoryRoute);
+app.use("/api/payment_method", paymentMethodRoute);
+app.use("/api/shipment_method", shipmentMethodRoute);
 app.use("/api/", siteRoute);

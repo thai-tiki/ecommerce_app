@@ -5,13 +5,10 @@ const initialState = {
     ? JSON.parse(cartInfo)
     : {
         status: c.LOADING,
-        line_items: [],
-        total_after_discount: 0,
-        total_before_discount: 0,
-        product_discount_amount: 0,
+        items: [],
       },
   status: c.LOADING,
-  shipmentFee: {
+  shipmentMethod: {
     status: c.LOADING,
     list: [],
   },
@@ -50,14 +47,14 @@ export function cart(state = initialState, action) {
       return {
         ...state,
         status: c.FAILURE,
-        cartInfo: { status: c.FAILURE },
+        cartInfo: { status: c.FAILURE, items: [] },
       };
     case c.GET_SHIPMENT_FEE_SUCCESS:
       return {
         ...state,
-        shipmentFee: {
+        shipmentMethod: {
           status: c.SUCCESS,
-          list: action.shipmentFee,
+          list: action.shipmentMethods,
         },
       };
     case c.GET_SHIPMENT_FEE_FAILURE:
@@ -81,14 +78,17 @@ export function cart(state = initialState, action) {
         ...state,
         paymentMethod: {
           status: c.FAILURE,
+          list: [],
         },
       };
     case c.GET_ORDERS_LIST_SUCCESS:
       return {
         ...state,
         ordersList: {
-          ...action.ordersList,
           status: c.SUCCESS,
+          list: action.ordersList,
+          totalPage: action.totalPage,
+          currentPage: action.currentPage,
         },
       };
     case c.GET_ORDERS_LIST_FAILURE:
@@ -102,8 +102,9 @@ export function cart(state = initialState, action) {
       return {
         ...state,
         orderInfo: {
+          ...action.orderInfo,
           status: c.SUCCESS,
-          info: action.orderInfo,
+          order_status: action.orderInfo.status,
         },
       };
     case c.GET_ORDER_INFO_FAILURE:

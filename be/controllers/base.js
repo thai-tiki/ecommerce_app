@@ -16,18 +16,27 @@ exports.addOne = (Model) => async (req, res) => {
   }
 };
 exports.getAll = (Model) => async (req, res) => {
-  console.log(req.query);
   try {
-    const data = await Model.find(req.query).lean();
+    let page = req.query.page ? req.query.page : 1;
+    const data = await Model.find(req.query)
+      .limit(c.PER_PAGE)
+      .skip((page - 1) * c.PER_PAGE)
+      .lean();
+    let total = await Model.count({}).lean();
+    console.log(total);
+    let total_page = Math.ceil(total / c.PER_PAGE);
     res.status(200).json({
-      total: data.length,
-      status: c.SUCCESS,
-      msg: c.SUCCESS,
       data,
+      total,
+      total_page,
+      msg: c.SUCCESS,
+      status: c.SUCCESS,
+      current_page: page,
     });
   } catch (err) {
     console.log(err);
     res.status(500).json({
+      code: 500,
       status: c.FAILURE,
       msg: c.CODE_500,
     });

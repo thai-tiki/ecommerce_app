@@ -14,7 +14,7 @@ function ProductInfoPage(props) {
   const similarProducts = useSelector(state => state.product.similar);
   const reviews = useSelector(state => state.product.review);
   useEffect(() => {
-    let productId = -1;
+    let productId = "";
     if (props.match.params.id) {
       let arr = props.match.params.id.split("-");
       productId = arr[arr.length - 1];
@@ -23,22 +23,21 @@ function ProductInfoPage(props) {
       dispatch(a.getProductInfo(productId));
     }
     if (product.status === c.SUCCESS) {
-      if (parseInt(productId) !== product.id) {
+      if (similarProducts.status === c.LOADING)
+        dispatch(a.getSimilarProducts(productId));
+      if (reviews.status === c.LOADING)
+        dispatch(a.getProductReview(productId));
+      if (productId !== product._id) {
         dispatch({ type: c.RESET_PRODUCT_STATUS });
+        return;
       }
-      else {
-        document.title = product.name;
-        window.scrollTo({
-          top: 0,
-          behavior: 'smooth'
-        });
-        if (similarProducts.status === c.LOADING)
-          dispatch(a.getSimilarProducts(productId));
-        if (reviews.status === c.LOADING)
-          dispatch(a.getProductReview(productId));
-      }
+      document.title = product.name;
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     }
-  }, [props.match.params.id, product])
+  }, [product])
   return (
     <React.Fragment>
       <Header />
@@ -56,7 +55,7 @@ function ProductInfoPage(props) {
                 attributes={product.attributes}
               />
               <SimilarProducts
-                products={similarProducts.list}
+                products={[]}
               />
             </div>
           </React.Fragment>

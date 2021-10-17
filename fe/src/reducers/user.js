@@ -1,18 +1,18 @@
 import { constants as c } from "../constants";
 const userInfo = localStorage.getItem("userInfo");
-const tokenInfo = localStorage.getItem("tokenInfo");
+const token = localStorage.getItem("token");
 const profile = localStorage.getItem("profile");
 const initialState = {
   phone: "",
   email: "",
   boxChatState: "",
   userInfo: userInfo ? JSON.parse(userInfo) : null,
-  tokenInfo: tokenInfo ? JSON.parse(tokenInfo) : null,
+  token: token ? JSON.parse(token) : null,
   profile: profile
     ? { ...JSON.parse(profile), status: c.SUCCESS }
     : {
-      status: c.LOADING,
-    },
+        status: c.LOADING,
+      },
   address: {
     list: [],
     status: c.LOADING,
@@ -41,13 +41,13 @@ export function user(state = initialState, action) {
     case c.PHONE_REGISTERED:
       return {
         ...state,
-        phone: action.info.phone_number,
-        email: action.info.email,
+        phone: action.info.phone,
       };
     case c.LOGIN_SUCCESS:
+    case c.REGIS_SUCCESS:
       return {
         ...state,
-        tokenInfo: action.tokenInfo,
+        token: action.token,
       };
     case c.LOGIN_FAILURE:
     case c.REGIS_FAILURE:
@@ -58,17 +58,18 @@ export function user(state = initialState, action) {
     case c.LOGOUT:
       return {
         ...state,
-        tokenInfo: null,
+        token: null,
         userInfo: null,
         profile: {
           status: c.LOADING,
         },
       };
     case c.GET_USER_ADDRESS_SUCCESS:
+    case c.UPDATE_USER_ADDRESS_SUCCESS:
       return {
         ...state,
         address: {
-          list: action.userAddress,
+          list: action.address,
           status: c.SUCCESS,
         },
       };
@@ -156,10 +157,10 @@ export function user(state = initialState, action) {
           data: [],
         },
       };
-      case c.TOGGLE_BOX_CHAT:
+    case c.TOGGLE_BOX_CHAT:
       return {
         ...state,
-        boxChatState : action.boxChatState,
+        boxChatState: action.boxChatState,
       };
     default:
       return state;

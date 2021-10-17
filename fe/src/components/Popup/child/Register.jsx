@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { requestOtp } from "../../../helper";
 import { appActions } from "../../../actions/appActions";
 import { userActions } from "../../../actions/userActions";
 import { constants as c } from "../../../constants";
@@ -13,7 +12,7 @@ export default function Login(props) {
   const [validateMsg, setValidateMsg] = useState("");
   const [isSentRequest, setIsSentRequest] = useState(false);
   const [regisInfo, setRegisInfo] = useState({
-    phone_number: phone,
+    phone: phone,
     email: "",
     name: "",
     otp: "",
@@ -40,6 +39,7 @@ export default function Login(props) {
       setValidateMsg("Vui lòng điền đầy đủ thông tin !");
       return;
     }
+    console.log(regisInfo)
     setValidateMsg("");
     setIsSentRequest(true);
     dispatch({ type: c.CLEAR_MESSAGE });
@@ -54,10 +54,12 @@ export default function Login(props) {
     return () => clearInterval(myTimer)
   })
   function handleResendOtp() {
+    let arr = [1, 2, 3, 4, 5];
+    let otp = arr.reduce((rs) => rs + (Math.floor(Math.random() * 10)), "");
+    setRegisInfo({ ...regisInfo, otp });
     if (timer > 0)
       return;
-    requestOtp(phone);
-    setTimer(30);
+    setTimer(2);
   }
   return (
     <div className="modal center">

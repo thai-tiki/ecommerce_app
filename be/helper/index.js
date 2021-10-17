@@ -18,4 +18,11 @@ const createToken = (user) => {
 };
 const comparePassword = async (typed, original) =>
   await bcrypt.compare(typed, c.SALT_SECRET.concat(original));
-module.exports = { dbConnect, createToken, comparePassword };
+function getDate() {
+  let date = new Date();
+  let dateStr = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`;
+  let monthStr =
+    date.getMonth() + 1 > 9 ? date.getMonth() + 1 : `0${date.getMonth()}`;
+  return `${dateStr}-${monthStr}-${date.getFullYear()}`;
+}
+module.exports = { dbConnect, createToken, comparePassword, getDate };

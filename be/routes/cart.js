@@ -1,0 +1,13 @@
+const express = require("express");
+const router = express.Router();
+const controller = require("../controllers/cart");
+const validator = require("../middlewares/validate");
+const { validate } = require("../models/cart");
+const auth = require("../middlewares/auth");
+router.use(auth.protect);
+router.get("/", controller.getOne);
+router.post("/order", controller.order);
+router.post("/discount", controller.applyDiscount);
+router.post("/item", validator(validate), controller.addCart);
+router.put("/item", controller.changeItemQuantity);
+module.exports = router;

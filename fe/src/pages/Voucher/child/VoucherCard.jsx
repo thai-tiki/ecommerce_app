@@ -1,5 +1,6 @@
 import { formatPrice } from "../../../helper";
 import Slider from "react-slick";
+import { constants as c } from "../../../constants";
 import ProductVoucher from "./ProductVoucher";
 export default function VoucherCard(props) {
   var settings = {
@@ -47,26 +48,24 @@ export default function VoucherCard(props) {
         <div className="info">
           <div>
             <div className="value">
-              Giảm {props.discount_type === 1 ? props.value_discount + "%" : "₫" + formatPrice(props.value_discount)}
+              Giảm {
+                props.type === c.PERCENT_DISCOUNT
+                  ? props.value + "%"
+                  : "₫" + formatPrice(props.value)}
             </div>
             <div className="code">
               <span>Mã: </span> {props.code}
             </div>
             {
-              props.value_limit_total &&
+              props.min_order_value > 0 &&
               <div className="apply">
-                Cho đơn hàng từ {formatPrice(props.value_limit_total)}
+                Cho đơn hàng từ {formatPrice(props.min_order_value)}
               </div>
             }
           </div>
           <div className="end">
-            <span>HSD: </span> {props.end_time.split(" ")[0]}
+            <span>HSD: </span> {props.end}
           </div>
-          {
-            props.set_limit_amount === false ? "" : <div className="end">
-              <span>Số lượng có hạn</span>
-            </div>
-          }
         </div>
       </div>
       {

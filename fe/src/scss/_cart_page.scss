@@ -1,0 +1,476 @@
+.cart-page {
+  min-height: 100vh;
+  .cart-items-list {
+    padding: 0.5em;
+    width: 70%;
+    .cart-item {
+      background: white;
+      padding: 0.5em;
+      margin-bottom: 2px;
+      position: relative;
+      .image {
+        width: 100px;
+        .img-container {
+          width: 100%;
+          padding-top: 100%;
+        }
+      }
+      .name {
+        line-height: 18px;
+        font-size: 14px;
+        height: 36px;
+        width: 35%;
+        margin-left: 1em;
+        margin-top: 16px;
+        color: $text-color;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .price {
+        margin-top: 1em;
+        margin-left: 3em;
+        width: 8em;
+        .current-price {
+          font-size: 20px;
+          color: $price-color;
+        }
+        .past-price {
+          font-size: 13px;
+          text-decoration: line-through;
+          color: $sub-text-color;
+        }
+      }
+      .item-info {
+        display: flex;
+        width: calc(100% - 100px);
+        .row {
+          height: fit-content;
+          width: fit-content;
+          border: 1px solid $border-color;
+          border-radius: 0.125em;
+          margin-top: 1em;
+          button {
+            font-size: 16px;
+            width: 2em;
+            height: 2em;
+            background: $wraper-color;
+          }
+          input {
+            width: 3em;
+            font-size: 16px;
+            text-align: center;
+          }
+        }
+      }
+      .delete-btn {
+        height: 2em;
+        width: 2em;
+        font-size: 14px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: rgb(184, 184, 184);
+      }
+    }
+  }
+  .order-info {
+    width: 30%;
+    overflow: hidden;
+    padding: 0.5em;
+    padding-left: 0;
+    #order-btn {
+      width: 100%;
+      background: $price-color;
+      color: white;
+      height: 38px;
+      font-size: 16px;
+      border-radius: 0.125em;
+    }
+    .delivery-method,
+    .personal-info,
+    .voucher-input,
+    .payment-method,
+    .price-info,
+    .point-input {
+      background: white;
+      padding: 1em;
+      margin-bottom: 0.5em;
+      h5 {
+        font-weight: 500;
+      }
+      .show-modal-btn {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        color: $main-color;
+        font-size: 12px;
+      }
+    }
+    .personal-info {
+      position: relative;
+      input {
+        border: 1px solid #dadada;
+        background: white;
+        height: 38px;
+        line-height: 38px;
+        font-size: 14px;
+        color: $sub-text-color;
+        padding-left: 0.5em;
+        width: 100%;
+        margin-top: 6px;
+      }
+      .row {
+        label {
+          margin-top: 8px;
+          margin-bottom: 8px;
+          font-size: 15px;
+          font-weight: 500;
+          color: $text-color;
+        }
+      }
+      a {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        color: $main-color;
+        font-size: 12px;
+        cursor: pointer;
+      }
+      label {
+        font-size: 14px;
+        color: $sub-text-color;
+      }
+    }
+    .voucher-input {
+      .row {
+        margin-top: 1em;
+        button {
+          width: 8em;
+          font-size: 16px;
+          height: 38px;
+          background: $price-color;
+          color: white;
+          margin-left: 6px;
+        }
+        input {
+          border: 1px solid #dadada;
+          background: white;
+          height: 38px;
+          line-height: 38px;
+          font-size: 14px;
+          color: $sub-text-color;
+          padding-left: 0.5em;
+          width: 100%;
+        }
+      }
+    }
+    .price-info {
+      button {
+        margin-top: 1em;
+      }
+      .row {
+        justify-content: space-between;
+        font-size: 14px;
+        line-height: 24px;
+        color: $sub-text-color;
+        span {
+          color: #333;
+        }
+      }
+      .total.row {
+        margin-top: 0.5em;
+        padding-top: 0.5em;
+        border-top: 1px solid $border-color;
+        span {
+          color: $price-color;
+          font-size: 20px;
+        }
+      }
+      .point-use {
+        .switch {
+          position: relative;
+          display: inline-block;
+          width: 40px;
+          height: 20px;
+        }
+        .switch input {
+          opacity: 0;
+          width: 0;
+          height: 0;
+        }
+        .slider {
+          position: absolute;
+          cursor: pointer;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background-color: #ccc;
+          -webkit-transition: 0.4s;
+          transition: 0.4s;
+        }
+        .slider:before {
+          position: absolute;
+          content: "";
+          height: 12px;
+          width: 12px;
+          left: 4px;
+          bottom: 4px;
+          background-color: white;
+          -webkit-transition: 0.4s;
+          transition: 0.4s;
+        }
+        input:checked + .slider {
+          background-color: #2196f3;
+        }
+        input:checked + .slider:before {
+          -webkit-transform: translateX(20px);
+          -ms-transform: translateX(20px);
+          transform: translateX(20px);
+        }
+        .slider.round {
+          border-radius: 20px;
+        }
+        .slider.round:before {
+          border-radius: 50%;
+        }
+        > .row {
+          justify-content: space-between;
+        }
+        .row {
+          align-items: center;
+        }
+        > div {
+          font-size: 14px;
+          color: $sub-text-color;
+          label {
+            display: block;
+          }
+          span {
+            color: $text-color;
+          }
+        }
+      }
+    }
+    .delivery-method {
+      .row {
+        font-size: 14px;
+        align-items: center;
+        color: $sub-text-color;
+      }
+      > .row {
+        padding-top: 10px;
+        justify-content: space-between;
+      }
+      label {
+        width: 120px;
+        margin-left: 0.5em;
+      }
+      span {
+        color: #333;
+      }
+    }
+    .payment-method {
+      .row {
+        font-size: 14px;
+        align-items: center;
+        color: $sub-text-color;
+        margin-top: 10px;
+      }
+      label {
+        width: calc(100% - 2em);
+        margin-left: 0.5em;
+      }
+    }
+    .point-input {
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 40px;
+        height: 20px;
+      }
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 12px;
+        width: 12px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
+      input:checked + .slider {
+        background-color: #2196f3;
+      }
+      input:checked + .slider:before {
+        -webkit-transform: translateX(20px);
+        -ms-transform: translateX(20px);
+        transform: translateX(20px);
+      }
+      .slider.round {
+        border-radius: 20px;
+      }
+      .slider.round:before {
+        border-radius: 50%;
+      }
+      > .row {
+        margin-top: 0.5em;
+        justify-content: space-between;
+      }
+      .row {
+        align-items: center;
+      }
+      > div {
+        font-size: 14px;
+        color: $sub-text-color;
+        label {
+          width: 5em;
+          display: block;
+        }
+        span {
+          font-weight: 500;
+          color: $text-color;
+        }
+      }
+    }
+  }
+  .modal {
+    .address-popup,
+    .voucher-popup {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      padding: 2em;
+      width: 600px;
+      max-width: 90%;
+      max-height: 90%;
+      overflow: scroll;
+      position: relative;
+      border-radius: 0.25em;
+      background-color: white;
+      > button {
+        position: absolute;
+        top: 2em;
+        right: 2em;
+        font-size: 18px;
+        color: $sub-text-color;
+      }
+      > button:hover {
+        color: $text-color;
+      }
+      h4 {
+        font-size: 18px;
+        font-weight: 500;
+      }
+    }
+    .address-popup::-webkit-scrollbar,
+    .voucher-popup::-webkit-scrollbar {
+      display: none;
+    }
+    .address-card {
+      padding: 1em;
+      max-width: 100%;
+      margin-top: 0.5em;
+      position: relative;
+      border-radius: 0.25em;
+      border: 1px solid $border-color;
+      div {
+        color: $text-color;
+        font-weight: lighter;
+        margin-top: 0.5em;
+      }
+      span {
+        font-weight: 500;
+        color: $text-color;
+        display: block;
+      }
+      label {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        font-size: 14px;
+        color: $main-text-color;
+      }
+      button {
+        color: white;
+        padding: 0.5em 1em;
+        margin-top: 0.5em;
+        border-radius: 0.25em;
+        background-color: $sub-color;
+      }
+    }
+    .voucher-card {
+      margin-top: 1em;
+      border-radius: 0.25em;
+      background-color: white;
+      border: dashed 2px #bc0412;
+      position: relative;
+      .name {
+        width: 120px;
+        height: 120px;
+        padding: 8px;
+        div {
+          height: 100%;
+          width: 100%;
+          border-radius: 0.25em;
+          background: #cc3c4c;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          color: white;
+        }
+      }
+      .info-btn {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        color: white;
+        padding: 0.25em 0.5em;
+        border-radius: 0.25em;
+        opacity: 0.8;
+        background-color: rgba($color: #bc0412, $alpha: 0.5);
+      }
+      .info-btn:hover {
+        opacity: 1;
+      }
+      .info {
+        padding: 8px;
+        width: calc(100% - 132px);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .value {
+          font-size: 20px;
+          font-weight: 500;
+        }
+        .end,
+        .apply,
+        .code {
+          margin-top: 4px;
+          color: $sub-text-color;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

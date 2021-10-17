@@ -165,6 +165,17 @@ function validURL(str) {
   ); // fragment locator
   return !!pattern.test(str);
 }
+function getAddressString(location, province, district, ward, detail) {
+  return (
+    detail +
+    ", " +
+    location[province].sub[district].sub[ward].name +
+    ", " +
+    location[province].sub[district].name +
+    ", " +
+    location[province].name
+  );
+}
 export {
   validURL,
   formatPrice,
@@ -179,4 +190,5 @@ export {
   requestOtp,
   isJson,
   standardProductLink,
+  getAddressString,
 };

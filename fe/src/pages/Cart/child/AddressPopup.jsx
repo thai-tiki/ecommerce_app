@@ -10,15 +10,11 @@ export default function AddressPopup(props) {
         {
           props.userAddress.map((v, i) =>
             <AddressCard
+              {...v}
               key={i}
               id={v.id}
+              index={i}
               address={v}
-              name={v.name}
-              wardName={v.wards_name}
-              isDefault={v.is_default}
-              detail={v.address_detail}
-              provinceName={v.province_name}
-              districtName={v.district_name}
             />
           )
         }

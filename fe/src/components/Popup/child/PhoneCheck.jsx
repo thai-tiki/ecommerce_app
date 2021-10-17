@@ -15,7 +15,7 @@ export default function PhoneCheck(props) {
       setMsg("Số điện thoại không hợp lệ !");
       return;
     }
-    dispatch(userActions.accountCheck({ email: null, phone_number: phone }));
+    dispatch(userActions.accountCheck({ phone }));
   };
   function handleInputChange(e) {
     setPhone(e.target.value);

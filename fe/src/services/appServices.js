@@ -16,7 +16,7 @@ function getHomeInfo() {
   const requestOptions = {
     method: "GET",
   };
-  return fetch(`${c.API_URL}/customer/${store_code}/home_app`, requestOptions)
+  return fetch(`${c.API_URL}/home`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -27,11 +27,11 @@ function getHomeInfo() {
       return {};
     });
 }
-function getProvincesList() {
+function getLocation() {
   const requestOptions = {
     mehod: "GET",
   };
-  return fetch(`${c.API_URL}/place/vn/province`, requestOptions)
+  return fetch(`${c.API_URL}/location`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -85,7 +85,7 @@ function getInfoStore() {
 export const appServices = {
   store_code,
   getHomeInfo,
-  getProvincesList,
+  getLocation,
   getDistrictsList,
   getWardsList,
   getWebTheme,

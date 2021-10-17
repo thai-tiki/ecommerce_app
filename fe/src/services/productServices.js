@@ -10,10 +10,7 @@ function getProductInfo(id) {
       "customer-token": tokenInfo ? tokenInfo.token : "",
     },
   };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/products/${id}`,
-    requestOptions
-  )
+  return fetch(`${c.API_URL}/product/${id}`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -46,10 +43,7 @@ function getAllProducts(queryString) {
   const requestOptions = {
     method: "GET",
   };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/products${queryString}`,
-    requestOptions
-  )
+  return fetch(`${c.API_URL}/product${queryString}`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
