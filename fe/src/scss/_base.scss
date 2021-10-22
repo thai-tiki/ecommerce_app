@@ -126,6 +126,21 @@ body {
     }
   }
 }
+.table-fixed {
+  overflow-y: auto;
+  height: 200px;
+  margin-top: 1em;
+  thead tr {
+    position: sticky;
+    background-color: white;
+    top: 0;
+    left: 0;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+}
 .desktop-paginate {
   margin: auto;
   margin-top: 1em;

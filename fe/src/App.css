@@ -121,6 +121,19 @@ body {
     .custom-select .options > div:hover {
       background-color: whitesmoke; }
 
+.table-fixed {
+  overflow-y: auto;
+  height: 200px;
+  margin-top: 1em; }
+  .table-fixed thead tr {
+    position: sticky;
+    background-color: white;
+    top: 0;
+    left: 0; }
+  .table-fixed table {
+    width: 100%;
+    border-collapse: collapse; }
+
 .desktop-paginate {
   margin: auto;
   margin-top: 1em;
@@ -1988,30 +2001,49 @@ body {
   .admin-page .tab-controll {
     width: 250px;
     height: 100%;
+    border-radius: 0.5em;
     background-color: white;
-    border-radius: 0.25em; }
+    box-shadow: 0 0 6px 0 #c8c8c8; }
+    .admin-page .tab-controll h3 {
+      padding: 16px;
+      color: #757575;
+      font-weight: 500;
+      border-bottom: 1px solid #e4e4e4;
+      width: 100%; }
+    .admin-page .tab-controll .tab-name {
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      font-size: 17px;
+      color: #757575;
+      border-bottom: 1px solid #e4e4e4;
+      cursor: pointer; }
+      .admin-page .tab-controll .tab-name img {
+        width: 25px;
+        height: 25px;
+        object-fit: contain;
+        margin-right: 10px; }
+    .admin-page .tab-controll .tab-name:hover,
+    .admin-page .tab-controll .tab-name.active {
+      box-shadow: 0 0 4px 0 #c8c8c8; }
+    .admin-page .tab-controll .backhome {
+      border-top: 1px solid #e4e4e4; }
+      .admin-page .tab-controll .backhome img {
+        width: 15px;
+        height: 15px;
+        object-fit: contain;
+        margin-right: 10px; }
   .admin-page .main-view {
     padding-left: 1em;
     width: calc(100% - 250px); }
     .admin-page .main-view h3 {
       margin-bottom: 16px; }
-    .admin-page .main-view .overview {
-      margin: 1em 0;
-      margin-top: 0;
-      display: flex;
-      width: 100%;
-      justify-content: space-between; }
-      .admin-page .main-view .overview > div {
-        padding: 1em;
-        height: 110px;
-        border-radius: 0.25em;
-        width: calc(33.333% - 10px);
-        background-color: white; }
     .admin-page .main-view .tab {
       width: 100%;
+      box-shadow: 0 0 6px 0 #c8c8c8;
       height: calc(100% - 126px);
       padding: 1em;
-      border-radius: 0.25em;
+      border-radius: 0.5em;
       background-color: white; }
       .admin-page .main-view .tab .row {
         justify-content: space-between;
@@ -2029,30 +2061,95 @@ body {
           .admin-page .main-view .tab .row button i {
             font-size: 12px;
             margin-left: 4px; }
+      .admin-page .main-view .tab .table-fixed {
+        border: 2px solid #f0f0f0;
+        height: calc(100% - 40px); }
       .admin-page .main-view .tab table {
         word-break: break-word;
-        border: 1px solid #e4e4e4;
         width: 100%;
-        margin-top: 1em;
-        border-radius: 0.25em; }
+        position: relative; }
         .admin-page .main-view .tab table th,
         .admin-page .main-view .tab table td {
           font-weight: normal;
           text-align: left;
-          padding: 5px 10px;
+          padding: 10px 10px;
           background-color: white;
           line-height: 1.5;
           color: #212121; }
         .admin-page .main-view .tab table th {
           color: #757575; }
         .admin-page .main-view .tab table td {
-          border-top: 1px solid #e4e4e4; }
+          border-top: 1px solid #757575; }
         .admin-page .main-view .tab table tbody tr {
           cursor: pointer;
           font-size: 15px;
-          border-top: 2px solid #fafafa; }
+          border-top: 2px solid #f0f0f0; }
+        .admin-page .main-view .tab table tbody tr:last-of-type {
+          border-bottom: 2px solid #f0f0f0; }
         .admin-page .main-view .tab table button {
           color: #189687; }
+  .admin-page .overview {
+    margin: 1em 0;
+    margin-top: 0;
+    display: flex;
+    width: 100%;
+    justify-content: space-between; }
+    .admin-page .overview .info {
+      box-shadow: 0 0 6px 0 #c8c8c8;
+      position: relative;
+      padding: 1em;
+      height: 110px;
+      border-radius: 0.5em;
+      width: calc(25% - 15px);
+      background-color: white;
+      display: flex;
+      justify-content: space-between; }
+      .admin-page .overview .info > div:first-of-type {
+        display: flex;
+        justify-content: center;
+        flex-direction: column; }
+        .admin-page .overview .info > div:first-of-type span {
+          font-size: 16px;
+          margin-bottom: 8px;
+          color: #757575; }
+        .admin-page .overview .info > div:first-of-type p {
+          display: block;
+          font-size: 30px;
+          font-weight: bold; }
+      .admin-page .overview .info > div:last-of-type .circle {
+        position: absolute;
+        top: -8px;
+        right: -8px;
+        border-radius: 100%;
+        width: 50px;
+        height: 50px;
+        background-color: #c0e5e4;
+        display: flex;
+        justify-content: center;
+        align-items: center; }
+        .admin-page .overview .info > div:last-of-type .circle img {
+          width: 25px; }
+      .admin-page .overview .info > div:last-of-type .flag {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        border-radius: 0.5em; }
+        .admin-page .overview .info > div:last-of-type .flag > div {
+          position: absolute;
+          bottom: -40px;
+          right: -15px;
+          transform: rotate(55deg);
+          background-color: #c0e5e4;
+          width: 50px;
+          height: 80px; }
+        .admin-page .overview .info > div:last-of-type .flag img {
+          bottom: 7px;
+          right: 7px;
+          position: absolute;
+          width: 12px; }
 
 .modal.center .form-container {
   position: relative; }
@@ -2095,8 +2192,18 @@ body {
       .modal.center .product-form .row .attribute > div:last-of-type {
         margin: 0; }
       .modal.center .product-form .row .attribute input {
-        width: calc(50% - 0.5em); }
-      .modal.center .product-form .row .attribute button {
+        width: calc(50% - 2.5em); }
+      .modal.center .product-form .row .attribute .edit-btn {
+        background-color: transparent;
+        color: #757575;
+        font-size: 16px;
+        padding: 8px 14px;
+        padding-left: 16px;
+        border: solid 1px #e4e4e4; }
+        .modal.center .product-form .row .attribute .edit-btn i {
+          margin: 0;
+          font-size: 16px; }
+      .modal.center .product-form .row .attribute > button {
         display: block;
         margin: auto;
         margin-top: 0.5em;
@@ -2125,11 +2232,25 @@ body {
       padding: 0.5em;
       border: 1px solid #e4e4e4;
       border-radius: 0.25em;
-      width: calc(100% - 9em); }
+      width: calc(100% - 9em);
+      display: flex; }
       .modal.center .product-form .row .images .image {
-        width: 100px; }
+        width: 100px;
+        margin-right: 0.5em;
+        border: 1px solid #e4e4e4; }
         .modal.center .product-form .row .images .image .img-container {
           padding-top: 100%; }
+    .modal.center .product-form .row .custom-select {
+      width: calc(100% - 9em); }
+      .modal.center .product-form .row .custom-select .select-btn {
+        width: 100%;
+        padding: 8px;
+        border-radius: 0.25em;
+        border: solid 1px #e4e4e4;
+        height: fit-content; }
+      .modal.center .product-form .row .custom-select .options {
+        background-color: #fafafa;
+        border-bottom: none; }
   .modal.center .product-form #submit-btn {
     padding: 8px 24px;
     display: block;

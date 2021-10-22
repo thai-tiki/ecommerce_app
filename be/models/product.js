@@ -56,7 +56,6 @@ const validate = (product) => {
   const schema = joi
     .object({
       name: joi.string().min(1).required(),
-      price: joi.number().min(0).required(),
       quantity: joi.number().min(0).required(),
       images: joi.array().items(joi.string()).required(),
       after_discount_price: joi.number().min(0).required(),

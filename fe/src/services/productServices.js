@@ -1,13 +1,28 @@
 import { constants as c } from "../constants";
 import { appServices } from "./appServices";
 const store_code = appServices.store_code;
+function getAllProducts(queryString) {
+  const requestOptions = {
+    method: "GET",
+  };
+  return fetch(`${c.API_URL}/product${queryString}`, requestOptions)
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json);
+      return json;
+    })
+    .catch((err) => {
+      console.log(err);
+      return {};
+    });
+}
 function getProductInfo(id) {
   const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
+      token: tokenInfo ? tokenInfo : "",
     },
   };
   return fetch(`${c.API_URL}/product/${id}`, requestOptions)
@@ -21,14 +36,17 @@ function getProductInfo(id) {
       return {};
     });
 }
-function getSimilarProducts(id) {
+function updateProduct(product) {
+  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
   const requestOptions = {
-    method: "GET",
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      token: tokenInfo ? tokenInfo : "",
+    },
+    body: JSON.stringify(product),
   };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/products/${id}/similar_products`,
-    requestOptions
-  )
+  return fetch(`${c.API_URL}/product/${product._id}`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -39,11 +57,36 @@ function getSimilarProducts(id) {
       return {};
     });
 }
-function getAllProducts(queryString) {
+function addProduct(product) {
+  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      token: tokenInfo ? tokenInfo : "",
+    },
+    body: JSON.stringify(product),
+  };
+  return fetch(`${c.API_URL}/product`, requestOptions)
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json);
+      return json;
+    })
+    .catch((err) => {
+      console.log(err);
+      return {};
+    });
+}
+//OK
+function getSimilarProducts(id) {
   const requestOptions = {
     method: "GET",
   };
-  return fetch(`${c.API_URL}/product${queryString}`, requestOptions)
+  return fetch(
+    `${c.API_URL}/customer/${store_code}/products/${id}/similar_products`,
+    requestOptions
+  )
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -163,9 +206,11 @@ function getProductReview(id) {
     });
 }
 export const productServices = {
+  addProduct,
+  updateProduct,
+  getAllProducts,
   getProductInfo,
   getSimilarProducts,
-  getAllProducts,
   toggleWishList,
   reviewProduct,
   getFavoriteProducts,

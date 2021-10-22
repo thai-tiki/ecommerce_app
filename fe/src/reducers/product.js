@@ -122,6 +122,14 @@ export function product(state = initialState, action) {
       newState.info.is_favorite = action.isLiked;
       return newState;
     }
+    case c.UPDATE_PRODUCT_SUCCESS: {
+      window.location.reload();
+      break;
+    }
+    case c.ADD_PRODUCT_SUCCESS: {
+      window.location.reload();
+      break;
+    }
     case c.GET_PRODUCT_REVIEW_SUCCESS:
       return {
         ...state,

@@ -34,6 +34,40 @@ function getAllProducts(params) {
     return { type: c.GET_PRODUCTS_FAILURE, code, message };
   }
 }
+function updateProduct(product) {
+  return (dispatch) => {
+    s.updateProduct(product).then((res) => {
+      if (res.status === c.SUCCESS) dispatch(success(res.data));
+      else dispatch(failure(res.msg));
+    });
+  };
+  function success(products) {
+    return {
+      type: c.UPDATE_PRODUCT_SUCCESS,
+      products,
+    };
+  }
+  function failure(code, message) {
+    return { type: c.UPDATE_PRODUCT_FAILURE, message };
+  }
+}
+function addProduct(product) {
+  return (dispatch) => {
+    s.addProduct(product).then((res) => {
+      if (res.status === c.SUCCESS) dispatch(success(res.data));
+      else dispatch(failure(res.msg));
+    });
+  };
+  function success(products) {
+    return {
+      type: c.ADD_PRODUCT_SUCCESS,
+      products,
+    };
+  }
+  function failure(code, message) {
+    return { type: c.ADD_PRODUCT_FAILURE, message };
+  }
+}
 //OK
 function getSimilarProducts(id) {
   return (dispatch) => {
@@ -160,9 +194,11 @@ function getProductReview(id) {
   }
 }
 export const productActions = {
-  reviewProduct,
-  getProductInfo,
+  addProduct,
   getAllProducts,
+  getProductInfo,
+  updateProduct,
+  reviewProduct,
   toggleWishList,
   getProductReview,
   getSimilarProducts,

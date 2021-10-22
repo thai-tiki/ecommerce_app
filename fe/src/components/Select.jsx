@@ -25,7 +25,7 @@ export default function Select(props) {
         </div>
         <i className="fas fa-caret-down"></i>
       </div>
-      <div className="options hide-scroll" ref={myContainer}>
+      <div className="options" ref={myContainer}>
         {
           values.map((v, i) => <div onClick={(e) => handleSelect(v, e)} key={i}>{v.title}</div>)
         }
