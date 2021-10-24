@@ -145,7 +145,9 @@ function changeNumberInCart(id, quantity) {
       return {};
     });
 }
-function getOrdersList(query) {
+function getOrdersList(query, isAdmin) {
+  let url = `${c.API_URL}/order${query}`;
+  if (isAdmin) url = `${c.API_URL}/admin/order${query}`;
   const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "GET",
@@ -154,7 +156,7 @@ function getOrdersList(query) {
       token: token ? token : "",
     },
   };
-  return fetch(`${c.API_URL}/order${query}`, requestOptions)
+  return fetch(url, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -175,6 +177,27 @@ function getOrderInfo(id) {
     },
   };
   return fetch(`${c.API_URL}/order/${id}`, requestOptions)
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json);
+      return json;
+    })
+    .catch((err) => {
+      console.log(err);
+      return {};
+    });
+}
+function updateOrder(orderInfo) {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const requestOptions = {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      token: token ? token : "",
+    },
+    body: JSON.stringify(orderInfo),
+  };
+  return fetch(`${c.API_URL}/order/${orderInfo._id}`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -240,6 +263,7 @@ export const cartServices = {
   order,
   addCart,
   getCartInfo,
+  updateOrder,
   getShipmentMethods,
   getPaymentMethods,
   changeNumberInCart,

@@ -17,27 +17,18 @@ import NewsListPage from "./pages/NewsList/NewsListPage";
 import OrdersListPage from "./pages/OrderList/OrdersListPage";
 import FavoritePage from "./pages/FavoriteProduct/FavoritePage";
 import ProductInfoPage from "./pages/ProductInfo/ProductInfoPage";
+import PurchasedPage from "./pages/PurchasedProduct/PurchasedPage";
 import CategoriesPage from "./pages/CategoriesPage/CategoriesPage";
 import ProductsListPage from "./pages/ProductsList/ProductsListPage";
 import { categoryActions } from "./actions/categoryActions";
 import { AdminPage } from "./pages/Admin";
 import { constants as c } from "./constants";
-import { appActions } from "./actions/appActions";
-import PurchasedPage from "./pages/PurchasedProduct/PurchasedPage";
 function App() {
   const dispatch = useDispatch();
   const categoryStatus = useSelector((state) => state.category.status);
-  const appTheme = useSelector((state) => state.app.appTheme);
-  const infoStore = useSelector((state) => state.app.infoStore);
   useEffect(() => {
     if (categoryStatus === c.LOADING) {
       dispatch(categoryActions.getCategories());
-    }
-    if (appTheme.status === c.NONE) {
-      dispatch(appActions.getWebTheme());
-    }
-    if (infoStore.status === c.NONE) {
-      dispatch(appActions.getInfoStore());
     }
   }, []);
   return categoryStatus === c.SUCCESS ? (

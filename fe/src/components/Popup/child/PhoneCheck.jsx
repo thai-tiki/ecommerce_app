@@ -5,7 +5,6 @@ export default function PhoneCheck(props) {
   const dispatch = useDispatch();
   const [phone, setPhone] = useState("");
   const [errMsg, setMsg] = useState("");
-  const appTheme = useSelector(state => state.app.appTheme);
   function handlePhoneCheck() {
     if (phone.length === 0) {
       setMsg("Số điện thoại không được để trống !");
@@ -36,7 +35,7 @@ export default function PhoneCheck(props) {
         <button
           className="next-btn"
           onClick={handlePhoneCheck}
-          style={{ background: appTheme.color_main_1 }}>Tiếp tục</button>
+        >Tiếp tục</button>
         <button className="close-btn" onClick={props.handleClose}>
           <i className="fas fa-times"></i>
         </button>

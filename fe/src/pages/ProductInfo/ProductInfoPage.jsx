@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import MainInfo from "./child/MainInfo";
 import DetailInfo from "./child/DetailInfo";
 import Header from "../../components/Header";
-import { constants as c } from "../../constants";
 import SimilarProducts from "./child/SimilarProducts";
 import PageLoading from "../../components/PageLoading";
+import { constants as c } from "../../constants";
 import { productActions as a } from "../../actions/productActions";
 function ProductInfoPage(props) {
   const dispatch = useDispatch();

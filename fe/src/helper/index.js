@@ -44,20 +44,26 @@ function hideParentElement(e) {
   parentElement.parentElement.style.zIndex = 2;
 }
 async function uploadImage(formData) {
-  const store_code = appServices.store_code;
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
-  const path = `${c.API_URL}/customer/${store_code}/images`;
+  const API_KEY = "92bd8c2c76657d6c7d7dd0eb1e7dc4d0";
   const requestOptions = {
     method: "POST",
-    headers: {
-      "customer-token": tokenInfo ? tokenInfo.token : "",
+    header: {
+      "mime-type": "multipart/form-data",
+      "content-type": false,
     },
     body: formData,
   };
-  const response = await fetch(path, requestOptions);
-  if (!response.ok) return "";
+  const response = await fetch(
+    `https://api.imgbb.com/1/upload?key=${API_KEY}`,
+    requestOptions
+  );
+  if (!response.ok) {
+    console.log("Error ! Fail to upload image");
+    return "";
+  }
   const json = await response.json();
-  return json.data;
+  console.log(json.data.url);
+  return json.data.url;
 }
 function handleImgErr(e) {
   e.target.src = c.DEFAULT_PRODUCT_IMG;

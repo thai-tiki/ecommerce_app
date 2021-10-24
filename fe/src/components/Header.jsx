@@ -14,7 +14,6 @@ export default function Header() {
   const location = useSelector((state) => state.app.location);
   const token = useSelector((state) => state.user.token);
   const badges = useSelector(state => state.user.badges);
-  const appTheme = useSelector((state) => state.app.appTheme);
   const profile = useSelector((state) => state.user.profile);
   useEffect(() => {
     if (token && cartInfo.status === c.LOADING)
@@ -72,8 +71,7 @@ export default function Header() {
   }
   return (
     <React.Fragment>
-      <div className="header"
-        style={{ background: appTheme.headerBackgroudColor }} >
+      <div className="header">
         <div className="container">
           <Link to="/" className="logo">
             <img src="https://i.ibb.co/gPwNJ6M/attachment-82489162.png" alt="" />
@@ -120,7 +118,7 @@ export default function Header() {
               onChange={handleInputChange} />
             <button
               onClick={handleSearch}
-              style={{ background: appTheme.color_main_1 }} >
+            >
               <img src="/img/search.svg" alt="search" />
             </button>
           </div>
@@ -279,7 +277,6 @@ export default function Header() {
           />
           <button
             onClick={handleSearch}
-            style={{ background: appTheme.color_main_1 }}
           >
             <img src="/img/search.svg" alt="search" />
           </button>

@@ -30,7 +30,7 @@ export default function PaymentTab(props) {
 
   function getContentPayment() {
 
-    
+
     if (payment_1_of_month == true && payment_16_of_month == true) {
       return "ngày 1 và ngày 16";
     }

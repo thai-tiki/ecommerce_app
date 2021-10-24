@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { formatPrice } from "../../../helper";
 import { constants as c } from "../../../constants";
+import { appActions } from "../../../actions/appActions";
 import { cartActions } from "../../../actions/cartActions";
 import { userActions } from "../../../actions/userActions";
 import { productActions } from "../../../actions/productActions";
@@ -19,9 +20,10 @@ export default function MainInfo(props) {
     before_discount_price,
   } = props.product;
   if (!images.length) images.push({ image_url: "/img/default_product.jpg" });
+  const discount = Math.ceil((before_discount_price - after_discount_price) / before_discount_price * 100);
   const dispatch = useDispatch();
+  const token = useSelector(state => state.user.token);
   const vouchers = useSelector((state) => state.voucher.list);
-  const appTheme = useSelector((state) => state.app.appTheme);
   const [selectedNumber, setSelectedNumber] = useState(quantity > 0 ? 1 : 0);
   var settings = {
     infinite: true,
@@ -29,8 +31,9 @@ export default function MainInfo(props) {
     slidesToScroll: 1,
   };
   useEffect(() => {
-    if (vouchers.status === c.LOADING) dispatch(voucherActions.getAllVoucher());
-  });
+    if (vouchers.status === c.LOADING)
+      dispatch(voucherActions.getAllVoucher());
+  }, []);
   function increaseNumber() {
     if (selectedNumber + 1 <= quantity)
       setSelectedNumber(selectedNumber + 1);
@@ -39,18 +42,23 @@ export default function MainInfo(props) {
     if (selectedNumber > 1) setSelectedNumber(selectedNumber - 1);
   }
   function handleAddCart() {
-    dispatch(
-      cartActions.addCart(
-        {
-          product_id: _id,
-          quantity: selectedNumber,
-        },
-        true
-      )
-    );
-    dispatch(userActions.getUserBadges());
+    if (!token) {
+      dispatch(appActions.changePopup(c.PHONE_POPUP));
+      return;
+    }
+    dispatch(cartActions.addCart(
+      {
+        product_id: _id,
+        quantity: selectedNumber,
+      },
+      true
+    ));
   }
   function handleToggleWishList() {
+    if (!token) {
+      dispatch(appActions.changePopup(c.PHONE_POPUP));
+      return;
+    }
     dispatch(productActions.toggleWishList(_id, props.isLiked));
     dispatch(userActions.getUserBadges());
   }
@@ -81,9 +89,38 @@ export default function MainInfo(props) {
         </div>
         <div className="product-order-info">
           <div className="name">{name}</div>
+          <div className="sale-info">
+            <div className="rating">
+              {
+                [1, 2, 3, 4, 5].map(v =>
+                  <i className="fas fa-star"></i>
+                )
+              }
+              <span>(Xem 28 đánh giá)</span>
+              <span> | </span>
+              <span>Đã bán 14</span>
+            </div>
+          </div>
           <div className="price-wraper">
-            <div className="price" style={{ color: appTheme.color_main_1 }}>
-              ₫{formatPrice(after_discount_price)}
+            <div className="price">
+              {formatPrice(after_discount_price)} ₫
+            </div>
+            <div className="row">
+              <div className="past-price">
+                {formatPrice(before_discount_price)} ₫
+              </div>
+              <div className="discount">
+                -{discount}%
+              </div>
+            </div>
+
+          </div>
+          <div className="product-voucher">
+            <span>01 Mã giảm giá</span>
+            <div className="row">
+              <div className="voucher-tag">
+                Giảm 30K
+              </div>
             </div>
           </div>
           <div className="cart-action">
@@ -103,7 +140,7 @@ export default function MainInfo(props) {
                 <button
                   id="addcart-btn"
                   onClick={handleAddCart}
-                  style={{ background: appTheme.color_main_1 }} >
+                >
                   Thêm vào giỏ hàng </button>
                 :
                 <button style={{ marginTop: "0em" }} id="soldout-btn">Hết hàng</button>}

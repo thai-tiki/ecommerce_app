@@ -41,7 +41,6 @@ export default function DetailInfo(props) {
                 {
                   description ?
                     <div className="description"
-                      style={{ paddingLeft: "1em" }}
                       dangerouslySetInnerHTML={{ __html: description }}>
                     </div>
                     :

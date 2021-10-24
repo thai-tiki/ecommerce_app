@@ -37,11 +37,10 @@ const initialState = {
 };
 export function user(state = initialState, action) {
   switch (action.type) {
-    case c.PHONE_NOT_REGISTERED:
-    case c.PHONE_REGISTERED:
+    case c.REQUEST_PHONE_CHECK:
       return {
         ...state,
-        phone: action.info.phone,
+        phone: action.phone,
       };
     case c.LOGIN_SUCCESS:
     case c.REGIS_SUCCESS:

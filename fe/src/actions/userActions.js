@@ -1,24 +1,26 @@
 import { constants as c } from "../constants";
 import { userServices as s } from "../services/userServices";
+import { appActions } from "./appActions";
 function accountCheck(info) {
   return (dispatch) => {
     s.accountCheck(info).then((res) => {
       if (res.status === c.SUCCESS) {
+        dispatch({ type: c.REQUEST_PHONE_CHECK, phone: info.phone });
         if (!res.is_registered) {
-          dispatch({ type: c.PHONE_NOT_REGISTERED, info });
+          dispatch(appActions.changePopup(c.REGIS_POPUP));
         } else {
-          dispatch({ type: c.PHONE_REGISTERED, info });
+          dispatch(appActions.changePopup(c.LOGIN_POPUP));
         }
       }
     });
   };
 }
 function accountLogin(info) {
-  console.log(info);
   return (dispatch) => {
     s.accountLogin(info).then((res) => {
       if (res.status === c.SUCCESS) {
         dispatch(success(res.data, res.token));
+        dispatch(appActions.changePopup(c.NO_POPUP));
       } else {
         dispatch(failure(res.msg));
       }

@@ -1,11 +1,16 @@
 import { useEffect, useRef } from "react";
+import { hideParentElement } from "../helper";
 export default function Select(props) {
-  const { placeholder, values, handleSelect, showDetail } = props;
+  const { placeholder, values, showDetail } = props;
   const myButton = useRef(null);
   const myContainer = useRef(null);
   function handleShowDetail(e) {
     if (values.length > 0)
       showDetail(e)
+  }
+  function handleSelect(e, v) {
+    props.handleSelect(v);
+    hideParentElement(e);
   }
   useEffect(() => {
     window.addEventListener('click', function (e) {
@@ -27,7 +32,7 @@ export default function Select(props) {
       </div>
       <div className="options" ref={myContainer}>
         {
-          values.map((v, i) => <div onClick={(e) => handleSelect(v, e)} key={i}>{v.title}</div>)
+          values.map((v, i) => <div onClick={(e) => handleSelect(e, v)} key={i}>{v.title}</div>)
         }
       </div>
     </div>

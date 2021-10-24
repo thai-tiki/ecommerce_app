@@ -199,9 +199,9 @@ function changeNumberInCart(id, quantity) {
     });
   };
 }
-function getOrdersList(query) {
+function getOrdersList(query, isAdmin) {
   return (dispatch) => {
-    s.getOrdersList(query).then((res) => {
+    s.getOrdersList(query, isAdmin).then((res) => {
       if (res.status === c.SUCCESS) {
         dispatch(success(res.data, res.current_page, res.total_page));
       } else {
@@ -248,6 +248,33 @@ function getOrderInfo(id) {
       message,
     };
   }
+}
+function updateOrder(orderInfo) {
+  return (dispatch) => {
+    s.updateOrder(orderInfo).then((res) => {
+      if (res.status === c.SUCCESS) {
+        dispatch({
+          msg: "Cập nhật thông tin đơn hàng thành công !",
+          additionalInfo: {
+            status: c.SUCCESS,
+            willReloadAfterClose: true,
+          },
+          type: c.CHANGE_POPUP,
+          popupType: c.MESSAGE_POPUP,
+        });
+      } else {
+        dispatch({
+          msg: res.msg,
+          additionalInfo: {
+            status: c.FAILURE,
+            willReloadAfterClose: false,
+          },
+          type: c.CHANGE_POPUP,
+          popupType: c.MESSAGE_POPUP,
+        });
+      }
+    });
+  };
 }
 //OK
 function changePaymentMethod(info) {
@@ -313,6 +340,7 @@ export const cartActions = {
   order,
   addCart,
   getCartInfo,
+  updateOrder,
   getShipmentMethods,
   getPaymentMethods,
   changeNumberInCart,

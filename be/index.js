@@ -10,6 +10,7 @@ const voucherRoute = require("./routes/voucher");
 const productRoute = require("./routes/product");
 const bannerRoute = require("./routes/banner");
 const orderRoute = require("./routes/order");
+const adminRoute = require("./routes/admin");
 const cartRoute = require("./routes/cart");
 const userRoute = require("./routes/user");
 const siteRoute = require("./routes/site");
@@ -30,6 +31,7 @@ app.listen(3001, () => {
 app.use("/api/user", userRoute);
 app.use("/api/cart", cartRoute);
 app.use("/api/order", orderRoute);
+app.use("/api/admin", adminRoute);
 app.use("/api/banner", bannerRoute);
 app.use("/api/voucher", voucherRoute);
 app.use("/api/product", productRoute);

@@ -41,6 +41,7 @@ exports.register = async (req, res) => {
 };
 exports.login = async (req, res) => {
   const { phone, password } = req.body;
+  console.log(req.body);
   if (!phone || !password) {
     res.status(400).json({
       status: c.FAILURE,

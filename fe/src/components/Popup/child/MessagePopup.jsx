@@ -3,11 +3,10 @@ import { constants as c } from "../../../constants";
 import { appActions as a } from "../../../actions/appActions";
 import { useDispatch } from "react-redux";
 export default function MessagePopup() {
-  const messagePopup = useSelector(state => state.app.messagePopup);
-  const appTheme = useSelector(state => state.app.appTheme);
+  const popupInfo = useSelector(state => state.app.popup);
   const dispatch = useDispatch();
   function handleConfirm() {
-    if (messagePopup.willReload) {
+    if (popupInfo.additionalInfo.willReloadAfterClose) {
       window.location.reload();
       return;
     }
@@ -16,7 +15,7 @@ export default function MessagePopup() {
   return (
     <div className="modal center">
       {
-        messagePopup.status === c.LOADING
+        popupInfo.additionalInfo.status === c.LOADING
           ?
           <div className="message-popup">
             <div className="loading">
@@ -34,27 +33,27 @@ export default function MessagePopup() {
                 viewBox="0 0 100 100"
                 preserveAspectRatio="xMidYMid">
                 <g transform="rotate(0 50 50)">
-                  <rect x="47" y="26" rx="3" ry="6" width="6" height="12" fill={appTheme.color_main_1}>
+                  <rect x="47" y="26" rx="3" ry="6" width="6" height="12" fill={"#333"}>
                     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.5s" begin="-0.8333333333333334s" repeatCount="indefinite"></animate>
                   </rect>
                 </g><g transform="rotate(60 50 50)">
-                  <rect x="47" y="26" rx="3" ry="6" width="6" height="12" fill={appTheme.color_main_1}>
+                  <rect x="47" y="26" rx="3" ry="6" width="6" height="12" fill={"#333"}>
                     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.5s" begin="-0.6666666666666666s" repeatCount="indefinite"></animate>
                   </rect>
                 </g><g transform="rotate(120 50 50)">
-                  <rect x="47" y="26" rx="3" ry="6" width="6" height="12" fill={appTheme.color_main_1}>
+                  <rect x="47" y="26" rx="3" ry="6" width="6" height="12" fill={"#333"}>
                     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.5s" begin="-0.5s" repeatCount="indefinite"></animate>
                   </rect>
                 </g><g transform="rotate(180 50 50)">
-                  <rect x="47" y="26" rx="3" ry="6" width="6" height="12" fill={appTheme.color_main_1}>
+                  <rect x="47" y="26" rx="3" ry="6" width="6" height="12" fill={"#333"}>
                     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.5s" begin="-0.3333333333333333s" repeatCount="indefinite"></animate>
                   </rect>
                 </g><g transform="rotate(240 50 50)">
-                  <rect x="47" y="26" rx="3" ry="6" width="6" height="12" fill={appTheme.color_main_1}>
+                  <rect x="47" y="26" rx="3" ry="6" width="6" height="12" fill={"#333"}>
                     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.5s" begin="-0.16666666666666666s" repeatCount="indefinite"></animate>
                   </rect>
                 </g><g transform="rotate(300 50 50)">
-                  <rect x="47" y="26" rx="3" ry="6" width="6" height="12" fill={appTheme.color_main_1}>
+                  <rect x="47" y="26" rx="3" ry="6" width="6" height="12" fill={"#333"}>
                     <animate attributeName="opacity" values="1;0" keyTimes="0;1" dur="0.5s" begin="0s" repeatCount="indefinite"></animate>
                   </rect>
                 </g>
@@ -66,7 +65,7 @@ export default function MessagePopup() {
           <div className="message-popup">
             <div className="normal">
               <div className="message">
-                {messagePopup.message}
+                {popupInfo.msg}
               </div>
               <button onClick={handleConfirm}>OK</button>
             </div>

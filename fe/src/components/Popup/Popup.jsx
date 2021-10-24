@@ -16,6 +16,7 @@ function Popup() {
   function handleClosePopup() {
     dispatch(a.changePopup(c.NO_POPUP));
   }
+  const popupInfo = useSelector(state => state.app.popup);
   const popups = {
     [c.NO_POPUP]: <div></div>,
     [c.MESSAGE_POPUP]: <MessagePopup />,
@@ -29,9 +30,8 @@ function Popup() {
     [c.PROFILE_POPUP]: <ProfilePopup handleClose={handleClosePopup} />,
     [c.FORGOT_PASS_POPUP]: <ForgotPass handleClose={handleClosePopup} />
   }
-  const currentPopup = useSelector(state => state.app.currentPopup);
   return (
-    popups[currentPopup]
+    popups[popupInfo.type]
   )
 }
 export default Popup

@@ -1,7 +1,5 @@
 import React from "react";
-import { useSelector } from "react-redux";
 export default function Paginate(props) {
-  const appTheme = useSelector(state => state.app.appTheme);
   const { handlePageSelect, currentPage, totalPage } = props;
   console.log(totalPage)
   const left = currentPage >= 3 && [
@@ -18,7 +16,7 @@ export default function Paginate(props) {
     <button onClick={() => handlePageSelect({ page: currentPage - 1 })} key="middle-01">
       {currentPage - 1}
     </button>,
-    <button className="active" key="middle-02" style={{ background: appTheme.color_main_1, color: "white" }}>
+    <button className="active" key="middle-02">
       {currentPage}
     </button>,
     currentPage + 1 <= totalPage &&

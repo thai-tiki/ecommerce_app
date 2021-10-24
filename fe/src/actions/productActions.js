@@ -37,8 +37,29 @@ function getAllProducts(params) {
 function updateProduct(product) {
   return (dispatch) => {
     s.updateProduct(product).then((res) => {
-      if (res.status === c.SUCCESS) dispatch(success(res.data));
-      else dispatch(failure(res.msg));
+      if (res.status === c.SUCCESS) {
+        dispatch(success(res.data));
+        dispatch({
+          msg: res.msg,
+          additionalInfo: {
+            status: c.SUCCESS,
+            willReloadAfterClose: true,
+          },
+          type: c.CHANGE_POPUP,
+          popupType: c.MESSAGE_POPUP,
+        });
+      } else {
+        dispatch(failure(res.msg));
+        dispatch({
+          msg: res.msg,
+          additionalInfo: {
+            status: c.FAILURE,
+            willReloadAfterClose: false,
+          },
+          type: c.CHANGE_POPUP,
+          popupType: c.MESSAGE_POPUP,
+        });
+      }
     });
   };
   function success(products) {
@@ -47,15 +68,36 @@ function updateProduct(product) {
       products,
     };
   }
-  function failure(code, message) {
+  function failure(message) {
     return { type: c.UPDATE_PRODUCT_FAILURE, message };
   }
 }
 function addProduct(product) {
   return (dispatch) => {
     s.addProduct(product).then((res) => {
-      if (res.status === c.SUCCESS) dispatch(success(res.data));
-      else dispatch(failure(res.msg));
+      if (res.status === c.SUCCESS) {
+        dispatch(success(res.data));
+        dispatch({
+          msg: "Thêm sản phẩm thành công !",
+          additionalInfo: {
+            status: c.SUCCESS,
+            willReloadAfterClose: true,
+          },
+          type: c.CHANGE_POPUP,
+          popupType: c.MESSAGE_POPUP,
+        });
+      } else {
+        dispatch(failure(res.msg));
+        dispatch({
+          msg: res.msg,
+          additionalInfo: {
+            status: c.FAILURE,
+            willReloadAfterClose: false,
+          },
+          type: c.CHANGE_POPUP,
+          popupType: c.MESSAGE_POPUP,
+        });
+      }
     });
   };
   function success(products) {
@@ -64,7 +106,7 @@ function addProduct(product) {
       products,
     };
   }
-  function failure(code, message) {
+  function failure(message) {
     return { type: c.ADD_PRODUCT_FAILURE, message };
   }
 }

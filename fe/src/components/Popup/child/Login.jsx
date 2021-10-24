@@ -7,7 +7,6 @@ export default function Login(props) {
   const dispatch = useDispatch();
   const phone = useSelector(state => state.user.phone);
   const message = useSelector(state => state.app.message);
-  const appTheme = useSelector(state => state.app.appTheme);
   const [password, setPassword] = useState("");
   function handleBack() {
     dispatch(appActions.changePopup(c.PHONE_POPUP));
@@ -36,8 +35,8 @@ export default function Login(props) {
         <input autoFocus type="password" placeholder="Mật khẩu" value={password} onChange={handleInputChange} />
         <label
           onClick={handleForgotPass}
-          style={{ color: appTheme.color_main_1 }}>Quên mật khẩu</label>
-        <button className="next-btn" onClick={handleLogin} style={{ background: appTheme.color_main_1 }}>
+        >Quên mật khẩu</label>
+        <button className="next-btn" onClick={handleLogin}>
           Đăng nhập
         </button>
         <p>{message}</p>

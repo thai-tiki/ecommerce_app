@@ -1,43 +1,29 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { formatPrice } from "../../../helper";
-import ProductForm from "./ProductForm";
-export default function ProductTab(props) {
-  const formStatus = {
-    open: "center",
-    hide: ""
-  }
+import ProductAddForm from "./ProductAddForm";
+import ProductUpdateForm from "./ProductUpdateForm";
+export default function ProductTab() {
   const products = useSelector(state => state.product.list);
-  const [customClass, setCustomClass] = useState(formStatus.hide);
+  const [currentForm, setCurrentForm] = useState("");
   const [currentProduct, setCurrentProduct] = useState(null);
   function handleAddProduct() {
-    setCurrentProduct({});
+    setCurrentForm("add")
   }
   function handleEditProduct(p) {
-    console.log(p);
-    setCustomClass(formStatus.open);
+    setCurrentForm("update");
     setCurrentProduct(p);
   }
-  function handleInfoChange(e) {
-    let newInfo = { ...currentProduct };
-    let { name, value } = e.target;
-    if (name.includes("price")) {
-      value = value.replace(/\./g, "");
-      console.log(value)
-      value = parseInt(value);
-    }
-    newInfo[name] = value;
-    setCurrentProduct(newInfo);
-  }
   function closeForm() {
-    setCurrentProduct(null);
+    setCurrentForm("none")
   }
   useEffect(() => {
-    if (currentProduct)
-      setCustomClass(formStatus.open);
-    else
-      setCustomClass(formStatus.hide)
-  }, [currentProduct])
+  }, []);
+  const formList = {
+    add: <ProductAddForm handleClose={closeForm} />,
+    update: <ProductUpdateForm product={currentProduct} handleClose={closeForm} />,
+    none: <div />
+  }
   return (
     products.list.length > 0 &&
     <div className="product-tab tab">
@@ -52,7 +38,8 @@ export default function ProductTab(props) {
         <table>
           <thead>
             <tr>
-              <th style={{ maxWidth: "250px" }}>Tên</th>
+              <th>No.</th>
+              <th style={{ maxWidth: "240px" }}>Tên</th>
               <th>Loại</th>
               <th>Giá gốc</th>
               <th>Giá sau giảm</th>
@@ -61,9 +48,10 @@ export default function ProductTab(props) {
           </thead>
           <tbody style={{}}>
             {
-              products.list.map((v) =>
+              products.list.map((v, i) =>
                 <tr key={v._id} onClick={() => handleEditProduct(v)}>
-                  <td style={{ maxWidth: "250px" }}>{v.name}</td>
+                  <td style={{ width: "45px" }}>{i + 1}</td>
+                  <td style={{ maxWidth: "240px" }}>{v.name}</td>
                   <td style={{ maxWidth: "150px" }}>{v.categories[0].name}</td>
                   <td>{formatPrice(v.before_discount_price)}</td>
                   <td>{formatPrice(v.after_discount_price)}</td>
@@ -78,15 +66,9 @@ export default function ProductTab(props) {
           </tbody>
         </table>
       </div>
-      <div className={`modal ${customClass}`}>
-        {
-          currentProduct &&
-          <ProductForm
-            product={currentProduct}
-            handleInputChange={handleInfoChange}
-            handleClose={closeForm} />
-        }
-      </div>
+      {
+        formList[currentForm]
+      }
     </div>
   )
 }

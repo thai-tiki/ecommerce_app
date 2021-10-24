@@ -1,5 +1,4 @@
 import { formatPrice, handleImgErr } from "../helper";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { standardProductLink } from "../helper"
@@ -34,7 +33,7 @@ export default function ProductCard(props) {
         </div>
         <div className="row">
           <div className="current-price">
-            ₫{formatPrice(after_discount_price)}
+            {formatPrice(after_discount_price)} ₫
           </div>
           {
             discountPercent > 0 &&

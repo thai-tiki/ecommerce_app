@@ -1,5 +1,6 @@
 const { Order } = require("../models/order");
 const c = require("../constants");
+const base = require("./base");
 exports.getOne = async (req, res) => {
   try {
     let data = await Order.findOne({
@@ -28,8 +29,8 @@ exports.getOne = async (req, res) => {
     });
   }
 };
-exports.getAll = async (req, res) => {
-  console.log(req.user._id);
+exports.getAllCustomer = async (req, res) => {
+  console.log(req.user);
   try {
     let page = req.query.page ? req.query.page : 1;
     let data = await Order.find({ user: req.user._id })
@@ -52,6 +53,37 @@ exports.getAll = async (req, res) => {
       total_page,
       msg: c.SUCCESS,
       status: c.SUCCESS,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      status: c.FAILURE,
+      msg: c.CODE_500,
+    });
+  }
+};
+exports.getAllAdmin = base.getAll(Order, [
+  "items",
+  "payment_method",
+  "shipment_method",
+]);
+exports.updateOne = async (req, res) => {
+  console.log(req.body, req.user);
+  try {
+    const filter = { _id: req.params.id };
+    if (req.user.role !== c.ADMIN) filter.user = req.user._id;
+    const data = await Order.findOneAndUpdate(filter, req.body);
+    if (!data) {
+      res.status(401).json({
+        status: c.FAILURE,
+        msg: c.NO_ORDER,
+      });
+      return;
+    }
+    res.status(200).json({
+      status: c.SUCCESS,
+      msg: c.UPDATE_ORDER_SUCCCESS,
+      data,
     });
   } catch (err) {
     console.log(err);

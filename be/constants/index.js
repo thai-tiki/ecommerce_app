@@ -27,6 +27,8 @@ module.exports = {
   PHONE_NOT_REGISTERED: "Số điện thoại chưa đăng ký",
   LOGIN_MISSING_INFO: "Vui lòng cung cấp đầy đủ thông tin đăng nhập",
   VOUCHER_ORDER_TOTAL_ERROR: "Chưa đạt mức tối thiểu để áp dụng voucher",
+  UPDATE_PRODUCT_SUCCESS: "Cập nhật thông tin sản phẩm thành công !",
+  UPDATE_ORDER_SUCCCESS: "Cập nhật thông tin đơn hàng thành công !",
   //ROLE
   ADMIN: "ADMIN",
   CUSTOMER: "CUSTOMER",

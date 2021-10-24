@@ -4,16 +4,16 @@ import { appActions } from "../../../actions/appActions";
 import { constants } from "../../../constants";
 export default function AutoHidePopup() {
   const dispatch = useDispatch();
-  const message = useSelector(state => state.app.message);
+  const popupInfo = useSelector(state => state.app.popup);
   useEffect(() => {
     setTimeout(() => {
       dispatch(appActions.changePopup(constants.NO_POPUP))
-    }, 1000)
+    }, 500)
   });
   return (
     <div className="modal center" style={{ background: "none" }}>
       <div className="autohide-popup">
-        {message}
+        {popupInfo.msg}
       </div>
     </div>
   )

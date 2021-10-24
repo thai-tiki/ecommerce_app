@@ -34,6 +34,9 @@
     .tab-name.active {
       box-shadow: 0 0 4px 0 rgb(200, 200, 200);
     }
+    .tab-name.active {
+      background-color: rgb(250, 250, 250);
+    }
     .backhome {
       border-top: 1px solid $border-color;
       img {
@@ -52,11 +55,7 @@
     }
     .tab {
       width: 100%;
-      box-shadow: 0 0 6px 0 rgb(200, 200, 200);
       height: calc(100% - 126px);
-      padding: 1em;
-      border-radius: 0.5em;
-      background-color: white;
       .row {
         justify-content: space-between;
         align-items: center;
@@ -83,22 +82,18 @@
       }
       table {
         word-break: break-word;
-        width: 100%;
         position: relative;
         th,
         td {
           font-weight: normal;
           text-align: left;
-          padding: 10px 10px;
+          padding: 10px 5px;
           background-color: white;
           line-height: 1.5;
           color: $text-color;
         }
         th {
           color: $sub-text-color;
-        }
-        td {
-          border-top: 1px solid $sub-text-color;
         }
         tbody {
           tr {
@@ -113,6 +108,27 @@
         button {
           color: $main-color;
         }
+      }
+    }
+    .product-tab {
+      padding: 1em;
+      border-radius: 0.5em;
+      background-color: white;
+      box-shadow: 0 0 6px 0 rgb(200, 200, 200);
+      table {
+        width: 100%;
+      }
+    }
+    .category-tab {
+      display: flex;
+      justify-content: space-between;
+      .list-container {
+        width: calc(50% - 10px);
+        height: 100%;
+        padding: 1em;
+        border-radius: 0.5em;
+        background-color: white;
+        box-shadow: 0 0 6px 0 rgb(200, 200, 200);
       }
     }
   }
@@ -191,138 +207,269 @@
     }
   }
 }
-.modal.center {
-  .form-container {
-    position: relative;
-    .close-btn {
-      width: 30px;
-      height: 30px;
-      position: absolute;
-      top: -8px;
-      right: 8px;
-      background: white;
-      border-radius: 100%;
-      font-size: 20px;
-      color: $sub-text-color;
+.form-container {
+  position: relative;
+  max-width: calc(100vw - 1em);
+  .close-btn {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -8px;
+    right: 8px;
+    background: white;
+    border-radius: 100%;
+    font-size: 20px;
+    color: $sub-text-color;
+  }
+}
+.product-form {
+  padding: 1em;
+  border-radius: 0.25em;
+  background-color: white;
+  width: 800px;
+  max-width: calc(100% - 1em);
+  overflow: scroll;
+  max-height: calc(100vh - 4em);
+  .row {
+    margin-bottom: 0.75em;
+    justify-content: left;
+    label {
+      width: 9em;
+      font-weight: 500;
+    }
+    input {
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid $border-color;
+      border-radius: 0.25em;
+    }
+    > input {
+      width: calc(100% - 9em);
+    }
+    .attribute {
+      width: calc(100% - 9em);
+      > div {
+        margin-bottom: 0.75em;
+      }
+      > div:last-of-type {
+        margin: 0;
+      }
+      input {
+        width: calc(50% - 0.5em);
+      }
+      .edit-btn {
+        background-color: transparent;
+        color: $sub-text-color;
+        font-size: 16px;
+        padding: 8px 14px;
+        padding-left: 16px;
+        border: solid 1px $border-color;
+        i {
+          margin: 0;
+          font-size: 16px;
+        }
+      }
+      > button {
+        display: block;
+        margin: auto;
+        margin-top: 0.5em;
+        width: 100%;
+        height: 38px;
+        color: $sub-text-color;
+        font-size: 16px;
+        border-radius: 0.25em;
+        background-color: transparent;
+        border: 1px solid $border-color;
+      }
+    }
+    .description {
+      width: calc(100% - 9em);
+      > div {
+        width: 100%;
+        border: 1px solid $border-color;
+        border-radius: 0.25em;
+        .ql-toolbar {
+          border: none;
+          border-bottom: 1px solid $border-color;
+        }
+        .ql-container {
+          height: 200px;
+          border: none;
+        }
+        button {
+          background-color: transparent;
+        }
+      }
+    }
+    .images {
+      display: flex;
+      padding: 0.5em;
+      border-radius: 0.25em;
+      width: calc(100% - 9em);
+      border: 1px solid $border-color;
+      .image {
+        width: 100px;
+        overflow: hidden;
+        margin-right: 0.5em;
+        border-radius: 0.25em;
+        border: 1px solid $border-color;
+        .img-container {
+          padding-top: 100%;
+        }
+      }
+    }
+    .custom-select {
+      width: calc(100% - 9em);
+      .select-btn {
+        width: 100%;
+        padding: 8px;
+        border-radius: 0.25em;
+        border: solid 1px $border-color;
+        height: fit-content;
+      }
+      .options {
+        background-color: rgb(250, 250, 250);
+        border-bottom: none;
+      }
     }
   }
-  .product-form {
-    padding: 1em;
+  #submit-btn {
+    padding: 8px 24px;
+    display: block;
+    margin: auto;
+    font-size: 16px;
     border-radius: 0.25em;
-    background-color: white;
-    width: 800px;
-    max-width: calc(100% - 1em);
-    overflow: scroll;
-    max-height: calc(100vh - 4em);
+    background-color: $main-color;
+    color: white;
+  }
+}
+.category-form {
+  background-color: white;
+  border-radius: 0.5em;
+  width: calc(50% - 10px);
+  box-shadow: 0 0 6px 0 rgb(200, 200, 200);
+  h3 {
+    padding: 16px;
+    color: $sub-text-color;
+    font-weight: 500;
+    border-bottom: 2px solid rgb(240, 240, 240);
+    width: 100%;
+  }
+  .form-container {
+    padding: 0 1em 1em 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: calc(100% - 73px);
     .row {
       margin-bottom: 0.75em;
       justify-content: left;
       label {
-        width: 9em;
+        width: 7em;
         font-weight: 500;
       }
       input {
+        width: calc(100% - 7em);
         padding: 8px;
         font-size: 16px;
         border: 1px solid $border-color;
         border-radius: 0.25em;
       }
-      > input {
-        width: calc(100% - 9em);
-      }
-      .attribute {
-        width: calc(100% - 9em);
-        > div {
-          margin-bottom: 0.75em;
-        }
-        > div:last-of-type {
-          margin: 0;
-        }
-        input {
-          width: calc(50% - 2.5em);
-        }
-        .edit-btn {
-          background-color: transparent;
-          color: $sub-text-color;
-          font-size: 16px;
-          padding: 8px 14px;
-          padding-left: 16px;
-          border: solid 1px $border-color;
-          i {
-            margin: 0;
-            font-size: 16px;
-          }
-        }
-        > button {
-          display: block;
-          margin: auto;
-          margin-top: 0.5em;
-          width: 100%;
-          height: 38px;
-          color: $sub-text-color;
-          font-size: 16px;
-          border-radius: 0.25em;
-          background-color: transparent;
-          border: 1px solid $border-color;
-        }
-      }
-      .description {
-        width: calc(100% - 9em);
-        > div {
-          width: 100%;
-          border: 1px solid $border-color;
-          border-radius: 0.25em;
-          .ql-toolbar {
-            border: none;
-            border-bottom: 1px solid $border-color;
-          }
-          .ql-container {
-            height: 200px;
-            border: none;
-          }
-          button {
-            background-color: transparent;
-          }
-        }
-      }
       .images {
-        padding: 0.5em;
-        border: 1px solid $border-color;
-        border-radius: 0.25em;
-        width: calc(100% - 9em);
         display: flex;
+        border-radius: 0.25em;
+        width: calc(100% - 7em);
+        justify-content: center;
+        border: 1px solid $border-color;
         .image {
           width: 100px;
+          overflow: hidden;
           margin-right: 0.5em;
-          border: 1px solid $border-color;
+          border-radius: 0.25em;
           .img-container {
             padding-top: 100%;
           }
         }
       }
-      .custom-select {
-        width: calc(100% - 9em);
-        .select-btn {
-          width: 100%;
-          padding: 8px;
-          border-radius: 0.25em;
-          border: solid 1px $border-color;
-          height: fit-content;
-        }
-        .options {
-          background-color: rgb(250, 250, 250);
-          border-bottom: none;
-        }
+    }
+  }
+  #submit-btn {
+    padding: 8px 24px;
+    display: block;
+    margin: auto;
+    font-size: 16px;
+    border-radius: 0.25em;
+    background-color: $main-color;
+    color: white;
+  }
+}
+.order-form {
+  padding: 1em;
+  border-radius: 0.25em;
+  background-color: white;
+  width: 800px;
+  max-width: calc(100% - 1em);
+  overflow: scroll;
+  max-height: calc(100vh - 4em);
+  .row {
+    margin-bottom: 0.75em;
+    justify-content: left;
+    label {
+      width: 9em;
+      font-weight: 500;
+    }
+    input {
+      padding: 8px;
+      font-size: 16px;
+      border: 1px solid $border-color;
+      border-radius: 0.25em;
+    }
+    > input {
+      width: calc(100% - 9em);
+    }
+    .custom-select {
+      width: calc(100% - 9em);
+      .select-btn {
+        width: 100%;
+        padding: 8px;
+        border-radius: 0.25em;
+        border: solid 1px $border-color;
+        height: fit-content;
+      }
+      .options {
+        background-color: rgb(250, 250, 250);
+        border-bottom: none;
       }
     }
-    #submit-btn {
-      padding: 8px 24px;
-      display: block;
-      margin: auto;
-      font-size: 16px;
-      border-radius: 0.25em;
-      background-color: $main-color;
-      color: white;
+  }
+  #submit-btn {
+    padding: 8px 24px;
+    display: block;
+    margin: auto;
+    font-size: 16px;
+    border-radius: 0.25em;
+    background-color: $main-color;
+    color: white;
+  }
+  table {
+    border: 2px solid $border-color;
+    margin-bottom: 1em;
+    tbody td {
+      border-top: 2px solid $border-color;
+    }
+  }
+  .product-show {
+    display: flex;
+    align-items: center;
+    .image {
+      width: 60px;
+      margin-right: 0.5em;
+      .img-container {
+        width: 100%;
+        padding-top: 100%;
+        border-radius: 0.25em;
+        overflow: hidden;
+      }
     }
   }
 }

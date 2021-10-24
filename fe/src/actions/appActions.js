@@ -14,9 +14,14 @@ function getHomeInfo() {
     return { type: c.GET_HOME_FAILURE };
   }
 }
-function changePopup(popupType, messageInfo, rattingInfo) {
+function changePopup(popupType, msg, additionalInfo) {
   return (dispatch) => {
-    dispatch({ type: c.CHANGE_POPUP, popupType, messageInfo, rattingInfo });
+    dispatch({
+      msg,
+      popupType,
+      additionalInfo,
+      type: c.CHANGE_POPUP,
+    });
   };
 }
 function getLocation() {
@@ -42,6 +47,7 @@ function getLocation() {
     };
   }
 }
+//OK
 function getDistrictsList(provinceID) {
   return (dispatch) => {
     appServices.getDistrictsList(provinceID).then((res) => {

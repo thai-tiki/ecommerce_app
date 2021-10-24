@@ -56,7 +56,31 @@ const orderSchema = mongoose.Schema({
     },
   ],
 });
+const validate = (order) => {
+  const schema = joi
+    .object({
+      date: joi.string().required(),
+      total_after_discount: joi.number().min(0).required(),
+      total_before_discount: joi.number().min(0).required(),
+      status: joi
+        .object({
+          name: joi.string().required(),
+          code: joi.string().required(),
+        })
+        .required(),
+      address: joi
+        .object({
+          name: joi.string().required(),
+          phone: joi.string().required(),
+          localtion: joi.string().required(),
+        })
+        .required(),
+    })
+    .unknown(true);
+  return schema.validate(order);
+};
 const Order = mongoose.model("order", orderSchema);
 module.exports = {
   Order,
+  validate,
 };
