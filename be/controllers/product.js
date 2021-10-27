@@ -3,7 +3,7 @@ const base = require("./base");
 const c = require("../constants");
 exports.addOne = base.addOne(Product);
 exports.getOne = base.getOne(Product);
-exports.getAll = base.getAll(Product, ["categories"]);
+exports.getAll = base.getAll(Product, ["categories"], "-rating");
 exports.updateOne = async (req, res) => {
   try {
     let data = await Product.findByIdAndUpdate(req.params.id, req.body, {

@@ -3,10 +3,6 @@ const joi = require("joi");
 const c = require("../constants");
 const productSchema = new mongoose.Schema({
   name: String,
-  rating: {
-    type: Number,
-    default: 0,
-  },
   before_discount_price: {
     type: Number,
     default: 0,
@@ -50,6 +46,24 @@ const productSchema = new mongoose.Schema({
     default: [],
   },
   images: [String],
+  rating: {
+    type: {
+      stars: Number,
+      list: [
+        {
+          stars: Number,
+          content: String,
+          user: String,
+          date: String,
+        },
+      ],
+    },
+    default: {
+      stars: 0,
+      list: [],
+    },
+    _id: false,
+  },
   categories: [{ type: mongoose.Schema.Types.ObjectId, ref: "category" }],
 });
 const validate = (product) => {

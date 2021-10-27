@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { formatPrice } from "../../../helper";
+import { formatPrice, convertMoney } from "../../../helper";
 import { constants as c } from "../../../constants";
 import { appActions } from "../../../actions/appActions";
 import { cartActions } from "../../../actions/cartActions";
 import { userActions } from "../../../actions/userActions";
 import { productActions } from "../../../actions/productActions";
 import { voucherActions } from "../../../actions/voucherActions";
-import Slider from "react-slick";
 import { ToastContainer } from "react-toastify";
+import Slider from "react-slick";
 import "react-toastify/dist/ReactToastify.css";
 export default function MainInfo(props) {
   let {
@@ -16,6 +16,7 @@ export default function MainInfo(props) {
     name,
     images,
     quantity,
+    rating,
     after_discount_price,
     before_discount_price,
   } = props.product;
@@ -96,7 +97,7 @@ export default function MainInfo(props) {
                   <i className="fas fa-star"></i>
                 )
               }
-              <span>(Xem 28 đánh giá)</span>
+              <span>({rating.list.length} đánh giá)</span>
               <span> | </span>
               <span>Đã bán 14</span>
             </div>
@@ -116,11 +117,20 @@ export default function MainInfo(props) {
 
           </div>
           <div className="product-voucher">
-            <span>01 Mã giảm giá</span>
+            <span>0{vouchers.data.length} Mã giảm giá</span>
             <div className="row">
-              <div className="voucher-tag">
-                Giảm 30K
-              </div>
+              {
+                vouchers.data.map(v =>
+                  <div className="voucher-tag" key={v._id}>
+                    Giảm&nbsp;
+                    {
+                      v.type === "VALUE_DISCOUNT"
+                        ? convertMoney(v.value)
+                        : `${v.value}%`
+                    }
+                  </div>
+                )
+              }
             </div>
           </div>
           <div className="cart-action">

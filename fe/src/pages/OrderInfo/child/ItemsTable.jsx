@@ -14,18 +14,11 @@ export default function ItemsTable(props) {
       c.RATTING_POPUP,
       "",
       {
-        id: product.id,
+        id: product._id,
         name: product.name,
-        orderCode: orderInfo.info.order_code,
+        orderCode: orderInfo._id,
       }
     ));
-  }
-  function isReviewable(product) {
-    let arr = orderInfo.info.line_items.filter((v) => {
-      return v.product.id === product.id
-    });
-    let rs = arr.length > 0 && arr[0].reviewed === false
-    return rs
   }
   return (
     <table>
@@ -59,18 +52,19 @@ export default function ItemsTable(props) {
                       {orderInfo.items[i].name}
                     </div>
                     {
-                      orderInfo.status.code === "COMPLETED" &&
+                      orderInfo.order_status.code === "COMPLETED" &&
                       <React.Fragment>
-                        {
-                          isReviewable(v) &&
-                          <>
-                            <button onClick={() => openRattingForm(v)}>Đánh giá</button>
-                            <span> | </span>
-                          </>
-                        }
+                        <button
+                          onClick={() => openRattingForm(orderInfo.items[i])}>
+                          Đánh giá
+                        </button>
+                        <span> | </span>
                       </React.Fragment>
                     }
-                    <button onClick={() => handleShowProduct(orderInfo.items[i]._id)}>Xem thông tin</button>
+                    <button
+                      onClick={() => handleShowProduct(orderInfo.items[i]._id)}>
+                      Xem thông tin
+                    </button>
                   </div>
                 </div>
               </td>

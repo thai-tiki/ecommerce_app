@@ -1,7 +1,8 @@
 import { constants as c } from "../constants";
 import { cartServices as s } from "../services/cartServices";
 import { toast } from "react-toastify";
-import { userActions } from "../actions/userActions";
+import { userActions } from "./userActions";
+import { appActions } from "./appActions";
 function addCart(product, willShowPopup) {
   return (dispatch) => {
     s.addCart(product).then((res) => {
@@ -147,22 +148,14 @@ function order(orderInfo) {
       if (res.status === c.SUCCESS) {
         window.localStorage.removeItem("cartInfo");
         dispatch(success());
-        dispatch({
-          type: c.CHANGE_POPUP,
-          popupType: c.ORDER_POPUP,
-          orderPopupTitle: {
-            title: "Đặt hàng thành công !",
-            subTitle:
-              "Bạn đã đặt hàng thành công vui lòng đợi xác nhận từ cửa hàng.",
-          },
-          paymentMethod: {
-            payment_method_name: res.data.payment_method_name,
-            payment_method_id: res.data.payment_method_id,
-            order_code: res.data.order_code,
-          },
-        });
+        dispatch(appActions.changePopup(c.ORDER_POPUP));
       } else {
         dispatch(failure(res.msg));
+        dispatch(
+          appActions.changePopup(c.MESSAGE_POPUP, res.msg, {
+            status: c.FAILURE,
+          })
+        );
       }
     });
   };

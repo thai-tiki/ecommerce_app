@@ -8,10 +8,12 @@ exports.getHomeInfo = async (req, res) => {
     const banners = await Banner.find({}).sort({ _id: -1 }).limit(5).lean();
     const hot_products = await Product.find({})
       .sort({ _id: 1 })
+      .select("-rating")
       .limit(6)
       .lean();
     const new_products = await Product.find({})
       .sort({ _id: -1 })
+      .select("-rating")
       .limit(6)
       .lean();
     const categories = await Category.find({}).lean();

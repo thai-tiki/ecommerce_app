@@ -15,13 +15,14 @@ exports.addOne = (Model) => async (req, res) => {
     });
   }
 };
-exports.getAll = (Model, populate) => async (req, res) => {
+exports.getAll = (Model, populate, select) => async (req, res) => {
   try {
     let page = req.query.page ? req.query.page : 1;
     const data = await Model.find(req.query)
       .limit(c.PER_PAGE)
       .skip((page - 1) * c.PER_PAGE)
       .populate(populate)
+      .select(select)
       .lean();
     let total = await Model.count({}).lean();
     let total_page = Math.ceil(total / c.PER_PAGE);

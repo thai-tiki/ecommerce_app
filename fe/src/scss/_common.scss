@@ -670,6 +670,7 @@
   }
   .row {
     align-items: center;
+    flex-wrap: wrap;
     .current-price {
       color: $price-color;
       font-size: 16px;
@@ -1262,6 +1263,7 @@
   }
   h4 {
     font-size: 18px;
+    color: $main-color;
   }
   p {
     display: block;
@@ -1288,22 +1290,6 @@
   span {
     font-size: 14px;
     line-height: 30px;
-  }
-  .custom-select {
-    width: 320px;
-    .select-btn {
-      width: 100%;
-      font-size: 14px;
-      height: 2.5em;
-      font-weight: 500;
-      > div {
-        text-align: center;
-        width: 100%;
-      }
-    }
-    .options > div {
-      font-size: 14px;
-    }
   }
 }
 .phone-popup,

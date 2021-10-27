@@ -1,5 +1,4 @@
 import { constants as c } from "../constants";
-import { appServices } from "../services/appServices";
 function formatPrice(p) {
   if (!p) return "0";
   p = Math.round(p);
@@ -182,9 +181,13 @@ function getAddressString(location, province, district, ward, detail) {
     location[province].name
   );
 }
+function convertMoney(m) {
+  return m / 1000 + "K";
+}
 export {
   validURL,
   formatPrice,
+  convertMoney,
   showNextElement,
   hideParentElement,
   uploadImage,

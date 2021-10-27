@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import OrderCard from "./child/OrderCard";
 import { formatPrice } from "../../helper";
-import Select from "../../components/Select";
-import Header from "../../components/Header";
-import Paginate from "../../components/Paginate";
 import { constants as c } from "../../constants";
-import PageLoading from "../../components/PageLoading";
 import { cartActions as a } from "../../actions/cartActions";
 import { showNextElement, hideParentElement } from "../../helper";
-import { cartActions } from "../../actions/cartActions";
+import OrderCard from "./child/OrderCard";
+import Select from "../../components/Select";
+import Header from "../../components/Header";
+import OrdersTable from "./child/OrdersTable";
+import Paginate from "../../components/Paginate";
+import PageLoading from "../../components/PageLoading";
 function OrdersListPage() {
   const dispatch = useDispatch();
   const [currentStatus, setCurrentStatus] = useState("Trạng thái");
   const [query, setQuery] = useState({});
   const [searchValue, setSearchValue] = useState("");
   const ordersList = useSelector((state) => state.cart.ordersList);
-  const appTheme = useSelector((state) => state.app.appTheme);
   useEffect(() => {
     document.title = "Danh sách đơn hàng";
     window.scrollTo({
@@ -40,22 +39,6 @@ function OrdersListPage() {
     let queryStr = queryKeys.reduce((rs, v) => `${rs}${v}=${q[v]}&`, "?");
     console.log(queryStr);
     dispatch(a.getOrdersList(queryStr));
-  }
-  function handleRebuy(e, productsList) {
-    e.stopPropagation();
-    productsList.map((v) => {
-      dispatch(
-        cartActions.addCart(
-          {
-            product_id: v.id,
-            quantity: v.quantity,
-            distributes: v.distributes_selected,
-          },
-          true
-        )
-      );
-      return null
-    });
   }
   function handleSort(option, e) {
     let newQuery = { ...query };
@@ -82,23 +65,6 @@ function OrdersListPage() {
   }
   function handleEnter(e) {
     if (e.key === "Enter") handleSearch();
-  }
-  function openPaymentDialog(e, order) {
-    e.stopPropagation();
-    dispatch({
-      type: c.CHANGE_POPUP,
-      popupType: c.ORDER_POPUP,
-      orderPopupTitle: {
-        title: "Thanh toán!",
-        subTitle:
-          "Hãy thanh toán ngay hoặc thay đổi hình thức thanh toán.",
-      },
-      paymentMethod: {
-        payment_method_name: order.payment_method_name,
-        payment_method_id: order.payment_method_id,
-        order_code: order.order_code,
-      },
-    });
   }
   return (
     <React.Fragment>
@@ -132,113 +98,22 @@ function OrdersListPage() {
                 <Select
                   placeholder={currentStatus}
                   handleSelect={handleSort}
-                  showDetail={(e) => showNextElement(e, 200)}
-                  values={[
-                    {
-                      title: "Tất cả",
-                    },
-                    {
-                      title: "Chờ xử lý",
-                      field_by: "order_status_code",
-                      field_by_value: "WAITING_FOR_PROGRESSING",
-                    },
-                    {
-                      title: "Đã hoàn thành",
-                      field_by: "order_status_code",
-                      field_by_value: "COMPLETED",
-                    },
-                    {
-                      title: "Đang chuẩn bị hàng",
-                      field_by: "order_status_code",
-                      field_by_value: "PACKING",
-                    },
-                    {
-                      title: "Hết hàng",
-                      field_by: "order_status_code",
-                      field_by_value: "OUT_OF_STOCK",
-                    },
-                    {
-                      title: "Shop đã huỷ",
-                      field_by: "order_status_code",
-                      field_by_value: "USER_CANCELLED",
-                    },
-                    {
-                      title: "Khách đã hủy",
-                      field_by: "order_status_code",
-                      field_by_value: "CUSTOMER_CANCELLED",
-                    },
-                    {
-                      title: "Đang giao hàng",
-                      field_by: "order_status_code",
-                      field_by_value: "SHIPPING",
-                    },
-                    {
-                      title: "Lỗi giao hàng",
-                      field_by: "order_status_code",
-                      field_by_value: "DELIVERY_ERROR",
-                    },
-                    {
-                      title: "Chờ trả hàng",
-                      field_by: "order_status_code",
-                      field_by_value: "CUSTOMER_RETURNING",
-                    },
-                    {
-                      title: "Đã trả hàng",
-                      field_by: "order_status_code",
-                      field_by_value: "CUSTOMER_HAS_RETURNS",
-                    },
-                  ]}
+                  showDetail={(e) => showNextElement(e)}
+                  values={
+                    c.ORDER_STATUS.map(v => {
+                      return { title: v.name, ...v }
+                    })
+                  }
                 />
               </div>
-              <table>
-                <thead>
-                  <tr>
-                    <th className="order-id">Mã đơn hàng</th>
-                    <th className="date">Thời gian</th>
-                    <th className="n-product">Sản phẩm</th>
-                    <th className="total">Tổng tiền</th>
-                    <th className="status">T.t đơn hàng</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {ordersList.list.map(
-                    (v, i) =>
-                      v.items.length > 0 && (
-                        <tr key={i} onClick={() => handleShowInfo(v._id)}>
-                          <td className="order-id" style={{ minWidth: "160px" }}>
-                            {v._id}
-                          </td>
-                          <td className="date">{v.date}</td>
-                          <td className="n-product">
-                            <div>{v.items[i].name}</div>
-                            <span>
-                              {v.items.length > 1
-                                ? `0${v.items.length - 1
-                                } sản phẩm khác`
-                                : null}
-                            </span>
-                          </td>
-                          <td className="total">₫ {formatPrice(v.total_before_discount)}</td>
-                          <td className="status">{v.status.name}</td>
-                        </tr>
-                      )
-                  )}
-                </tbody>
-              </table>
+              <OrdersTable orders={ordersList.list} />
               <div className="mobile">
-                {[].map(
+                {ordersList.list.map(
                   (v, i) =>
                     v.items.length > 0 && (
                       <OrderCard
-                        statusCode={v.order_status_code}
-                        onClick={handleShowInfo}
-                        orderCode={v.order_code}
                         key={i}
-                        status={v.order_status_name}
-                        image={v.line_items_at_time[0].image_url}
-                        name={v.line_items_at_time[0].name}
-                        nItems={v.line_items_at_time.length}
-                        total={v.total_final}
+                        {...v}
                       />
                     )
                 )}

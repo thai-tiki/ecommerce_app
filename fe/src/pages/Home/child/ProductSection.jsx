@@ -7,7 +7,7 @@ export default function ProductSection(props) {
     slidesToScroll: 1,
     responsive: [
       {
-        breakpoint: 600,
+        breakpoint: 768,
         settings: {
           infinite: props.products.length > 2,
           slidesToShow: 2,
@@ -15,18 +15,10 @@ export default function ProductSection(props) {
         }
       },
       {
-        breakpoint: 768,
+        breakpoint: 992,
         settings: {
           infinite: props.products.length > 3,
           slidesToShow: 3,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          infinite: props.products.length > 4,
-          slidesToShow: 4,
           slidesToScroll: 1,
         }
       },

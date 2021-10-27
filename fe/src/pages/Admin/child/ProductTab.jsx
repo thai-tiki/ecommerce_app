@@ -51,7 +51,7 @@ export default function ProductTab() {
               products.list.map((v, i) =>
                 <tr key={v._id} onClick={() => handleEditProduct(v)}>
                   <td style={{ width: "45px" }}>{i + 1}</td>
-                  <td style={{ maxWidth: "240px" }}>{v.name}</td>
+                  <td style={{ maxWidth: "240px", paddingRight: "16px" }}>{v.name}</td>
                   <td style={{ maxWidth: "150px" }}>{v.categories[0].name}</td>
                   <td>{formatPrice(v.before_discount_price)}</td>
                   <td>{formatPrice(v.after_discount_price)}</td>

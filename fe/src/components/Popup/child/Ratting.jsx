@@ -10,7 +10,7 @@ export default function RattingPopup(props) {
   const [previewImages, setPreviewImages] = useState([]);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [currentRatting, setCurrentRatting] = useState(0);
-  const rattingInfo = useSelector(state => state.app.rattingPopup);
+  const popupInfo = useSelector(state => state.app.popup);
   const myInput = useRef(null);
   const msg = [
     "Vui lòng đánh giá",
@@ -20,6 +20,7 @@ export default function RattingPopup(props) {
     "Hài lòng",
     "Rất hài lòng"
   ]
+  console.log(popupInfo)
   async function handleSubmit() {
     let images = [];
     for (let i = 0; i < selectedFiles.length; i++) {
@@ -33,9 +34,9 @@ export default function RattingPopup(props) {
       return;
     }
     dispatch(productActions.reviewProduct(
-      rattingInfo.id,
+      popupInfo.additionalInfo.id,
       {
-        order_code: rattingInfo.orderCode,
+        order_code: popupInfo.additionalInfo.orderCode,
         stars: currentRatting,
         content,
         images: JSON.stringify(images)
@@ -66,7 +67,7 @@ export default function RattingPopup(props) {
   return (
     <div className="modal center">
       <div className="ratting-popup">
-        <span>{rattingInfo.name}</span>
+        <span>{popupInfo.additionalInfo.name}</span>
         <h4>{msg[currentRatting]}</h4>
         <div className="stars">
           {

@@ -51,7 +51,7 @@ function CartPage() {
   };
   function handleOrder() {
     console.log(orderInfo);
-    dispatch(appActions.changePopup(c.MESSAGE_POPUP));
+    dispatch(appActions.changePopup(c.MESSAGE_POPUP, "", { status: c.LOADING }));
     dispatch(cartActions.order(orderInfo));
   };
   function handleSetOrderInfo(name, value) {

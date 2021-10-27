@@ -1,0 +1,306 @@
+.order-info-page {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  position: relative;
+  > button {
+    position: absolute;
+    top: 16px;
+    color: white;
+    font-weight: 500;
+    right: 0px;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    background-color: $main-color;
+  }
+  .title {
+    font-weight: 300;
+    font-size: 19px;
+    span {
+      font-weight: bolder;
+    }
+  }
+  .date {
+    font-size: 14px;
+    color: $sub-text-color;
+    margin-top: 0.5em;
+  }
+  .row {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .user-info,
+  .shipment-info,
+  .payment-info {
+    margin-top: 1em;
+    width: 32%;
+    h4 {
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .title {
+      font-size: 15px;
+      font-weight: normal;
+    }
+    .info {
+      background-color: white;
+      border-radius: 0.5em;
+      padding: 1em;
+      margin-top: 0.5em;
+      height: calc(100% - 26px);
+      div {
+        font-size: 14px;
+        line-height: 1.5;
+        color: $sub-text-color;
+        margin-top: 4px;
+      }
+    }
+  }
+  h4 {
+    text-transform: uppercase;
+  }
+  table {
+    border-collapse: collapse;
+    word-break: break-word;
+    border-top: 2px solid $wraper-color;
+    border-radius: 0.5em;
+    overflow: hidden;
+    margin-top: 1em;
+    width: 100%;
+    th,
+    td {
+      font-weight: normal;
+      min-width: 130px;
+      text-align: left;
+      padding: 20px 15px;
+      background-color: white;
+      line-height: 1.5;
+      color: $text-color;
+      .row {
+        justify-content: unset;
+        align-items: center;
+        .action {
+          width: calc(100% - 100px);
+        }
+        .name {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          line-height: 22px;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+      button,
+      span {
+        color: $main-color;
+      }
+    }
+    th {
+      color: $sub-text-color;
+    }
+    tbody {
+      tr {
+        font-size: 15px;
+        border-top: 2px solid $wraper-color;
+      }
+    }
+    .image {
+      width: 100px;
+      padding-right: 0.5em;
+      .img-container {
+        width: 100%;
+        padding-top: 100%;
+      }
+    }
+  }
+  .item-card {
+    display: flex;
+    padding: 0.5em;
+    background-color: white;
+    margin-bottom: 0.25em;
+    border-radius: 0.25em;
+    .image {
+      width: 80px;
+      padding-right: 0.5em;
+      .img-container {
+        width: 100%;
+        padding-top: 100%;
+      }
+    }
+    .row {
+      justify-content: unset;
+      margin-top: 0.5em;
+      color: $sub-text-color;
+    }
+    .info {
+      width: calc(100% - 80px);
+    }
+  }
+  .ratting-popup {
+    background-color: white;
+    width: 600px;
+    max-width: 90%;
+    position: relative;
+    padding: 1em;
+    border-radius: 0.5em;
+    .close-btn {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      background: white;
+      border-radius: 100%;
+      font-size: 20px;
+      color: $sub-text-color;
+    }
+    span {
+      font-size: 14px;
+      color: $sub-text-color;
+    }
+    h4 {
+      line-height: 40px;
+      font-size: 16px;
+      text-align: center;
+      text-transform: unset;
+    }
+    textarea {
+      border: 1px solid rgb(238, 238, 238);
+      padding: 12px;
+      border-radius: 4px;
+      resize: none;
+      width: 100%;
+      outline: 0px;
+      margin: 24px 0px 12px;
+      line-height: 1.5;
+      color: $sub-text-color;
+      font-size: 14px;
+    }
+    .row {
+      justify-content: space-between;
+    }
+    button {
+      width: calc(50% - 1em);
+      border-radius: 4px;
+      display: block;
+      height: 2.75em;
+    }
+    .image-btn {
+      color: rgb(11, 116, 229);
+      border: 1px solid rgb(11, 116, 229);
+    }
+    .submit-btn {
+      background-color: rgb(11, 116, 229);
+      color: white;
+    }
+    .stars {
+      margin: auto;
+      text-align: center;
+      color: rgb(228, 210, 55);
+      font-size: 32px;
+      font-weight: lighter;
+      i {
+        margin-left: 8px;
+        margin-right: 8px;
+      }
+    }
+    .preview-images {
+      display: flex;
+      margin: 1em -4px;
+      > div {
+        width: calc(12.5% - 8px);
+        margin-left: 4px;
+        margin-right: 4px;
+        border-radius: 0.25em;
+        overflow: hidden;
+        cursor: pointer;
+        border: 1px solid $border-color;
+        .img-container {
+          width: 100%;
+          padding-top: 100%;
+        }
+      }
+      .show-number {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        opacity: 0.5;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        font-weight: 500;
+      }
+    }
+  }
+}
+@media only screen and (max-width: 600px) {
+  .order-info-page {
+    padding: 0.5em;
+    > button {
+      position: relative;
+      top: 0;
+      right: 0;
+      margin-top: 1em;
+    }
+    .shipment-info,
+    .payment-info,
+    .user-info {
+      width: 100%;
+      background-color: white;
+      padding: 1em;
+      margin-top: 0.5em;
+      border-radius: 0.25em;
+      .info {
+        padding: 0;
+      }
+    }
+    .prePrice,
+    .discount {
+      display: none;
+    }
+    table {
+      display: none;
+    }
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+  .order-info-page {
+    padding-left: 1em;
+    padding-right: 1em;
+    .user-info {
+      width: 100%;
+    }
+    .shipment-info {
+      width: 49%;
+    }
+    .payment-info {
+      width: 49%;
+    }
+    .prePrice,
+    .discount {
+      display: none;
+    }
+    table {
+      .image {
+        width: 80px;
+      }
+    }
+  }
+}
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .order-info-page {
+    .price {
+      display: none;
+    }
+    table {
+      .image {
+        width: 80px;
+      }
+    }
+  }
+}

@@ -1,12 +1,3 @@
-function getMeta(metaName) {
-  const metas = document.getElementsByTagName("meta");
-  for (let i = 0; i < metas.length; i++) {
-    if (metas[i].getAttribute("name") === metaName) {
-      return metas[i].getAttribute("content");
-    }
-  }
-  return "";
-}
 exports.constants = {
   DEFAULT_TITLE:
     "Xây dựng hệ thống bán hàng mạnh mẽ, mang thương hiệu của riêng bạn.",
@@ -177,4 +168,27 @@ exports.constants = {
   //CODE
   VALUE_DISCOUNT: "VALUE_DISCOUNT",
   PERCENT_DISCOUNT: "PERCENT_DISCOUNT",
+  //ARRAY
+  ORDER_STATUS: [
+    {
+      code: "WAITING_FOR_PROGRESSING",
+      name: "Chờ xử lý",
+    },
+    {
+      code: "COMPLETED",
+      name: "Hoàn thành",
+    },
+    {
+      code: "SHIPPING",
+      name: "Đang giao hàng",
+    },
+    {
+      code: "SHOP_CANCELED",
+      name: "Shop đã hủy",
+    },
+    {
+      code: "CUSTOMER_CANCELED",
+      name: "Khách đã hủy",
+    },
+  ],
 };

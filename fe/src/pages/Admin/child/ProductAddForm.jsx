@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { constants as c } from '../../../constants';
 import { appActions } from "../../../actions/appActions";
 import { productActions } from '../../../actions/productActions';
-import { formatPrice, handleImgErr, showNextElement, hideParentElement, uploadImage } from '../../../helper';
+import { formatPrice, handleImgErr, showNextElement, uploadImage } from '../../../helper';
 import Select from "../../../components/Select";
 export default function ProductAddForm(props) {
   const dispatch = useDispatch();
@@ -33,11 +33,10 @@ export default function ProductAddForm(props) {
     newInfo.description = value;
     setProductInfo(newInfo);
   }
-  function handleSelectCategory(v, e) {
+  function handleSelectCategory(v) {
     let newInfo = { ...productInfo };
     newInfo.categories = [v];
     setProductInfo(newInfo);
-    hideParentElement(e);
   }
   function handleEditAttribute(e, i) {
     let newAttributes = productInfo.attributes ? [...productInfo.attributes] : [];
