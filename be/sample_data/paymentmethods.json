@@ -1,0 +1,13 @@
+[{
+  "_id": {
+    "$oid": "615ff5e717ced8609a5d4262"
+  },
+  "name": "Thanh toán khi nhận hàng",
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "615ff5f517ced8609a5d4264"
+  },
+  "name": "Chuyển khoản ngân hàng",
+  "__v": 0
+}]

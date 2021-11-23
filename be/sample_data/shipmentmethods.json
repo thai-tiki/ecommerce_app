@@ -1,0 +1,15 @@
+[{
+  "_id": {
+    "$oid": "61632fda7d2d1274ada79251"
+  },
+  "name": "Giao hàng tiết kiệm",
+  "fee": 25000,
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61632fe77d2d1274ada79253"
+  },
+  "name": "Giao hàng nhanh",
+  "fee": 75000,
+  "__v": 0
+}]

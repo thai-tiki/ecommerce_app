@@ -1,0 +1,224 @@
+[{
+  "_id": {
+    "$oid": "6167151ff9ba5c0f8d5438f0"
+  },
+  "date": "14-10-2021",
+  "total_before_discount": 133500,
+  "total_after_discount": 133500,
+  "status": {
+    "name": "Hoàn thành",
+    "code": "COMPLETED"
+  },
+  "address": {
+    "location": "220C, Xã Thành Triệu, Huyện Châu Thành, Tỉnh Bến Tre",
+    "phone": "0357857086",
+    "name": "Thai Lu Ngoc Vinh"
+  },
+  "voucher": null,
+  "payment_method": {
+    "$oid": "615ff5e717ced8609a5d4262"
+  },
+  "shipment_method": {
+    "$oid": "61632fda7d2d1274ada79251"
+  },
+  "user": {
+    "$oid": "6161b2cd9f88ccd3d410d0ea"
+  },
+  "items_in_time": [
+    {
+      "before_discount_price": 44500,
+      "after_discount_price": 44500,
+      "quantity": 3,
+      "_id": {
+        "$oid": "6167151ff9ba5c0f8d5438f1"
+      },
+      "is_rated": true
+    }
+  ],
+  "items": [
+    {
+      "$oid": "615ffd94709066373c2ab02b"
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "6167157cf9ba5c0f8d543901"
+  },
+  "date": "14-10-2021",
+  "total_before_discount": 149000,
+  "total_after_discount": 149000,
+  "status": {
+    "code": "\"WAITING_FOR_PROGRESSING\"",
+    "name": "Chờ xử lý"
+  },
+  "address": {
+    "location": "123C, Thanh Trieu, Chau Thanh, Ben Tre",
+    "phone": "0357857086",
+    "name": "Thai Lu Ngoc Vinh"
+  },
+  "voucher": null,
+  "payment_method": {
+    "$oid": "615ff5f517ced8609a5d4264"
+  },
+  "shipment_method": {
+    "$oid": "61632fe77d2d1274ada79253"
+  },
+  "user": {
+    "$oid": "6161b04d9f88ccd3d410d0d5"
+  },
+  "items_in_time": [
+    {
+      "before_discount_price": 149000,
+      "after_discount_price": 149000,
+      "quantity": 1,
+      "_id": {
+        "$oid": "6167157cf9ba5c0f8d543902"
+      }
+    }
+  ],
+  "items": [
+    {
+      "$oid": "615ffd94709066373c2ab029"
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "616724f96c43c837966f993c"
+  },
+  "date": "14-10-2021",
+  "total_before_discount": 9988000,
+  "total_after_discount": 9988000,
+  "status": {
+    "name": "Hoàn thành",
+    "code": "COMPLETED"
+  },
+  "address": {
+    "location": "223C, Xã Phương Độ, Thành phố Hà Giang, Tỉnh Hà Giang",
+    "phone": "0392808995",
+    "name": "Lê Minh Thư"
+  },
+  "voucher": null,
+  "payment_method": {
+    "$oid": "615ff5e717ced8609a5d4262"
+  },
+  "shipment_method": {
+    "$oid": "61632fe77d2d1274ada79253"
+  },
+  "user": {
+    "$oid": "6161b2cd9f88ccd3d410d0ea"
+  },
+  "items_in_time": [
+    {
+      "before_discount_price": 9690000,
+      "after_discount_price": 9690000,
+      "quantity": 1,
+      "_id": {
+        "$oid": "616724f96c43c837966f993d"
+      },
+      "is_rated": true
+    },
+    {
+      "before_discount_price": 149000,
+      "after_discount_price": 149000,
+      "quantity": 2,
+      "_id": {
+        "$oid": "616724f96c43c837966f993e"
+      }
+    }
+  ],
+  "items": [
+    {
+      "$oid": "61616e00bcc96e17fc4c198b"
+    },
+    {
+      "$oid": "615ffd94709066373c2ab029"
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61792f648367b7a51a053a3b"
+  },
+  "date": "27-10-2021",
+  "total_before_discount": 90000,
+  "total_after_discount": 64500,
+  "status": {
+    "name": "Chờ xử lý",
+    "code": "WAITING_FOR_PROGRESSING"
+  },
+  "address": {
+    "location": "123E, Phường Vĩnh Phúc, Quận Ba Đình, Thành phố Hà Nội",
+    "phone": "0392808996",
+    "name": "Lê Ngọc Minh Xap"
+  },
+  "voucher": null,
+  "payment_method": {
+    "$oid": "615ff5e717ced8609a5d4262"
+  },
+  "shipment_method": {
+    "$oid": "61632fe77d2d1274ada79253"
+  },
+  "user": {
+    "$oid": "6161b2cd9f88ccd3d410d0ea"
+  },
+  "items_in_time": [
+    {
+      "before_discount_price": 90000,
+      "after_discount_price": 64500,
+      "quantity": 1,
+      "_id": {
+        "$oid": "61792f648367b7a51a053a3c"
+      }
+    }
+  ],
+  "items": [
+    {
+      "$oid": "6173e00b92bd8b11a9180e1a"
+    }
+  ],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "61792fa78367b7a51a053a62"
+  },
+  "date": "27-10-2021",
+  "total_before_discount": 135000,
+  "total_after_discount": 135000,
+  "status": {
+    "name": "Hoàn thành",
+    "code": "COMPLETED"
+  },
+  "address": {
+    "location": "123E, Phường Vĩnh Phúc, Quận Ba Đình, Thành phố Hà Nội",
+    "phone": "0392808996",
+    "name": "Lê Ngọc Minh Xap"
+  },
+  "voucher": null,
+  "payment_method": {
+    "$oid": "615ff5e717ced8609a5d4262"
+  },
+  "shipment_method": {
+    "$oid": "61632fda7d2d1274ada79251"
+  },
+  "user": {
+    "$oid": "6161b2cd9f88ccd3d410d0ea"
+  },
+  "items_in_time": [
+    {
+      "before_discount_price": 135000,
+      "after_discount_price": 135000,
+      "quantity": 1,
+      "_id": {
+        "$oid": "61792fa78367b7a51a053a63"
+      }
+    }
+  ],
+  "items": [
+    {
+      "$oid": "6173dcb992bd8b11a9180df4"
+    }
+  ],
+  "__v": 0
+}]

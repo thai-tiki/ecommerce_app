@@ -1,0 +1,42 @@
+[{
+  "_id": {
+    "$oid": "617aa78a6d4a68ad87f5bddc"
+  },
+  "date": "28-10-2021",
+  "stars": 5,
+  "content": "Cuốn sách mà ai cũng nên đọc ạ. Thực sự thích cách hành văn của tác giả. Sách của Nhã Nam in sắc nét, ít lỗi. Tiki giao hàng nhanh lắm, đóng gói cũng chắc chắn. Sẽ ủng hộ Tiki nhiều hơn!",
+  "user": {
+    "$oid": "6161b2cd9f88ccd3d410d0ea"
+  },
+  "order": {
+    "$oid": "6167151ff9ba5c0f8d5438f0"
+  },
+  "product": {
+    "$oid": "615ffd94709066373c2ab02b"
+  },
+  "images": [
+    "https://i.ibb.co/cTzLMnc/1693dbd31498e76a9fb4e9a43f2558da.jpg",
+    "https://i.ibb.co/C65DyD5/143d64246f591aa2ed1a94f913dec0a4.jpg",
+    "https://i.ibb.co/vsC1V7v/2d22b7a431f1382e831a8a9b4b39ad0f.jpg"
+  ]
+},{
+  "_id": {
+    "$oid": "617ae51f742e2562a522701c"
+  },
+  "date": "29-10-2021",
+  "stars": 5,
+  "content": "Thật sự hài lòng với sản phẩm. Máy còn nguyên seal, mã ZP với sạc ba chấu để dành đi Singapore khỏi phải lo. Tiki giao hàng dường như tức thời, khôg phải đợi lâu.",
+  "user": {
+    "$oid": "6161b2cd9f88ccd3d410d0ea"
+  },
+  "order": {
+    "$oid": "616724f96c43c837966f993c"
+  },
+  "product": {
+    "$oid": "61616e00bcc96e17fc4c198b"
+  },
+  "images": [
+    "https://i.ibb.co/P6bcQ1Y/0d30218a619f23126d95cc9037d617c7.jpg"
+  ],
+  "__v": 0
+}]

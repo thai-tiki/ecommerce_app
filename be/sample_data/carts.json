@@ -1,0 +1,47 @@
+[{
+  "_id": {
+    "$oid": "6161b04e9f88ccd3d410d0d7"
+  },
+  "user": {
+    "$oid": "6161b04d9f88ccd3d410d0d5"
+  },
+  "total_before_discount": 0,
+  "total_after_discount": 0,
+  "voucher": null,
+  "items": [],
+  "items_in_time": [],
+  "__v": 22
+},{
+  "_id": {
+    "$oid": "6161b2cd9f88ccd3d410d0ec"
+  },
+  "user": {
+    "$oid": "6161b2cd9f88ccd3d410d0ea"
+  },
+  "total_before_discount": 55018000,
+  "total_after_discount": 54838000,
+  "voucher": null,
+  "items": [
+    {
+      "$oid": "61798d66c38218c3dca729fe"
+    },
+    {
+      "$oid": "616055533843e016384f7407"
+    }
+  ],
+  "items_in_time": [
+    {
+      "quantity": 2,
+      "_id": {
+        "$oid": "619cb11d6fde868b9f2387c4"
+      }
+    },
+    {
+      "quantity": 2,
+      "_id": {
+        "$oid": "619bb60c568ec8196e142679"
+      }
+    }
+  ],
+  "__v": 19
+}]

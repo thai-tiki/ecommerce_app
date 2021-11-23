@@ -1,0 +1,31 @@
+[{
+  "_id": {
+    "$oid": "61631d1e144d079a6cae944c"
+  },
+  "name": "Sinh nhật",
+  "type": "VALUE_DISCOUNT",
+  "value": 100000,
+  "limit_discount": 0,
+  "limit_use": 1,
+  "min_order_value": 1000000,
+  "description": "",
+  "products": [],
+  "__v": 0,
+  "code": "SINHNHAT",
+  "end": "10-12-2021"
+},{
+  "_id": {
+    "$oid": "6163275f2cdb86cef583a6ca"
+  },
+  "name": "Khai trương",
+  "type": "VALUE_DISCOUNT",
+  "value": 30000,
+  "code": "KHAITRUONG",
+  "limit_discount": 0,
+  "limit_use": 1,
+  "min_order_value": 0,
+  "description": "",
+  "products": [],
+  "__v": 0,
+  "end": "21-04-2022"
+}]

@@ -1,0 +1,52 @@
+[{
+  "_id": {
+    "$oid": "6161b04d9f88ccd3d410d0d5"
+  },
+  "name": "Thai",
+  "password": "dlSlN/A4sQPoamrC9SGbFCXKzPSdsfe",
+  "phone": "123456789",
+  "email": "thailnv263@gmail.com",
+  "sex": 1,
+  "role": "CUSTOMER",
+  "__v": 0,
+  "address": []
+},{
+  "_id": {
+    "$oid": "6161b2cd9f88ccd3d410d0ea"
+  },
+  "name": "Thai Vinh",
+  "password": "/.TahSUy7SaHksiCROmC.sycDh9yVqm",
+  "phone": "0357857086",
+  "email": "thailnv263@gmail.com",
+  "sex": 1,
+  "role": "CUSTOMER",
+  "__v": 8,
+  "address": [
+    {
+      "name": "Lê Ngọc Minh",
+      "ward": 2,
+      "phone": "0392808996",
+      "email": "ngocminh.2126@gmail.comn",
+      "detail": "123BE",
+      "province": 0,
+      "district": 0,
+      "is_default": true,
+      "_id": {
+        "$oid": "619bc4d3568ec8196e142709"
+      }
+    },
+    {
+      "name": "Thai Lu Ngoc Vinh",
+      "ward": 10,
+      "phone": "0357857086",
+      "email": "thailnv263@gmail.com",
+      "detail": "220C",
+      "province": 52,
+      "district": 1,
+      "is_default": false,
+      "_id": {
+        "$oid": "6162d2a8e495adadd821b773"
+      }
+    }
+  ]
+}]
