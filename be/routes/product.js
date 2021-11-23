@@ -1,12 +1,18 @@
 const express = require("express");
 const router = express.Router();
 const { validate } = require("../models/product");
+const auth = require("../middlewares/auth");
 const validator = require("../middlewares/validate");
 const controller = require("../controllers/product");
-
+const commentValidate = require("../models/comment").validate;
 router.get("/", controller.getAll);
-router.get("/:id", controller.getOne);
+router.get("/similar/:id", controller.getSimilar);
+router.get("/rating/:id", controller.getAllComment);
+router.get("/favorite", auth.protect, controller.getFavorite);
+router.get("/:id", auth.readToken, controller.getOne);
+router.use(auth.protect);
+router.get("/like/:id", controller.like);
+router.post("/rating/:id", validator(commentValidate), controller.rating);
 router.post("/", validator(validate), controller.addOne);
 router.put("/:id", validator(validate), controller.updateOne);
-
 module.exports = router;

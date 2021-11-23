@@ -407,12 +407,14 @@
             .content {
               margin-top: 16px;
               font-size: 14px;
+              line-height: 1.5;
               color: $text-color;
             }
           }
           .images {
             display: flex;
             margin: 1em -4px;
+            margin-bottom: 0;
             > div {
               width: calc(16.666% - 8px);
               margin-left: 4px;
@@ -545,6 +547,9 @@
       margin-top: 2px;
       padding-left: 8px;
       padding-right: 8px;
+      .product-card {
+        border: 1px solid $border-color;
+      }
     }
   }
 }

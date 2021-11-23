@@ -10,7 +10,7 @@ function HomePage(props) {
   const dispatch = useDispatch();
   const homeInfo = useSelector(state => state.app.home);
   useEffect(() => {
-    document.title = "Trang chủ";
+    document.title = "Magento - Mua sắm online không giới hạn";
     window.scrollTo({
       top: 0,
       behavior: 'smooth'

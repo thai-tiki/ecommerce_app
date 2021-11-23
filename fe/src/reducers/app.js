@@ -43,21 +43,6 @@ export function app(state = initialState, action) {
           type: action.popupType,
           additionalInfo: action.additionalInfo,
         },
-        // currentPopup: action.popupType,
-        // message: action.messageInfo ? action.messageInfo : "",
-        // rattingPopup: { ...action.rattingInfo },
-        // orderPopup: { ...action.paymentMethod, ...action.orderPopupTitle },
-      };
-    case c.ADD_USER_ADDRESS_SUCCESS:
-    case c.UPDATE_USER_ADDRESS_SUCCESS:
-    case c.DELETE_USER_ADDRESS_SUCCESS:
-      return {
-        ...state,
-        messagePopup: {
-          message: action.message,
-          status: c.SUCCESS,
-          willReload: true,
-        },
       };
     case c.ADD_USER_ADDRESS_FAILURE:
     case c.UPDATE_USER_ADDRESS_FAILURE:
@@ -77,11 +62,11 @@ export function app(state = initialState, action) {
         message: action.msg,
       };
     //case c.GET_ORDERS_LIST_FAILURE:
+    //case c.GET_ALL_NEWS_FAILURE:
     case c.GET_CART_FAILURE:
     case c.GET_NEWS_FAILURE:
     case c.GET_PRODUCT_FAILURE:
     case c.GET_PROFILE_FAILURE:
-    case c.GET_ALL_NEWS_FAILURE:
     case c.GET_PRODUCTS_FAILURE:
     case c.GET_ORDER_INFO_FAILURE:
     case c.GET_NEWS_CATEGORY_FAILURE:

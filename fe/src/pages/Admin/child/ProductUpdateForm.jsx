@@ -12,6 +12,7 @@ export default function ProductUpdateForm(props) {
   const myInput = useRef(null);
   const categories = useSelector(state => state.category.categories);
   const [productInfo, setProductInfo] = useState(props.product);
+  console.log(props.product)
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [selectedFilesUrl, setSelectedFilesUrl] = useState([]);
   const errMsg = {
@@ -33,11 +34,10 @@ export default function ProductUpdateForm(props) {
     newInfo.description = value;
     setProductInfo(newInfo);
   }
-  function handleSelectCategory(v, e) {
+  function handleSelectCategory(v) {
     let newInfo = { ...productInfo };
     newInfo.categories = [v];
     setProductInfo(newInfo);
-    hideParentElement(e);
   }
   function handleEditAttribute(e, i) {
     let newAttributes = productInfo.attributes ? [...productInfo.attributes] : [];

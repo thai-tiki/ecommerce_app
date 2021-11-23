@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Paginate from "../../components/Paginate";
+import { productActions as a } from "../../actions/productActions";
+import { constants as c } from "../../constants";
 import Header from "../../components/Header";
 import ProductCard from "../../components/ProductCard";
 import PageLoading from "../../components/PageLoading";
-import { constants as c } from "../../constants";
-import { productActions as a } from "../../actions/productActions";
 function FavoritePage(props) {
   const pageInfo = useSelector(state => state.product.favorite);
   const dispatch = useDispatch();
@@ -14,7 +13,7 @@ function FavoritePage(props) {
     if (pageInfo.status === c.LOADING) {
       dispatch(a.getFavoriteProducts());
     }
-  });
+  }, []);
   return (
     pageInfo.status === c.SUCCESS
       ?
@@ -23,12 +22,12 @@ function FavoritePage(props) {
         <div className="purchased-product-page container">
           <div className="mobile-tool mobile">
             <span>
-              Có {pageInfo.total} sản phẩm yêu thích
+              Có {pageInfo.data.length} sản phẩm yêu thích
             </span>
           </div>
           <div className="products-list">
             <span>
-              Có {pageInfo.total} sản phẩm yêu thích
+              Có {pageInfo.data.length} sản phẩm yêu thích
             </span>
             <div className="row">
               {
@@ -40,10 +39,6 @@ function FavoritePage(props) {
                 )
               }
             </div>
-            <Paginate
-              currentPage={pageInfo.currentPage}
-              totalPage={pageInfo.last_page}
-            />
           </div>
         </div>
       </React.Fragment>

@@ -17,12 +17,12 @@ function getAllProducts(queryString) {
     });
 }
 function getProductInfo(id) {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      token: tokenInfo ? tokenInfo : "",
+      token: token ? token : "",
     },
   };
   return fetch(`${c.API_URL}/product/${id}`, requestOptions)
@@ -37,12 +37,12 @@ function getProductInfo(id) {
     });
 }
 function updateProduct(product) {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      token: tokenInfo ? tokenInfo : "",
+      token: token ? token : "",
     },
     body: JSON.stringify(product),
   };
@@ -58,12 +58,12 @@ function updateProduct(product) {
     });
 }
 function addProduct(product) {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      token: tokenInfo ? tokenInfo : "",
+      token: token ? token : "",
     },
     body: JSON.stringify(product),
   };
@@ -78,19 +78,72 @@ function addProduct(product) {
       return {};
     });
 }
-//OK
-function getSimilarProducts(id) {
+function getProductReview(id) {
   const requestOptions = {
     method: "GET",
   };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/products/${id}/similar_products`,
-    requestOptions
-  )
+  return fetch(`${c.API_URL}/product/rating/${id}`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
       return json;
+    })
+    .catch((err) => {
+      console.log(err);
+      return {};
+    });
+}
+function reviewProduct(reviewInfo) {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      token: token ? token : "",
+    },
+    body: JSON.stringify(reviewInfo),
+  };
+  return fetch(
+    `${c.API_URL}/product/rating/${reviewInfo.product}`,
+    requestOptions
+  )
+    .then((res) => res.json())
+    .then((data) => {
+      return data;
+    })
+    .catch((err) => {
+      console.log(err);
+      return {};
+    });
+}
+function getSimilarProducts(id) {
+  const requestOptions = {
+    method: "GET",
+  };
+  return fetch(`${c.API_URL}/product/similar/${id}`, requestOptions)
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json);
+      return json;
+    })
+    .catch((err) => {
+      console.log(err);
+      return {};
+    });
+}
+function toggleWishList(id) {
+  const token = JSON.parse(localStorage.getItem("token"));
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      token: token ? token : "",
+    },
+  };
+  return fetch(`${c.API_URL}/product/like/${id}`, requestOptions)
+    .then((res) => res.json())
+    .then((data) => {
+      return data;
     })
     .catch((err) => {
       console.log(err);
@@ -98,15 +151,15 @@ function getSimilarProducts(id) {
     });
 }
 function getFavoriteProducts() {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
+      token: token ? token : "",
     },
   };
-  return fetch(`${c.API_URL}/customer/${store_code}/favorites`, requestOptions)
+  return fetch(`${c.API_URL}/product/favorite`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -117,61 +170,14 @@ function getFavoriteProducts() {
       return {};
     });
 }
-function toggleWishList(id, isLiked) {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
-  const requestOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
-    },
-    body: JSON.stringify({
-      is_favorite: !isLiked,
-    }),
-  };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/products/${id}/favorites`,
-    requestOptions
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      return data;
-    })
-    .catch((err) => {
-      console.log(err);
-      return {};
-    });
-}
-function reviewProduct(id, reviewInfo) {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
-  const requestOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
-    },
-    body: JSON.stringify(reviewInfo),
-  };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/products/${id}/reviews`,
-    requestOptions
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      return data;
-    })
-    .catch((err) => {
-      console.log(err);
-      return {};
-    });
-}
+//OK
 function getPurchasedProducts() {
-  const tokenInfo = JSON.parse(localStorage.getItem("tokenInfo"));
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": tokenInfo ? tokenInfo.token : "",
+      "customer-token": token ? token.token : "",
     },
   };
   return fetch(
@@ -181,24 +187,6 @@ function getPurchasedProducts() {
     .then((res) => res.json())
     .then((data) => {
       return data;
-    })
-    .catch((err) => {
-      console.log(err);
-      return {};
-    });
-}
-function getProductReview(id) {
-  const requestOptions = {
-    method: "GET",
-  };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/products/${id}/reviews`,
-    requestOptions
-  )
-    .then((res) => res.json())
-    .then((json) => {
-      console.log(json);
-      return json;
     })
     .catch((err) => {
       console.log(err);

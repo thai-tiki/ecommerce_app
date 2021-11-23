@@ -74,7 +74,7 @@ export default function Header() {
       <div className="header">
         <div className="container">
           <Link to="/" className="logo">
-            <img src="https://i.ibb.co/gPwNJ6M/attachment-82489162.png" alt="" />
+            <img src="/img/1.jpg" alt="" />
           </Link>
           <div
             id="clickbox"
@@ -129,23 +129,6 @@ export default function Header() {
               <div className="title">Giỏ hàng</div>
             </div>
           </Link>
-          <div className="row">
-            {token &&
-              <Link
-                to="/yeu-thich"
-                onClick={checkAccount}
-                className="header-btn row">
-                <img src="/img/heart1.png" alt="" />
-                <div>
-                  {
-                    badges.favorite_products > 0 &&
-                    <div className="number">{badges.favorite_products}</div>
-                  }
-                  <div className="title">Yêu thích</div>
-                </div>
-              </Link>
-            }
-          </div>
         </div>
       </div>
       <div className="nav">

@@ -49,14 +49,7 @@ const productSchema = new mongoose.Schema({
   rating: {
     type: {
       stars: Number,
-      list: [
-        {
-          stars: Number,
-          content: String,
-          user: String,
-          date: String,
-        },
-      ],
+      list: [{ type: mongoose.SchemaTypes.ObjectId, ref: "comment" }],
     },
     default: {
       stars: 0,
@@ -64,7 +57,17 @@ const productSchema = new mongoose.Schema({
     },
     _id: false,
   },
+  sold: {
+    type: Number,
+    default: 0,
+  },
   categories: [{ type: mongoose.Schema.Types.ObjectId, ref: "category" }],
+  like: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "user",
+    },
+  ],
 });
 const validate = (product) => {
   const schema = joi

@@ -1,6 +1,5 @@
 import { formatPrice } from "../../../helper";
 export default function ItemCard(props) {
-  console.log(props.canRating)
   return (
     <a href={`/san-pham/${props.id}`} className="item-card">
       <div className="image">

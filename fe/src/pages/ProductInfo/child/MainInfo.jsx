@@ -60,8 +60,7 @@ export default function MainInfo(props) {
       dispatch(appActions.changePopup(c.PHONE_POPUP));
       return;
     }
-    dispatch(productActions.toggleWishList(_id, props.isLiked));
-    dispatch(userActions.getUserBadges());
+    dispatch(productActions.toggleWishList(_id));
   }
   return (
     <div>
@@ -106,15 +105,17 @@ export default function MainInfo(props) {
             <div className="price">
               {formatPrice(after_discount_price)} ₫
             </div>
-            <div className="row">
-              <div className="past-price">
-                {formatPrice(before_discount_price)} ₫
+            {
+              discount > 0 &&
+              <div className="row">
+                <div className="past-price">
+                  {formatPrice(before_discount_price)} ₫
+                </div>
+                <div className="discount">
+                  -{discount}%
+                </div>
               </div>
-              <div className="discount">
-                -{discount}%
-              </div>
-            </div>
-
+            }
           </div>
           <div className="product-voucher">
             <span>0{vouchers.data.length} Mã giảm giá</span>

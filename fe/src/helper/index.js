@@ -43,6 +43,7 @@ function hideParentElement(e) {
   parentElement.parentElement.style.zIndex = 2;
 }
 async function uploadImage(formData) {
+  console.log("upload");
   const API_KEY = "92bd8c2c76657d6c7d7dd0eb1e7dc4d0";
   const requestOptions = {
     method: "POST",
@@ -184,6 +185,13 @@ function getAddressString(location, province, district, ward, detail) {
 function convertMoney(m) {
   return m / 1000 + "K";
 }
+function getDate() {
+  let date = new Date();
+  let dateStr = date.getDate() > 9 ? date.getDate() : `0${date.getDate()}`;
+  let monthStr =
+    date.getMonth() + 1 > 9 ? date.getMonth() + 1 : `0${date.getMonth()}`;
+  return `${dateStr}-${monthStr}-${date.getFullYear()}`;
+}
 export {
   validURL,
   formatPrice,
@@ -197,6 +205,7 @@ export {
   isNullText,
   formatDate,
   requestOtp,
+  getDate,
   isJson,
   standardProductLink,
   getAddressString,

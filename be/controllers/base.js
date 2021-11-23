@@ -18,11 +18,12 @@ exports.addOne = (Model) => async (req, res) => {
 exports.getAll = (Model, populate, select) => async (req, res) => {
   try {
     let page = req.query.page ? req.query.page : 1;
-    const data = await Model.find(req.query)
+    const data = await Model.find(req.query ? req.query : {})
       .limit(c.PER_PAGE)
       .skip((page - 1) * c.PER_PAGE)
       .populate(populate)
       .select(select)
+      .sort({ _id: -1 })
       .lean();
     let total = await Model.count({}).lean();
     let total_page = Math.ceil(total / c.PER_PAGE);
@@ -53,6 +54,24 @@ exports.getOne = (Model) => async (req, res) => {
       });
       return;
     }
+    res.status(200).json({
+      status: c.SUCCESS,
+      msg: c.SUCCESS,
+      data,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      status: c.FAILURE,
+      msg: c.CODE_500,
+    });
+  }
+};
+exports.updateOne = (Model) => async (req, res) => {
+  try {
+    let data = await Model.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
     res.status(200).json({
       status: c.SUCCESS,
       msg: c.SUCCESS,

@@ -45,6 +45,7 @@ const orderSchema = mongoose.Schema({
         before_discount_price: Number,
         after_discount_price: Number,
         quantity: Number,
+        is_rated: Boolean,
       },
       _id: false,
     },

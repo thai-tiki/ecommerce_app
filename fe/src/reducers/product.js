@@ -5,18 +5,19 @@ const initialState = {
     list: [],
   },
   favorite: {
+    data: [],
     status: c.LOADING,
   },
   info: {
+    data: {},
     status: c.LOADING,
   },
   similar: {
     status: c.LOADING,
     list: [],
   },
-  review: {
+  rating: {
     status: c.LOADING,
-    info: null,
     list: [],
   },
   purchased: {
@@ -37,7 +38,7 @@ export function product(state = initialState, action) {
           status: c.LOADING,
           list: [],
         },
-        review: {
+        rating: {
           status: c.LOADING,
           info: null,
           list: [],
@@ -50,16 +51,11 @@ export function product(state = initialState, action) {
           status: c.LOADING,
         },
       };
-    case c.SET_ERROR_SELECT_DISTRIBUTE:
-      return {
-        ...state,
-        error_distribute: action.data,
-      };
     case c.GET_PRODUCT_SUCCESS:
       return {
         ...state,
         info: {
-          ...action.data,
+          data: action.data,
           status: c.SUCCESS,
         },
         status: c.SUCCESS,
@@ -68,7 +64,7 @@ export function product(state = initialState, action) {
       return {
         ...state,
         favorite: {
-          ...action.data,
+          data: action.data,
           status: c.SUCCESS,
         },
       };
@@ -117,26 +113,29 @@ export function product(state = initialState, action) {
           status: c.FAILURE,
         },
       };
-    case c.ADD_TO_WISHLIST_SUCCESS: {
-      let newState = { ...state };
-      newState.info.is_favorite = action.isLiked;
-      return newState;
-    }
+    case c.ADD_TO_WISHLIST_SUCCESS:
+      return {
+        ...state,
+        info: {
+          data: {
+            ...state.info.data,
+            isLiked: action.isLiked,
+          },
+        },
+      };
     case c.GET_PRODUCT_REVIEW_SUCCESS:
       return {
         ...state,
-        review: {
+        rating: {
           status: c.SUCCESS,
-          info: action.data,
-          list: action.data.data,
+          list: action.data,
         },
       };
     case c.GET_PRODUCT_REVIEW_FAILURE:
       return {
         ...state,
-        review: {
+        rating: {
           status: c.FAILURE,
-          info: null,
           list: [],
         },
       };

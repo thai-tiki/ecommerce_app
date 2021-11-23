@@ -87,22 +87,67 @@ function updateUserAddress(addressInfo, index) {
   return (dispatch) => {
     s.updateUserAddress(addressInfo, index).then((res) => {
       if (res.status === c.SUCCESS) {
-        dispatch(success(res.data));
+        dispatch(
+          appActions.changePopup(
+            c.MESSAGE_POPUP,
+            "Cập nhật địa chỉ giao hàng thàng công !",
+            { status: c.SUCCESS, willReloadAfterClose: true }
+          )
+        );
       } else {
-        dispatch(failure(res.msg));
+        dispatch(
+          appActions.changePopup(c.MESSAGE_POPUP, res.msg, {
+            status: c.FAILURE,
+            willReloadAfterClose: true,
+          })
+        );
       }
     });
   };
-  function success(address) {
-    return {
-      type: c.UPDATE_USER_ADDRESS_SUCCESS,
-      address,
-      message: "Cập nhật thông tin giao hàng thành công",
-    };
-  }
-  function failure(message) {
-    return { type: c.UPDATE_USER_ADDRESS_FAILURE, message };
-  }
+}
+function addUserAddress(addressInfo) {
+  return (dispatch) => {
+    s.addUserAddress(addressInfo).then((res) => {
+      if (res.status === c.SUCCESS) {
+        dispatch(
+          appActions.changePopup(
+            c.MESSAGE_POPUP,
+            "Thêm địa chỉ giao hàng thàng công !",
+            { status: c.SUCCESS, willReloadAfterClose: true }
+          )
+        );
+      } else {
+        dispatch(
+          appActions.changePopup(c.MESSAGE_POPUP, res.msg, {
+            status: c.FAILURE,
+            willReloadAfterClose: false,
+          })
+        );
+      }
+    });
+  };
+}
+function deleteUserAddress(id) {
+  return (dispatch) => {
+    s.deleteUserAddress(id).then((res) => {
+      if (res.status === c.SUCCESS) {
+        dispatch(
+          appActions.changePopup(
+            c.MESSAGE_POPUP,
+            "Xóa địa chỉ giao hàng thàng công !",
+            { status: c.SUCCESS, willReloadAfterClose: true }
+          )
+        );
+      } else {
+        dispatch(
+          appActions.changePopup(c.MESSAGE_POPUP, res.msg, {
+            status: c.FAILURE,
+            willReloadAfterClose: false,
+          })
+        );
+      }
+    });
+  };
 }
 //OK
 function resetPassword(info) {
@@ -120,69 +165,6 @@ function resetPassword(info) {
   }
   function failure(msg) {
     return { type: c.RESET_PASSWORD_FAILURE, msg };
-  }
-}
-function addUserAddress(addressInfo) {
-  return (dispatch) => {
-    s.addUserAddress(addressInfo).then((res) => {
-      if (res.status === c.SUCCESS) {
-        dispatch(success());
-      } else {
-        dispatch(failure(res.msg));
-      }
-    });
-  };
-  function success() {
-    return {
-      type: c.ADD_USER_ADDRESS_SUCCESS,
-      message: "Thêm địa chỉ giao hàng thành công",
-    };
-  }
-  function failure(message) {
-    return { type: c.ADD_USER_ADDRESS_FAILURE, message };
-  }
-}
-function setAddressDefault(addressInfo) {
-  return (dispatch) => {
-    s.updateUserAddress(addressInfo).then((res) => {
-      if (res.code === 200) {
-        dispatch(success());
-        window.location.reload();
-      } else {
-        dispatch(failure());
-        dispatch({
-          type: c.CHANGE_POPUP,
-          popupType: c.AUTOHIDE_POPUP,
-          messageInfo: res.msg,
-        });
-      }
-    });
-  };
-  function success() {
-    return { type: c.SET_ADDRESS_DEFAULT_SUCCESS };
-  }
-  function failure() {
-    return { type: c.SET_ADDRESS_DEFAULT_FAILURE };
-  }
-}
-function deleteUserAddress(id) {
-  return (dispatch) => {
-    s.deleteUserAddress(id).then((res) => {
-      if (res.status === c.SUCCESS) {
-        dispatch(success());
-      } else {
-        dispatch(failure(res.msg));
-      }
-    });
-  };
-  function success() {
-    return {
-      type: c.DELETE_USER_ADDRESS_SUCCESS,
-      message: "Xóa địa chỉ thành công",
-    };
-  }
-  function failure(message) {
-    return { type: c.DELETE_USER_ADDRESS_FAILURE, message };
   }
 }
 function getUserProfile() {
@@ -277,37 +259,6 @@ function getUserBadges() {
     return { type: c.GET_USER_BADGES_FAILURE, message, code };
   }
 }
-function getuserNotify() {
-  return (dispatch) => {
-    s.getuserNotify().then((res) => {
-      if (res.code === 200) {
-        dispatch(success(res.data));
-      } else {
-        dispatch(failure(res.msg, res.code));
-      }
-    });
-  };
-  function success(data) {
-    return {
-      data,
-      type: c.GET_USER_NOTIFY_SUCCESS,
-    };
-  }
-  function failure(message, code) {
-    return { type: c.GET_USER_NOTIFY_FAILURE, message, code };
-  }
-}
-
-function toggleClassChat(boxChatStateIp) {
-  var boxChatState = boxChatStateIp;
-  boxChatState = boxChatState === "active" ? "" : "active";
-  console.log({ boxChatState });
-  return {
-    boxChatState,
-    type: c.TOGGLE_BOX_CHAT,
-  };
-}
-
 export const userActions = {
   accountCheck,
   accountLogin,
@@ -319,10 +270,7 @@ export const userActions = {
   addUserAddress,
   updateUserAddress,
   deleteUserAddress,
-  setAddressDefault,
   updateUserProfile,
   getUserReview,
   getUserBadges,
-  getuserNotify,
-  toggleClassChat,
 };

@@ -11,7 +11,6 @@ export default function AddressCard(props) {
     is_default,
     handleDelete
   } = props;
-  const appTheme = useSelector(state => state.app.appTheme);
   const location = useSelector(state => state.app.location.data);
   let provinceName = location[province].name;
   let districtName = location[province].sub[district].name;
@@ -35,7 +34,6 @@ export default function AddressCard(props) {
         !is_default &&
         <button
           className="set-default-btn"
-          style={{ background: appTheme.color_main_1 }}
           onClick={props.setDefault}>
           Đặt làm mặc định
         </button>

@@ -1,9 +1,12 @@
-import { formatPrice, handleImgErr } from "../helper";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
-import { standardProductLink } from "../helper"
+import { formatPrice, handleImgErr, standardProductLink } from "../helper";
+import { productActions } from "../actions/productActions";
+import { constants } from "../constants";
 export default function ProductCard(props) {
   const myLink = useRef(null);
+  const dispatch = useDispatch();
   let { before_discount_price, after_discount_price, images, name, _id } = props.product;
   let avt = "/img/default_product.jpg";
   let discountPercent = Math.ceil(
@@ -13,6 +16,7 @@ export default function ProductCard(props) {
   if (images.length)
     avt = images[0];
   function handleClick() {
+    dispatch({ type: constants.RESET_PRODUCT_STATUS })
     myLink.current.click();
   }
   return (

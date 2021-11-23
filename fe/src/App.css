@@ -32,7 +32,7 @@ body {
   color: white; }
 
 .confirm-btn {
-  background: #189687;
+  background: #f04a10;
   color: white; }
 
 .err-msg {
@@ -151,7 +151,7 @@ body {
     font-size: 16px;
     background: white; }
   .desktop-paginate button.active {
-    background: #189687;
+    background: #f04a10;
     color: white; }
   .desktop-paginate .pre-btn,
   .desktop-paginate .next-btn {
@@ -210,7 +210,7 @@ body {
       margin-left: 1em;
       margin-right: 1em; }
       .mobile-paginate div span {
-        color: #189687; }
+        color: #f04a10; }
     .mobile-paginate button.disable {
       opacity: 0.5; }
   .mobile {
@@ -251,7 +251,7 @@ body {
       display: block; }
       .header .container .logo > img {
         width: 220px;
-        height: 2.5em;
+        height: 3em;
         object-position: left;
         object-fit: contain; }
     .header .container .categories-dropdown-btn {
@@ -309,7 +309,7 @@ body {
         width: 2.5em;
         height: 2.5em;
         font-size: 16px;
-        background-color: #189687;
+        background-color: #f04a10;
         display: block;
         border-top-right-radius: 0.25em;
         border-bottom-right-radius: 0.25em; }
@@ -324,7 +324,7 @@ body {
         line-height: unset;
         font-size: 13px;
         font-weight: 400;
-        color: #189687; }
+        color: #f04a10; }
         .header .container .dropdown-container .dropdown-title span {
           font-size: 14px; }
         .header .container .dropdown-container .dropdown-title div {
@@ -340,7 +340,7 @@ body {
           margin-top: 8px;
           margin-bottom: 8px;
           display: block;
-          background: #189687;
+          background: #f04a10;
           color: white;
           font-weight: 500; }
         .header .container .dropdown-container .dropdown-info div {
@@ -458,7 +458,7 @@ body {
       width: 2.5em;
       height: 2.5em;
       font-size: 16px;
-      background-color: #189687;
+      background-color: #f04a10;
       display: block; }
       .mobile-header .search-bar button img {
         width: 1em;
@@ -614,25 +614,34 @@ body {
         font-size: 28px;
         width: 28px;
         height: 28px;
-        margin-bottom: 10px; }
+        margin-bottom: 10px;
+        color: #757575; }
 
 .footer {
   background: #111723;
   color: white;
-  padding: 2em; }
+  padding: 2em;
+  padding-bottom: 1em; }
   .footer .container > div:first-of-type {
     width: 350px;
     padding-right: 1em; }
-    .footer .container > div:first-of-type img {
-      max-width: 15em;
-      max-height: 3em;
-      object-fit: contain;
+    .footer .container > div:first-of-type .logo {
+      display: flex;
       margin-bottom: 1em; }
+      .footer .container > div:first-of-type .logo img {
+        max-height: 4em;
+        object-fit: contain;
+        border-radius: 0.5em;
+        margin-right: 14px; }
+      .footer .container > div:first-of-type .logo h4 {
+        font-size: 20px;
+        font-weight: normal; }
+      .footer .container > div:first-of-type .logo span {
+        font-size: 14px; }
     .footer .container > div:first-of-type div {
       font-size: 13px;
       line-height: 2em; }
     .footer .container > div:first-of-type .row {
-      margin-top: 1em;
       padding-right: 2em; }
       .footer .container > div:first-of-type .row input {
         width: 100%;
@@ -676,12 +685,15 @@ body {
         color: #f2f3f8;
         margin-bottom: 1em;
         font-size: 13px;
-        opacity: 0.7; }
+        display: flex; }
         .footer .container > div:last-of-type > div div span,
         .footer .container > div:last-of-type > div div a {
           color: #f2f3f8;
           opacity: 0.5;
           line-height: 1.5em; }
+        .footer .container > div:last-of-type > div div span {
+          width: 6em;
+          display: block; }
 
 .page-loading {
   width: 100%;
@@ -744,7 +756,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px #189687 solid;
+    border: 1px #f04a10 solid;
     border-radius: 100%; }
     .footer-mobile .footer-home img {
       width: 1.5em;
@@ -780,7 +792,7 @@ body {
       right: 0;
       font-size: 12px;
       padding: 4px 8px;
-      background-color: #189687;
+      background-color: #f04a10;
       color: white;
       opacity: 0.9; }
   .product-card .name {
@@ -852,10 +864,10 @@ body {
     font-size: 13px;
     text-align: justify;
     line-height: 1.25em;
-    height: 3.75em;
+    height: 2.5em;
     width: 100%;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1257,7 +1269,8 @@ body {
       margin-right: 8px; }
   .ratting-popup .preview-images {
     display: flex;
-    margin: 1em -4px; }
+    margin: 1em -4px;
+    margin-top: 0; }
     .ratting-popup .preview-images > div {
       width: calc(12.5% - 8px);
       margin-left: 4px;
@@ -1307,7 +1320,7 @@ body {
     color: #757575; }
   .order-popup h4 {
     font-size: 18px;
-    color: #189687; }
+    color: #f04a10; }
   .order-popup p {
     display: block;
     margin: 0.5em 0; }
@@ -1705,7 +1718,7 @@ body {
         position: absolute;
         top: 16px;
         right: 16px;
-        color: #189687;
+        color: #f04a10;
         font-size: 12px; }
     .cart-page .order-info .personal-info {
       position: relative; }
@@ -1729,7 +1742,7 @@ body {
         position: absolute;
         top: 16px;
         right: 16px;
-        color: #189687;
+        color: #f04a10;
         font-size: 12px;
         cursor: pointer; }
       .cart-page .order-info .personal-info label {
@@ -2053,7 +2066,7 @@ body {
           color: #757575; }
         .admin-page .main-view .tab .row button {
           color: white;
-          background-color: #189687;
+          background-color: #f04a10;
           font-size: 14px;
           padding: 4px 6px;
           border-radius: 4px; }
@@ -2083,7 +2096,7 @@ body {
         .admin-page .main-view .tab table tbody tr:last-of-type {
           border-bottom: 2px solid #f0f0f0; }
         .admin-page .main-view .tab table button {
-          color: #189687; }
+          color: #f04a10; }
     .admin-page .main-view .product-tab {
       padding: 1em;
       border-radius: 0.5em;
@@ -2178,7 +2191,99 @@ body {
     font-size: 20px;
     color: #757575; }
 
-.form-container .product-form {
+.form-container .product-form .row {
+  margin-bottom: 0.75em;
+  justify-content: left; }
+  .form-container .product-form .row label {
+    width: 9em;
+    font-weight: 500; }
+  .form-container .product-form .row input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #e4e4e4;
+    border-radius: 0.25em; }
+  .form-container .product-form .row > input {
+    width: calc(100% - 9em); }
+  .form-container .product-form .row .attribute {
+    width: calc(100% - 9em); }
+    .form-container .product-form .row .attribute > div {
+      margin-bottom: 0.75em; }
+    .form-container .product-form .row .attribute > div:last-of-type {
+      margin: 0; }
+    .form-container .product-form .row .attribute input {
+      width: calc(50% - 0.5em); }
+    .form-container .product-form .row .attribute .edit-btn {
+      background-color: transparent;
+      color: #757575;
+      font-size: 16px;
+      padding: 8px 14px;
+      padding-left: 16px;
+      border: solid 1px #e4e4e4; }
+      .form-container .product-form .row .attribute .edit-btn i {
+        margin: 0;
+        font-size: 16px; }
+    .form-container .product-form .row .attribute > button {
+      display: block;
+      margin: auto;
+      margin-top: 0.5em;
+      width: 100%;
+      height: 38px;
+      color: #757575;
+      font-size: 16px;
+      border-radius: 0.25em;
+      background-color: transparent;
+      border: 1px solid #e4e4e4; }
+  .form-container .product-form .row .description {
+    width: calc(100% - 9em); }
+    .form-container .product-form .row .description > div {
+      width: 100%;
+      border: 1px solid #e4e4e4;
+      border-radius: 0.25em; }
+      .form-container .product-form .row .description > div .ql-toolbar {
+        border: none;
+        border-bottom: 1px solid #e4e4e4; }
+      .form-container .product-form .row .description > div .ql-container {
+        height: 200px;
+        border: none; }
+      .form-container .product-form .row .description > div button {
+        background-color: transparent; }
+  .form-container .product-form .row .images {
+    display: flex;
+    padding: 0.5em;
+    border-radius: 0.25em;
+    width: calc(100% - 9em);
+    border: 1px solid #e4e4e4; }
+    .form-container .product-form .row .images .image {
+      width: 100px;
+      overflow: hidden;
+      margin-right: 0.5em;
+      border-radius: 0.25em;
+      border: 1px solid #e4e4e4; }
+      .form-container .product-form .row .images .image .img-container {
+        padding-top: 100%; }
+  .form-container .product-form .row .custom-select {
+    width: calc(100% - 9em); }
+    .form-container .product-form .row .custom-select .select-btn {
+      width: 100%;
+      padding: 8px;
+      border-radius: 0.25em;
+      border: solid 1px #e4e4e4;
+      height: fit-content; }
+    .form-container .product-form .row .custom-select .options {
+      background-color: #fafafa;
+      border-bottom: none; }
+
+.form-container .product-form #submit-btn {
+  padding: 8px 24px;
+  display: block;
+  margin: auto;
+  font-size: 16px;
+  border-radius: 0.25em;
+  background-color: #f04a10;
+  color: white; }
+
+.form-container .product-form,
+.form-container .news-form {
   padding: 1em;
   border-radius: 0.25em;
   background-color: white;
@@ -2186,95 +2291,60 @@ body {
   max-width: calc(100% - 1em);
   overflow: scroll;
   max-height: calc(100vh - 4em); }
-  .form-container .product-form .row {
-    margin-bottom: 0.75em;
-    justify-content: left; }
-    .form-container .product-form .row label {
-      width: 9em;
-      font-weight: 500; }
-    .form-container .product-form .row input {
-      padding: 8px;
-      font-size: 16px;
-      border: 1px solid #e4e4e4;
-      border-radius: 0.25em; }
-    .form-container .product-form .row > input {
-      width: calc(100% - 9em); }
-    .form-container .product-form .row .attribute {
-      width: calc(100% - 9em); }
-      .form-container .product-form .row .attribute > div {
-        margin-bottom: 0.75em; }
-      .form-container .product-form .row .attribute > div:last-of-type {
-        margin: 0; }
-      .form-container .product-form .row .attribute input {
-        width: calc(50% - 0.5em); }
-      .form-container .product-form .row .attribute .edit-btn {
-        background-color: transparent;
-        color: #757575;
-        font-size: 16px;
-        padding: 8px 14px;
-        padding-left: 16px;
-        border: solid 1px #e4e4e4; }
-        .form-container .product-form .row .attribute .edit-btn i {
-          margin: 0;
-          font-size: 16px; }
-      .form-container .product-form .row .attribute > button {
-        display: block;
-        margin: auto;
-        margin-top: 0.5em;
-        width: 100%;
-        height: 38px;
-        color: #757575;
-        font-size: 16px;
-        border-radius: 0.25em;
-        background-color: transparent;
-        border: 1px solid #e4e4e4; }
-    .form-container .product-form .row .description {
-      width: calc(100% - 9em); }
-      .form-container .product-form .row .description > div {
-        width: 100%;
-        border: 1px solid #e4e4e4;
-        border-radius: 0.25em; }
-        .form-container .product-form .row .description > div .ql-toolbar {
-          border: none;
-          border-bottom: 1px solid #e4e4e4; }
-        .form-container .product-form .row .description > div .ql-container {
-          height: 200px;
-          border: none; }
-        .form-container .product-form .row .description > div button {
-          background-color: transparent; }
-    .form-container .product-form .row .images {
-      display: flex;
-      padding: 0.5em;
-      border-radius: 0.25em;
-      width: calc(100% - 9em);
-      border: 1px solid #e4e4e4; }
-      .form-container .product-form .row .images .image {
-        width: 100px;
-        overflow: hidden;
-        margin-right: 0.5em;
-        border-radius: 0.25em;
-        border: 1px solid #e4e4e4; }
-        .form-container .product-form .row .images .image .img-container {
-          padding-top: 100%; }
-    .form-container .product-form .row .custom-select {
-      width: calc(100% - 9em); }
-      .form-container .product-form .row .custom-select .select-btn {
-        width: 100%;
-        padding: 8px;
-        border-radius: 0.25em;
-        border: solid 1px #e4e4e4;
-        height: fit-content; }
-      .form-container .product-form .row .custom-select .options {
-        background-color: #fafafa;
-        border-bottom: none; }
-  .form-container .product-form #submit-btn {
-    padding: 8px 24px;
-    display: block;
-    margin: auto;
+
+.news-form {
+  position: relative;
+  width: 100%;
+  height: 100%; }
+  .news-form .ql-container {
+    height: calc(100vh - 21em - 100px); }
+    .news-form .ql-container img {
+      display: block;
+      margin: auto; }
+  .news-form > h3 {
+    margin-bottom: 0.5em !important; }
+  .news-form > input {
+    padding: 8px 16px;
+    border: #e4e4e4 1px solid;
     font-size: 16px;
     border-radius: 0.25em;
-    background-color: #189687;
-    color: white; }
+    width: 100%;
+    margin-bottom: 0.5em; }
+  .news-form > p {
+    display: block;
+    font-size: 14px;
+    width: fit-content;
+    margin-top: 0.5em; }
+  .news-form > button {
+    margin-top: 0.5em;
+    padding: 8px 14px;
+    background-color: #f04a10;
+    color: white;
+    border-radius: 2px;
+    font-weight: 500; }
+  .news-form .row {
+    margin-bottom: 0.5em; }
+    .news-form .row > label {
+      margin-right: 1em;
+      font-weight: 600; }
+    .news-form .row .image {
+      width: 100px; }
+      .news-form .row .image .img-container {
+        width: 100%;
+        padding-top: 100%;
+        border-radius: 0.25em;
+        border: #e4e4e4 1px solid; }
+  .news-form .loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.25em; }
 
 .category-form {
   background-color: white;
@@ -2324,7 +2394,7 @@ body {
     margin: auto;
     font-size: 16px;
     border-radius: 0.25em;
-    background-color: #189687;
+    background-color: #f04a10;
     color: white; }
 
 .order-form {
@@ -2365,7 +2435,7 @@ body {
     margin: auto;
     font-size: 16px;
     border-radius: 0.25em;
-    background-color: #189687;
+    background-color: #f04a10;
     color: white; }
   .order-form table {
     border: 2px solid #e4e4e4;
@@ -2840,10 +2910,12 @@ body {
             .product-info-page .detail-info .tabs .comment .comment-card .comment-display .content {
               margin-top: 16px;
               font-size: 14px;
+              line-height: 1.5;
               color: #212121; }
           .product-info-page .detail-info .tabs .comment .comment-card .images {
             display: flex;
-            margin: 1em -4px; }
+            margin: 1em -4px;
+            margin-bottom: 0; }
             .product-info-page .detail-info .tabs .comment .comment-card .images > div {
               width: calc(16.666% - 8px);
               margin-left: 4px;
@@ -2948,6 +3020,8 @@ body {
       margin-top: 2px;
       padding-left: 8px;
       padding-right: 8px; }
+      .product-info-page .similar-products .card-container .product-card {
+        border: 1px solid #e4e4e4; }
 
 @media only screen and (max-width: 600px) {
   .product-info-page {
@@ -3107,7 +3181,7 @@ body {
     right: 0px;
     padding: 0.5em;
     border-radius: 0.5em;
-    background-color: #189687; }
+    background-color: #f04a10; }
   .order-info-page .title {
     font-weight: 300;
     font-size: 19px; }
@@ -3188,7 +3262,7 @@ body {
       .order-info-page table th span,
       .order-info-page table td button,
       .order-info-page table td span {
-        color: #189687; }
+        color: #f04a10; }
     .order-info-page table th {
       color: #757575; }
     .order-info-page table tbody tr {
@@ -3352,6 +3426,92 @@ body {
     display: none; }
   .order-info-page table .image {
     width: 80px; } }
+
+.news-list-page {
+  padding: 1em;
+  width: 100%;
+  min-height: calc(100vh - 5.5em);
+  justify-content: space-between; }
+  .news-list-page h3 {
+    font-size: 20px;
+    font-weight: lighter;
+    color: #212121; }
+  .news-list-page > .row {
+    width: 100%;
+    justify-content: space-between; }
+    .news-list-page > .row .news-list {
+      width: calc(100% - 316px); }
+      .news-list-page > .row .news-list > .row {
+        margin: 0 0px 0 -4px;
+        width: calc(100% + 8px);
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+        display: flex;
+        flex-wrap: wrap; }
+      .news-list-page > .row .news-list .card-container {
+        width: 33.333%;
+        padding-left: 4px;
+        padding-right: 4px;
+        min-height: 100%;
+        margin-bottom: 0.5em;
+        margin-top: 0.5em; }
+      .news-list-page > .row .news-list .blog-card {
+        width: 100%;
+        padding: 0.5em;
+        min-height: 100%;
+        border: 1px solid #e4e4e4;
+        border-radius: 0.25em;
+        overflow: hidden; }
+    .news-list-page > .row .latest-news {
+      width: 300px;
+      background-color: white;
+      padding: 1em;
+      padding-top: 0;
+      border-radius: 0.25em;
+      height: fit-content; }
+      .news-list-page > .row .latest-news h4 {
+        padding: 16px 0;
+        font-size: 18px;
+        font-weight: lighter;
+        border-bottom: 1px solid #e4e4e4; }
+      .news-list-page > .row .latest-news .latest-news-card {
+        width: 100%;
+        cursor: pointer;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5em 0; }
+        .news-list-page > .row .latest-news .latest-news-card .image {
+          width: 70px; }
+          .news-list-page > .row .latest-news .latest-news-card .image .img-container {
+            width: 100%;
+            padding-top: 100%;
+            border-radius: 2px; }
+        .news-list-page > .row .latest-news .latest-news-card .info {
+          color: #333;
+          width: calc(100% - 80px); }
+          .news-list-page > .row .latest-news .latest-news-card .info h5 {
+            line-height: 1.25em;
+            height: 1.25em;
+            width: 100%;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis; }
+          .news-list-page > .row .latest-news .latest-news-card .info .content {
+            font-size: 14px;
+            line-height: 1.25em;
+            height: 2.5em;
+            width: 100%;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis; }
+        .news-list-page > .row .latest-news .latest-news-card .date {
+          color: #757575;
+          font-size: 12px;
+          line-height: 20px; }
 
 .home-page .categories-column .image,
 .products-list-page .categories-column .image,
@@ -3711,93 +3871,6 @@ body {
         width: calc(20% - 16px);
         margin: 8px; }
 
-.news-list-page {
-  padding: 1em;
-  width: 100%;
-  min-height: calc(100vh - 5.5em);
-  justify-content: space-between; }
-  .news-list-page .title {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; }
-    .news-list-page .title h3 {
-      font-size: 20px;
-      font-weight: lighter;
-      color: #212121; }
-    .news-list-page .title h4 {
-      font-weight: 500;
-      font-size: 16px; }
-      .news-list-page .title h4 span {
-        color: #757575;
-        font-weight: lighter;
-        cursor: pointer; }
-  .news-list-page .news-category {
-    width: 100%;
-    margin-top: 1em;
-    display: none; }
-    .news-list-page .news-category .news-category-card {
-      background-color: rgba(230, 46, 4, 0.15);
-      padding: 0.5em 1em;
-      border-radius: 0.25em;
-      color: #e62e04;
-      margin-right: 0.5em;
-      transition: 0.3s;
-      cursor: pointer; }
-    .news-list-page .news-category .news-category-card:hover {
-      background-color: #e62e04;
-      color: white; }
-  .news-list-page > .row {
-    width: 100%;
-    justify-content: space-between; }
-    .news-list-page > .row .news-list {
-      width: calc(100% - 256px); }
-      .news-list-page > .row .news-list > .row {
-        margin: 0 0px 0 -4px;
-        width: calc(100% + 8px);
-        padding-top: 0.5em;
-        padding-bottom: 0.5em;
-        display: flex;
-        flex-wrap: wrap; }
-      .news-list-page > .row .news-list .card-container {
-        width: 25%;
-        padding-left: 4px;
-        padding-right: 4px;
-        min-height: 100%;
-        margin-bottom: 0.5em;
-        margin-top: 0.5em; }
-      .news-list-page > .row .news-list .blog-card {
-        width: 100%;
-        padding: 0.5em;
-        min-height: 100%;
-        border: 1px solid #e4e4e4;
-        border-radius: 0.25em;
-        overflow: hidden; }
-    .news-list-page > .row .categories-column {
-      background-color: white;
-      border-radius: 0.25em;
-      overflow: hidden;
-      width: 240px; }
-      .news-list-page > .row .categories-column .column {
-        min-height: calc(100% - 48px);
-        overflow-y: scroll;
-        -ms-overflow-style: none;
-        scrollbar-width: none; }
-        .news-list-page > .row .categories-column .column > a {
-          padding: 0.75em;
-          padding-left: 1em;
-          display: flex;
-          align-items: center; }
-        .news-list-page > .row .categories-column .column > a:hover {
-          box-shadow: 0 0 4px 0 #cecece; }
-      .news-list-page > .row .categories-column .column::-webkit-scrollbar {
-        display: none; }
-      .news-list-page > .row .categories-column .main-title {
-        padding: 14px;
-        border-bottom: 1px solid #e4e4e4; }
-        .news-list-page > .row .categories-column .main-title h3 {
-          font-weight: lighter;
-          font-size: 18px; }
-
 .news-page {
   padding: 1em;
   width: 100%;
@@ -3806,40 +3879,17 @@ body {
     display: flex;
     justify-content: space-between; }
   .news-page .main-view {
-    width: calc(100% - 300px); }
-    .news-page .main-view .title span {
-      font-weight: lighter;
-      color: #757575;
-      cursor: pointer; }
+    width: calc(100% - 316px); }
     .news-page .main-view h3 {
       font-size: 16px;
       font-weight: normal;
       line-height: 2.5em; }
-    .news-page .main-view .news-category {
-      width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      margin-top: 1em; }
-      .news-page .main-view .news-category .news-category-card {
-        background-color: rgba(230, 46, 4, 0.15);
-        padding: 0.5em 1em;
-        border-radius: 0.25em;
-        color: #e62e04;
-        transition: 0.3s;
-        cursor: pointer;
-        margin: 4px 0;
-        margin-right: 0.5em; }
-      .news-page .main-view .news-category .news-category-card:hover {
-        background-color: #e62e04;
-        color: white; }
     .news-page .main-view .news {
-      margin-top: 1em;
       width: 100%;
       padding: 1em;
       border-radius: 0.25em;
       background: white; }
       .news-page .main-view .news .title {
-        margin-top: 0.5em;
         font-size: 20px;
         font-weight: lighter; }
       .news-page .main-view .news .date {
@@ -3858,39 +3908,55 @@ body {
         .news-page .main-view .news .paragraph h4 {
           margin-bottom: 0.5em; }
         .news-page .main-view .news .paragraph div {
-          line-height: 20px;
+          line-height: 1.5em;
           color: #212121;
           margin-bottom: 0.5em;
           text-align: justify; }
+        .news-page .main-view .news .paragraph img {
+          max-width: 90%;
+          display: block;
+          margin: auto;
+          margin: 0.5em auto; }
+        .news-page .main-view .news .paragraph li {
+          margin-left: 1em; }
   .news-page .latest-news {
+    width: 300px;
     background-color: white;
-    width: 284px;
-    height: fit-content;
+    padding: 1em;
+    padding-top: 0;
     border-radius: 0.25em;
-    overflow: hidden; }
-    .news-page .latest-news h3 {
+    height: fit-content; }
+    .news-page .latest-news h4 {
+      padding: 16px 0;
+      font-size: 18px;
       font-weight: lighter;
-      color: #212121;
-      cursor: pointer;
-      font-size: 20px;
-      padding: 16px;
       border-bottom: 1px solid #e4e4e4; }
-    .news-page .latest-news .news-card {
-      display: flex;
+    .news-page .latest-news .latest-news-card {
+      width: 100%;
+      align-items: center;
       justify-content: space-between;
-      padding: 8px;
-      border-bottom: 1px solid #e4e4e4; }
-      .news-page .latest-news .news-card .image {
-        width: 60px; }
-        .news-page .latest-news .news-card .image .img-container {
+      cursor: pointer;
+      padding: 0.5em 0; }
+      .news-page .latest-news .latest-news-card .image {
+        width: 70px; }
+        .news-page .latest-news .latest-news-card .image .img-container {
           width: 100%;
-          padding-top: 100%; }
-      .news-page .latest-news .news-card .content {
-        width: calc(100% - 68px); }
-        .news-page .latest-news .news-card .content .quote {
-          margin-top: 4px;
-          font-size: 13px;
-          text-align: justify;
+          padding-top: 100%;
+          border-radius: 2px; }
+      .news-page .latest-news .latest-news-card .info {
+        color: #333;
+        width: calc(100% - 80px); }
+        .news-page .latest-news .latest-news-card .info h5 {
+          line-height: 1.25em;
+          height: 1.25em;
+          width: 100%;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis; }
+        .news-page .latest-news .latest-news-card .info .content {
+          font-size: 14px;
           line-height: 1.25em;
           height: 2.5em;
           width: 100%;
@@ -3898,10 +3964,11 @@ body {
           -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
           overflow: hidden;
-          text-overflow: ellipsis;
-          color: #757575; }
-    .news-page .latest-news .news-card:last-of-type {
-      border: none; }
+          text-overflow: ellipsis; }
+      .news-page .latest-news .latest-news-card .date {
+        color: #757575;
+        font-size: 12px;
+        line-height: 20px; }
 
 .categories-page {
   min-height: calc(100vh - 104px);
@@ -3949,13 +4016,13 @@ body {
     width: 600px;
     max-width: 100%;
     height: fit-content;
-    border: 1px dashed #189687; }
+    border: 1px dashed #f04a10; }
     .address-page .address-card label {
       position: absolute;
       top: 0.75em;
       right: 0.75em;
       font-size: 12px;
-      color: #189687; }
+      color: #f04a10; }
     .address-page .address-card span {
       display: block;
       font-weight: 500; }
@@ -3969,7 +4036,7 @@ body {
       padding-right: 1em;
       margin-top: 1em; }
     .address-page .address-card .set-default-btn {
-      background-color: #189687;
+      background-color: #f04a10;
       color: white;
       margin-right: 1em; }
     .address-page .address-card .edit-btn {
@@ -4035,7 +4102,7 @@ body {
       padding: 0.5em 1em;
       font-size: 15px; }
     .address-page .address-form .save-btn {
-      background-color: #189687;
+      background-color: #f04a10;
       color: white; }
     .address-page .address-form .cancel-btn {
       background-color: #fafafa;
@@ -4098,7 +4165,7 @@ body {
         font-weight: 500; }
     .review-page .review-card a {
       font-size: 14px;
-      color: #189687; }
+      color: #f04a10; }
 
 .account-page {
   min-height: calc(100vh - 6.5em);
@@ -4368,7 +4435,7 @@ body {
         width: 400px;
         padding: 1em;
         border-radius: 0.25em;
-        border: 2px dashed #189687; }
+        border: 2px dashed #f04a10; }
         .collaborator-page .container .info-tab .income-card .row {
           justify-content: space-between;
           font-size: 14px;
@@ -4379,7 +4446,7 @@ body {
           font-size: 18px; }
         .collaborator-page .container .info-tab .income-card i,
         .collaborator-page .container .info-tab .income-card img {
-          color: #189687;
+          color: #f04a10;
           margin-right: 0.5em;
           font-size: 20px;
           width: 30px;

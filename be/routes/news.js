@@ -1,0 +1,10 @@
+const router = require("express").Router();
+const { validate } = require("../models/news");
+const validator = require("../middlewares/validate");
+const controller = require("../controllers/news");
+router.get("/latest", controller.getLatest);
+router.get("/:id", controller.getOne);
+router.get("/", controller.getAll);
+router.post("/", validator(validate), controller.addOne);
+router.put("/:id", controller.updateOne);
+module.exports = router;

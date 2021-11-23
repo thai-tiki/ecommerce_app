@@ -40,6 +40,11 @@ export default function TabControll(props) {
       name: "payment",
       title: "Phương thức thanh toán",
       img: "/img/mobile-payment.png"
+    },
+    {
+      name: "news",
+      title: "Bài viết",
+      img: "/img/blog.png"
     }
   ]
   return (

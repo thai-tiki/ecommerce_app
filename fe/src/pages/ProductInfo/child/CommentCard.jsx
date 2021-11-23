@@ -8,12 +8,15 @@ export default function CommentCard(props) {
     "Rất hài lòng"
   ];
   const { images, customer, stars, content } = props;
-  console.log(images, images.length);
+  const arr = customer.split(" ");
+  let avt = arr.length > 0
+    ? customer[0].toUpperCase() + arr[arr.length - 1][0]
+    : customer.slice(0, 2).toUpperCase()
   return (
     <div className="comment-card row">
       <div className="user-info" style={{ alignItems: "center", height: "fit-content" }}>
         <div className="avt">
-          HD
+          {avt}
         </div>
         <div>
           <div className="name">{customer}</div>

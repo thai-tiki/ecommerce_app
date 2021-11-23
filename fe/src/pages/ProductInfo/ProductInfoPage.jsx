@@ -10,9 +10,8 @@ import { productActions as a } from "../../actions/productActions";
 function ProductInfoPage(props) {
   const dispatch = useDispatch();
   const product = useSelector(state => state.product.info);
-  const productLiked = useSelector(state => state.product.info.is_favorite);
   const similarProducts = useSelector(state => state.product.similar);
-  const reviews = useSelector(state => state.product.review);
+  const rating = useSelector(state => state.product.rating);
   useEffect(() => {
     let productId = "";
     if (props.match.params.id) {
@@ -25,13 +24,13 @@ function ProductInfoPage(props) {
     if (product.status === c.SUCCESS) {
       if (similarProducts.status === c.LOADING)
         dispatch(a.getSimilarProducts(productId));
-      if (reviews.status === c.LOADING)
+      if (rating.status === c.LOADING)
         dispatch(a.getProductReview(productId));
-      if (productId !== product._id) {
+      if (productId !== product.data._id) {
         dispatch({ type: c.RESET_PRODUCT_STATUS });
         return;
       }
-      document.title = product.name;
+      document.title = product.data.name;
       window.scrollTo({
         top: 0,
         behavior: 'smooth'
@@ -47,15 +46,15 @@ function ProductInfoPage(props) {
           <React.Fragment>
             <div className="product-info-page container">
               <MainInfo
-                product={product}
-                isLiked={productLiked}
+                product={product.data}
+                isLiked={product.data.isLiked}
               />
               <DetailInfo
-                description={product.description}
-                attributes={product.attributes}
+                description={product.data.description}
+                attributes={product.data.attributes}
               />
               <SimilarProducts
-                products={[]}
+                products={similarProducts.list}
               />
             </div>
           </React.Fragment>

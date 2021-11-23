@@ -1,16 +1,28 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ItemCard from "./child/ItemCard";
 import { formatPrice } from "../../helper";
+import { constants as c } from "../../constants";
+import { cartActions as a } from "../../actions/cartActions";
 import ItemsTable from "./child/ItemsTable";
 import Header from "../../components/Header";
-import { constants as c } from "../../constants";
+import RatingPopup from "./child/RatingPopup";
 import PageLoading from "../../components/PageLoading";
-import { cartActions as a } from "../../actions/cartActions";
 function OrderInfoPage(props) {
   const dispatch = useDispatch();
   const orderInfo = useSelector(state => state.cart.orderInfo);
+  const [selectedProduct, setSelectedProduct] = useState({});
+  const [currentPopup, setCurrentPopup] = useState("none");
+  const popup = {
+    "none": <div></div>,
+    "rating": <RatingPopup
+      order={orderInfo}
+      product={selectedProduct}
+      onClose={handleClosePopup}
+    />,
+  }
   useEffect(() => {
+    console.log("render")
     document.title = `Thông tin đơn hàng ${props.match.params.id}`
     if (orderInfo.status === c.LOADING)
       dispatch(a.getOrderInfo(props.match.params.id));
@@ -20,6 +32,13 @@ function OrderInfoPage(props) {
     dispatch(a.cancelOrder({
       order_code: orderInfo.info.order_code
     }))
+  }
+  function handleEdit(product) {
+    setCurrentPopup("rating");
+    setSelectedProduct(product);
+  }
+  function handleClosePopup() {
+    setCurrentPopup("none");
   }
   return (
     <React.Fragment>
@@ -74,7 +93,7 @@ function OrderInfoPage(props) {
                 </div>
               </div>
             </div>
-            <ItemsTable />
+            <ItemsTable onRatingClick={handleEdit} />
             <div className="mobile">
               <div className="title"
                 style={{
@@ -91,11 +110,15 @@ function OrderInfoPage(props) {
                     {...v}
                     {...orderInfo.items_in_time[i]}
                     canRating={orderInfo.order_status.code === "COMPLETED"}
+                    onRatingClick={handleEdit}
                   />
                 )
               }
             </div>
           </div>
+      }
+      {
+        popup[currentPopup]
       }
     </React.Fragment>
   )

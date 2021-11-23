@@ -1,18 +1,17 @@
 import queryString from "query-string"
-import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Paginate from "../../components/Paginate";
-import BlogCard from "../../components/BlogCard";
 import { constants as c } from "../../constants";
-import PageLoading from "../../components/PageLoading"
 import { newsActions as a } from "../../actions/newsActions";
 import Header from "../../components/Header";
-import { handleImgErr } from "../../helper";
+import BlogCard from "../../components/BlogCard";
+import Paginate from "../../components/Paginate";
+import LatestNews from "../../components/LatestNews";
+import PageLoading from "../../components/PageLoading";
 function NewsListPage(props) {
   let query = queryString.parse(props.location.search);
   const pageInfo = useSelector(state => state.news.list);
-  const categories = useSelector(state => state.news.categories);
+  console.log(pageInfo);
   const dispatch = useDispatch();
   const [prevLocation, setPrevLocation] = useState(props.location.state);
   const [currentQuery, setCurrentQuery] = useState(createQueryString(query));
@@ -44,83 +43,29 @@ function NewsListPage(props) {
       if (pageInfo.status === c.LOADING) {
         let queryStr = createQueryString(query);
         dispatch(a.getAllNews(queryStr));
-      } else {
-        if (categories.status === c.LOADING) {
-          dispatch(a.getNewsCategory());
-        }
       }
   }, [props.location.search, pageInfo]);
   function handleSort(option) {
     const queryStr = createQueryString(option);
     window.location.href = window.location.origin + window.location.pathname + queryStr
   }
-  function handleCategorySelect(id, title) {
-    window.location.href = `/tin-tuc?danh-muc=${title.replace(/\s/g, "-")}-${id}`;
-  }
   return (
     <React.Fragment>
       <Header />
       {
-        pageInfo.status === c.SUCCESS && categories.status === c.SUCCESS ?
+        pageInfo.status === c.SUCCESS ?
           <div className="news-list-page container">
             <div className="row">
-              <div className="categories-column">
-                <div className="main-title">
-                  <h3>Danh mục</h3>
-                </div>
-                <div className="column">
-                  {
-                    categories.list.map((v, i) =>
-                      <Link
-                        key={i}
-                        style={{ cursor: "pointer" }}
-                        to={`/tin-tuc?danh-muc=${v.title.replace(/\s/g, "-")}-${v.id}`}>
-                        <div className="image">
-                          <div className="img-container">
-                            <img
-                              onError={handleImgErr}
-                              src={v.image_url}
-                              alt=""
-                              style={{ width: "30px", objectFir: "contain", marginRight: "8px" }}
-                            />
-                          </div>
-                        </div>
-                        <div>
-                          {v.title}
-                        </div>
-                      </Link>
-                    )
-                  }
-                </div>
-              </div>
               <div className="news-list">
                 <div className="title">
                   <h3>Danh mục tin tức</h3>
-                  <h4>
-                    <span onClick={() => { window.location.href = "/" }}>Trang chủ /</span> Danh mục tin tức
-                  </h4>
                 </div>
-                <div className="news-category">
+                <div className="row list-news">
                   {
-                    categories.list.map((v, i) =>
-                      <Link
-                        key={i}
-                        className="news-category-card"
-                        to={`/tin-tuc?danh-muc=${v.title.replace(/\s/g, "-")}-${v.id}`}>
-                        {v.title}
-                      </Link>
-                    )
-                  }
-                </div>
-                <div className="row">
-                  {
-                    pageInfo.data.map((v, i) =>
-                      <div className="card-container" key={i}>
+                    pageInfo.data.map((v) =>
+                      <div className="card-container" key={v._id}>
                         <BlogCard
-                          id={v.id}
-                          title={v.title}
-                          img={v.image_url}
-                          quote={v.content}
+                          {...v}
                         />
                       </div>
                     )
@@ -128,9 +73,15 @@ function NewsListPage(props) {
                 </div>
                 <Paginate
                   currentPage={pageInfo.current_page}
-                  totalPage={pageInfo.last_page}
+                  totalPage={pageInfo.total_page}
                   handlePageSelect={handleSort}
                 />
+              </div>
+              <div className="latest-news">
+                <h4>Tin tức mới nhất</h4>
+                {
+                  pageInfo.data.map((v) => <LatestNews {...v} />)
+                }
               </div>
             </div>
           </div>

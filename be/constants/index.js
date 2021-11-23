@@ -10,7 +10,6 @@ module.exports = {
   UNAUTHORIZED: "UNAUTHORIZED",
   //MESSAGE
   CODE_401: "Không tìm thấy !",
-  WRONG_PASSWORD: "Mật khẩu không chính xác",
   CODE_500: "Có lỗi xảy ra vui lòng thử lại sau !",
   NO_TOKEN: "Vui lòng đăng nhập !",
   NO_ROLE: "Không đủ quyền truy cập",
@@ -21,6 +20,9 @@ module.exports = {
   NO_ORDER: "Đơn hàng không tồn tại",
   NO_PAYMENT_METHOD: "Phương thức thanh toán không tồn tại",
   NO_SHIPMENT_METHOD: "Phương thức giao hàng không tồn tại",
+  ALREADY_COMMENT: "Sản phẩm này đã được đánh giá trước đây",
+  PRODUCT_NOT_IN_ORDER: "Sản phẩm không tồn tại trong đơn hàng",
+  WRONG_PASSWORD: "Mật khẩu không chính xác",
   MISSING_INFO: "Vui lòng gửi đầy đủ thông tin",
   EMPTY_CART: "Không có sản phẩm trong giỏ hàng",
   PHONE_REGISTERED: "Số điện thoại đã được đăng ký",
@@ -36,7 +38,7 @@ module.exports = {
   VALUE_DISCOUNT: "VALUE_DISCOUNT",
   PERCENT_DISCOUNT: "PERCENT_DISCOUNT",
   //HASH
-  JWT_SECRET: "12KDJAKE21",
+  JWT_SECRET: "ahjwWIU12",
   SALT_SECRET: "$2a$12$t7M3OgpA4ML85VAwnlI10.",
   //ORDER STATUS
   WAITING_FOR_PROGRESSING: "WAITING_FOR_PROGRESSING",

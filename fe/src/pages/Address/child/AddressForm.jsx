@@ -67,8 +67,7 @@ export default function AddressForm(props) {
     props.handleClose(e);
     setMessage("");
   }
-  function handleProvinceSelect(v, e) {
-    hideParentElement(e);
+  function handleProvinceSelect(v) {
     setCurrentProvince(v);
     setSelectedProvince(v.index);
     setCurrentDistrict(null);
@@ -76,15 +75,13 @@ export default function AddressForm(props) {
     setCurrentWard(null);
     setSelectedWard(0);
   }
-  function handleDistrictSelect(v, e) {
-    hideParentElement(e);
+  function handleDistrictSelect(v) {
     setCurrentDistrict(v);
     setSelectedDistrict(v.index);
     setCurrentWard(null);
     setSelectedWard(0);
   }
-  function handleWardSelect(v, e) {
-    hideParentElement(e);
+  function handleWardSelect(v) {
     setCurrentWard(v);
     setSelectedWard(v.index);
   }

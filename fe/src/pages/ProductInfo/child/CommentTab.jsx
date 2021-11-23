@@ -6,7 +6,8 @@ export default function CommentTab(props) {
   const [currentImg, setCurrentImg] = useState(0);
   const [customClass, setCustomClass] = useState("");
   const [images, setImages] = useState([]);
-  const reviews = useSelector(state => state.product.review);
+  const product = useSelector(state => state.product.info);
+  const rating = useSelector(state => state.product.rating);
   function showImagesSlider(images, currentImg) {
     setImages(images);
     setCurrentImg(currentImg);
@@ -47,12 +48,12 @@ export default function CommentTab(props) {
     ]
   };
   return (
-    reviews.list.length > 0 ?
+    rating.list.length > 0 ?
       <div className="comment">
         <div className="total">
           <div className="row" style={{ marginBottom: "0.5em" }}>
             <div className="averaged-stars">
-              {Math.round(reviews.info.averaged_stars * 10) / 10}
+              {Math.round(product.data.rating.stars * 10) / 10}
             </div>
             <div className="star-info-detail">
               <div className="row">
@@ -60,18 +61,18 @@ export default function CommentTab(props) {
                   [1, 2, 3, 4, 5].map((v, i) => <i key={i} className="fas fa-star"></i>)
                 }
               </div>
-              {reviews.list.length} Nhận xét
+              {rating.list.length} Nhận xét
             </div>
           </div>
         </div>
         <div>
           {
-            reviews.list.map((v, i) =>
+            rating.list.map((v, i) =>
               <CommentCard
                 showImages={showImagesSlider}
-                images={JSON.parse(v.images)}
+                images={v.images}
                 key={i}
-                customer={v.customer.name}
+                customer={v.user}
                 content={v.content}
                 stars={v.stars}
               />

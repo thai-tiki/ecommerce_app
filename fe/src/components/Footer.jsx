@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { appActions } from "../actions/appActions";
 import { userActions } from "../actions/userActions";
 import { constants as c } from "../constants";
-import { validURL } from "../helper";
 export default function Footer() {
   const dispatch = useDispatch();
   const token = useSelector(state => state.user.token);
@@ -64,23 +63,16 @@ export default function Footer() {
       <div className="footer">
         <div className="container row">
           <div>
-            <div>
-              {"contact_individual_organization_name"}
-            </div>
-            <div>
-              {"title"}
+            <div className="logo">
+              <img src="/img/3.png" alt="" />
+              <div>
+                <h4>Magento ®</h4>
+                <span>Mua sắm theo cách của bạn !</span>
+              </div>
             </div>
             <div className="row">
-              {
-                <a href={'#'}>
-                  <img src="/img/play.png" alt="" />
-                </a>
-              }
-              {
-                <a href={"#"}>
-                  <img src="/img/app.png" alt="" />
-                </a>
-              }
+              <img src="/img/play.png" alt="" />
+              <img src="/img/app.png" alt="" />
             </div>
           </div>
           <div style={{ justifyContent: "space-between" }}>
@@ -88,15 +80,14 @@ export default function Footer() {
               <h2>
                 Liên hệ
               </h2>
-
               <div>
-                <span>Điện thoại:</span> {"contact_phone_number"}
+                <span>Địa chỉ:</span>  Z06, Đường 13, P. Tân Thuận Đông, Q.7, Tp.HCM
               </div>
               <div>
-                <span>Email:</span>  {'contact_email'}
+                <span>Điện thoại:</span> 0357-857-086
               </div>
               <div>
-                <span>Địa chỉ:</span>  {"contact_address"}
+                <span>Email:</span>  magento@email.vn
               </div>
             </div>
             <div>
@@ -129,20 +120,11 @@ export default function Footer() {
               <h2>
                 Tài khoản của tôi
               </h2>
-              {
-                token ?
-                  <div
-                    style={{ opacity: "0.35", cursor: "pointer", lineHeight: "1.5em" }}
-                    onClick={handleLogout}>
-                    Thoát tài khoản
-                  </div>
-                  :
-                  <div
-                    style={{ opacity: "0.35", cursor: "pointer", lineHeight: "1.5em" }}
-                    onClick={handleShowPhonePopup}>
-                    Đăng nhập
-                  </div>
-              }
+              <div>
+                <a href="/dia-chi" onClick={checkToken}>
+                  Địa chỉ nhận hàng
+                </a>
+              </div>
               <div>
                 <a href="/don-hang" onClick={checkToken}>
                   Lịch sử đơn hàng
@@ -153,15 +135,11 @@ export default function Footer() {
                   Sản phẩm yêu thích
                 </a>
               </div>
-              {/* <h2>Đăng ký bán hàng</h2>
-              <button onClick={() => { window.open("https://doapp.vn/", '_blank').focus(); }}>Đăng ký ngay</button>
-             */}
             </div>
           </div>
         </div>
       </div>
       <div className="mobile footer-mobile">
-
         <div className="footer-icon">
           <a href="/gio-hang" >
             <div className="cart-number">

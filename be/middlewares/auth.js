@@ -33,3 +33,18 @@ exports.protect = async (req, res, next) => {
     next(err);
   }
 };
+exports.readToken = async (req, res, next) => {
+  try {
+    let token = req.headers.token;
+    if (token) {
+      const decode = await promisify(jwt.verify)(token, c.JWT_SECRET);
+      req.user = decode.user;
+    }
+    next();
+  } catch (err) {
+    res.status(401).json({
+      msg: c.NO_TOKEN,
+    });
+    next(err);
+  }
+};

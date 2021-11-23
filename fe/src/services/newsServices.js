@@ -1,14 +1,13 @@
 import { constants as c } from "../constants";
-import { appServices } from "./appServices";
-const store_code = appServices.store_code;
-function getAllNews(queryString) {
+function addNews(info) {
   const requestOptions = {
-    method: "GET",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(info),
   };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/posts${queryString}`,
-    requestOptions
-  )
+  return fetch(`${c.API_URL}/news`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -19,12 +18,12 @@ function getAllNews(queryString) {
       return {};
     });
 }
-function getNewsCategory() {
+function getAllNews(queryString) {
   const requestOptions = {
     method: "GET",
   };
   return fetch(
-    `${c.API_URL}/customer/${store_code}/post_categories`,
+    `${c.API_URL}/news${queryString ? queryString : ""}`,
     requestOptions
   )
     .then((res) => res.json())
@@ -41,10 +40,7 @@ function getNewsInfo(id) {
   const requestOptions = {
     method: "GET",
   };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/posts/${id}`,
-    requestOptions
-  )
+  return fetch(`${c.API_URL}/news/${id}`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -55,8 +51,25 @@ function getNewsInfo(id) {
       return {};
     });
 }
+function getLatestNews() {
+  const requestOptions = {
+    method: "GET",
+  };
+  return fetch(`${c.API_URL}/news/latest`, requestOptions)
+    .then((res) => res.json())
+    .then((json) => {
+      console.log(json);
+      return json;
+    })
+    .catch((err) => {
+      console.log(err);
+      return {};
+    });
+}
+//OK
 export const newsServices = {
+  addNews,
   getAllNews,
-  getNewsCategory,
   getNewsInfo,
+  getLatestNews,
 };

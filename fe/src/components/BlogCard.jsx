@@ -9,7 +9,7 @@ export default function BlogCard(props) {
   return (
     <div className="blog-card" onClick={handleClick}>
       <div style={{ display: "none" }}>
-        <Link ref={myLink} to={`/tin-tuc/${props.title.replace(/\s/g, '-')}-${props.id}`} />
+        <Link ref={myLink} to={`/tin-tuc/${props.title.replace(/[\s?/]/g, '-')}-${props._id}`} />
       </div>
       <div className="image">
         <div className="img-container">
@@ -20,7 +20,7 @@ export default function BlogCard(props) {
         <div className="blog-title">
           {props.title}
         </div>
-        <div className="blog-quote" dangerouslySetInnerHTML={{ __html: props.quote }}>
+        <div className="blog-quote" dangerouslySetInnerHTML={{ __html: props.content }}>
         </div>
       </div>
     </div>

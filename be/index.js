@@ -14,8 +14,8 @@ const adminRoute = require("./routes/admin");
 const cartRoute = require("./routes/cart");
 const userRoute = require("./routes/user");
 const siteRoute = require("./routes/site");
+const newsRoute = require("./routes/news");
 const app = express();
-
 //static file
 app.use(express.static(path.join(__dirname, "/shared")));
 //security http header
@@ -30,6 +30,7 @@ app.listen(3001, () => {
 });
 app.use("/api/user", userRoute);
 app.use("/api/cart", cartRoute);
+app.use("/api/news", newsRoute);
 app.use("/api/order", orderRoute);
 app.use("/api/admin", adminRoute);
 app.use("/api/banner", bannerRoute);

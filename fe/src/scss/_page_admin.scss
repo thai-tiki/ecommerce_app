@@ -223,13 +223,6 @@
   }
 }
 .form-container .product-form {
-  padding: 1em;
-  border-radius: 0.25em;
-  background-color: white;
-  width: 800px;
-  max-width: calc(100% - 1em);
-  overflow: scroll;
-  max-height: calc(100vh - 4em);
   .row {
     margin-bottom: 0.75em;
     justify-content: left;
@@ -341,6 +334,81 @@
     border-radius: 0.25em;
     background-color: $main-color;
     color: white;
+  }
+}
+.form-container .product-form,
+.form-container .news-form {
+  padding: 1em;
+  border-radius: 0.25em;
+  background-color: white;
+  width: 800px;
+  max-width: calc(100% - 1em);
+  overflow: scroll;
+  max-height: calc(100vh - 4em);
+}
+.news-form {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  .ql-container {
+    height: calc(100vh - 21em - 100px);
+    img {
+      display: block;
+      margin: auto;
+    }
+  }
+  > h3 {
+    margin-bottom: 0.5em !important;
+  }
+  > input {
+    padding: 8px 16px;
+    border: $border-color 1px solid;
+    font-size: 16px;
+    border-radius: 0.25em;
+    width: 100%;
+    margin-bottom: 0.5em;
+  }
+  > p {
+    display: block;
+    font-size: 14px;
+    width: fit-content;
+    margin-top: 0.5em;
+  }
+  > button {
+    margin-top: 0.5em;
+    padding: 8px 14px;
+    background-color: $main-color;
+    color: white;
+    border-radius: 2px;
+    font-weight: 500;
+  }
+  .row {
+    margin-bottom: 0.5em;
+    > label {
+      margin-right: 1em;
+      font-weight: 600;
+    }
+    .image {
+      width: 100px;
+      .img-container {
+        width: 100%;
+        padding-top: 100%;
+        border-radius: 0.25em;
+        border: $border-color 1px solid;
+      }
+    }
+  }
+  .loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba($color: #000000, $alpha: 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.25em;
   }
 }
 .category-form {

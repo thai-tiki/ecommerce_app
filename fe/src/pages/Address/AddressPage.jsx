@@ -34,19 +34,19 @@ function AddressPage() {
     setFormClass("");
   }
   function handleAddAddress(info) {
-    dispatch(appActions.changePopup(c.MESSAGE_POPUP));
+    dispatch(appActions.changePopup(c.MESSAGE_POPUP, "", { status: c.LOADING }));
     dispatch(userActions.addUserAddress(info));
   }
   function handleUpdateAddress(info, index) {
-    dispatch(appActions.changePopup(c.MESSAGE_POPUP));
+    dispatch(appActions.changePopup(c.MESSAGE_POPUP, "", { status: c.LOADING }));
     dispatch(userActions.updateUserAddress(info, index));
   }
   function handleDeleteAddress(id) {
-    dispatch(appActions.changePopup(c.MESSAGE_POPUP));
+    dispatch(appActions.changePopup(c.MESSAGE_POPUP, "", { status: c.LOADING }));
     dispatch(userActions.deleteUserAddress(id));
   }
   function setDefault(info, index) {
-    dispatch(appActions.changePopup(c.MESSAGE_POPUP));
+    dispatch(appActions.changePopup(c.MESSAGE_POPUP, "", { status: c.LOADING }));
     dispatch(userActions.updateUserAddress({
       ...info,
       is_default: true

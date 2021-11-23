@@ -7,6 +7,7 @@ import TabControll from "./child/TabControll";
 import CategoryTab from "./child/CategoryTab";
 import { constants as c } from "../../constants";
 import { productActions } from "../../actions/productActions";
+import NewsTab from "./child/NewsTab";
 function AdminPage(props) {
   const dispatch = useDispatch();
   const products = useSelector(state => state.product.list);
@@ -14,7 +15,8 @@ function AdminPage(props) {
   const tabs = {
     "product": <ProductTab />,
     "category": <CategoryTab />,
-    "order": <OrderTab />
+    "order": <OrderTab />,
+    "news": <NewsTab />
   };
   useEffect(() => {
     document.title = "Quản lý";

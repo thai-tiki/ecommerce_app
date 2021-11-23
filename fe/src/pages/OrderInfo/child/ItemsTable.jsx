@@ -1,24 +1,10 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { formatPrice } from "../../../helper";
-import { constants as c } from "../../../constants";
-import { appActions } from "../../../actions/appActions";
 export default function ItemsTable(props) {
-  const dispatch = useDispatch();
   const orderInfo = useSelector(state => state.cart.orderInfo);
   function handleShowProduct(id) {
     window.location.href = `/san-pham/${id}`
-  }
-  function openRattingForm(product) {
-    dispatch(appActions.changePopup(
-      c.RATTING_POPUP,
-      "",
-      {
-        id: product._id,
-        name: product.name,
-        orderCode: orderInfo._id,
-      }
-    ));
   }
   return (
     <table>
@@ -53,9 +39,10 @@ export default function ItemsTable(props) {
                     </div>
                     {
                       orderInfo.order_status.code === "COMPLETED" &&
+                      !orderInfo.items_in_time[i].is_rated &&
                       <React.Fragment>
                         <button
-                          onClick={() => openRattingForm(orderInfo.items[i])}>
+                          onClick={() => props.onRatingClick(orderInfo.items[i])}>
                           Đánh giá
                         </button>
                         <span> | </span>

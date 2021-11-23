@@ -1,7 +1,6 @@
 import React from "react";
 export default function Paginate(props) {
   const { handlePageSelect, currentPage, totalPage } = props;
-  console.log(totalPage)
   const left = currentPage >= 3 && [
     <button onClick={() => handlePageSelect({ page: 1 })} key="left-01">
       1
