@@ -1343,6 +1343,77 @@ body {
     font-size: 14px;
     line-height: 30px; }
 
+.voucher-popup {
+  background: white;
+  padding: 2em;
+  border-radius: 0.5em;
+  position: relative;
+  max-width: calc(100% - 1em); }
+  .voucher-popup .close-btn {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: white;
+    border-radius: 100%;
+    font-size: 20px;
+    color: #757575; }
+  .voucher-popup .voucher-card {
+    margin-bottom: 1em;
+    border-radius: 0.5em;
+    width: 400px;
+    max-width: 100%;
+    background-color: white;
+    border: dashed 2px #bc0412;
+    position: relative;
+    height: fit-content; }
+    .voucher-popup .voucher-card .name {
+      width: 120px;
+      height: 120px;
+      padding: 8px; }
+      .voucher-popup .voucher-card .name div {
+        height: 100%;
+        width: 100%;
+        border-radius: 0.5em;
+        background: #cc3c4c;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white; }
+    .voucher-popup .voucher-card .info-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      color: white;
+      padding: 0.25em 0.5em;
+      border-radius: 0.25em;
+      opacity: 0.8;
+      background-color: rgba(188, 4, 18, 0.5); }
+    .voucher-popup .voucher-card .info {
+      padding: 8px;
+      width: calc(100% - 132px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around; }
+      .voucher-popup .voucher-card .info .value {
+        font-size: 18px;
+        font-weight: 500;
+        color: #333; }
+      .voucher-popup .voucher-card .info .end,
+      .voucher-popup .voucher-card .info .apply,
+      .voucher-popup .voucher-card .info .code {
+        margin-top: 4px;
+        color: #757575;
+        font-size: 14px; }
+    .voucher-popup .voucher-card h4 {
+      padding: 8px;
+      padding-top: 0;
+      font-weight: lighter; }
+  .voucher-popup .voucher-card:last-of-type {
+    margin-bottom: 0; }
+
 .phone-popup,
 .message-popup,
 .login-popup,
@@ -1350,8 +1421,9 @@ body {
 .regis-popup,
 .ratting-popup,
 .profile-popup,
+.voucher-popup,
 .order-popup {
-  max-width: calc(100% - 1em); }
+  max-width: calc(100vw - 1em); }
 
 .modal .err-msg {
   margin-top: 8px;
@@ -2064,13 +2136,13 @@ body {
           font-size: 18px;
           font-weight: 500;
           color: #757575; }
-        .admin-page .main-view .tab .row button {
+        .admin-page .main-view .tab .row .add-btn {
           color: white;
           background-color: #f04a10;
           font-size: 14px;
           padding: 4px 6px;
           border-radius: 4px; }
-          .admin-page .main-view .tab .row button i {
+          .admin-page .main-view .tab .row .add-btn i {
             font-size: 12px;
             margin-left: 4px; }
       .admin-page .main-view .tab .table-fixed {
@@ -2107,6 +2179,11 @@ body {
     .admin-page .main-view .category-tab {
       display: flex;
       justify-content: space-between; }
+      .admin-page .main-view .category-tab .id {
+        text-align: center;
+        border-right: 2px solid #f0f0f0; }
+      .admin-page .main-view .category-tab .name {
+        padding: 10px !important; }
       .admin-page .main-view .category-tab .list-container {
         width: calc(50% - 10px);
         height: 100%;
@@ -2114,6 +2191,91 @@ body {
         border-radius: 0.5em;
         background-color: white;
         box-shadow: 0 0 6px 0 #c8c8c8; }
+    .admin-page .main-view .news-tab .id {
+      text-align: center;
+      border-right: 2px solid #f0f0f0; }
+    .admin-page .main-view .news-tab .title {
+      text-align: justify; }
+    .admin-page .main-view .news-tab > .row {
+      height: 100%; }
+    .admin-page .main-view .news-tab .news-list {
+      padding: 1em;
+      border-radius: 0.5em;
+      background: white;
+      height: 100%;
+      box-shadow: 0 0 6px 0 #c8c8c8; }
+    .admin-page .main-view .news-tab .news-update {
+      width: calc(100% - 398px);
+      height: 100%;
+      padding: 1em;
+      background-color: white;
+      border-radius: 0.5em;
+      box-shadow: 0 0 6px 0 #c8c8c8; }
+      .admin-page .main-view .news-tab .news-update .row {
+        margin-bottom: 1em;
+        align-items: center; }
+        .admin-page .main-view .news-tab .news-update .row input {
+          font-size: 16px;
+          width: calc(100% - 6em);
+          padding: 10px 16px;
+          border: 1px solid #e4e4e4;
+          border-radius: 0.25em; }
+        .admin-page .main-view .news-tab .news-update .row button {
+          padding: 6px 12px;
+          background-color: #f04a10;
+          color: white;
+          font-size: 14px;
+          border-radius: 4px; }
+      .admin-page .main-view .news-tab .news-update .quill {
+        height: calc(100% - 100px); }
+    .admin-page .main-view .voucher-tab table .id {
+      text-align: center;
+      border-right: 2px solid #f0f0f0; }
+    .admin-page .main-view .voucher-tab table .name {
+      padding: 10px !important; }
+    .admin-page .main-view .voucher-tab > .row {
+      height: 100%; }
+    .admin-page .main-view .voucher-tab .vouchers-list {
+      padding: 1em;
+      border-radius: 0.5em;
+      background: white;
+      height: 100%;
+      box-shadow: 0 0 6px 0 #c8c8c8; }
+    .admin-page .main-view .voucher-tab .voucher-add {
+      width: calc(100% - 616px);
+      height: 100%;
+      background-color: white;
+      border-radius: 0.5em;
+      box-shadow: 0 0 6px 0 #c8c8c8; }
+      .admin-page .main-view .voucher-tab .voucher-add h4 {
+        padding: 16px;
+        border-bottom: 2px solid #f0f0f0; }
+      .admin-page .main-view .voucher-tab .voucher-add > div {
+        padding: 1em; }
+        .admin-page .main-view .voucher-tab .voucher-add > div input {
+          font-size: 16px;
+          padding: 10px;
+          border: 1px solid #e4e4e4;
+          border-radius: 4px;
+          width: 100%;
+          margin-bottom: 1em; }
+        .admin-page .main-view .voucher-tab .voucher-add > div button {
+          display: block;
+          margin: auto;
+          padding: 8px 20px;
+          background: #f04a10;
+          color: white;
+          font-size: 16px;
+          border-radius: 4px; }
+        .admin-page .main-view .voucher-tab .voucher-add > div label {
+          width: 8em;
+          font-weight: 500;
+          color: #333; }
+        .admin-page .main-view .voucher-tab .voucher-add > div .row {
+          align-items: center;
+          margin-bottom: 1em; }
+          .admin-page .main-view .voucher-tab .voucher-add > div .row input {
+            margin: 0; }
   .admin-page .overview {
     margin: 1em 0;
     margin-top: 0;
@@ -2323,7 +2485,8 @@ body {
     border-radius: 2px;
     font-weight: 500; }
   .news-form .row {
-    margin-bottom: 0.5em; }
+    margin-bottom: 0.5em;
+    justify-content: unset !important; }
     .news-form .row > label {
       margin-right: 1em;
       font-weight: 600; }

@@ -7,7 +7,6 @@ export default function Login(props) {
   const dispatch = useDispatch();
   const phone = useSelector(state => state.user.phone);
   const message = useSelector(state => state.user.message);
-  const appTheme = useSelector(state => state.app.appTheme);
   const [timer, setTimer] = useState(0);
   const [validateMsg, setValidateMsg] = useState("");
   const [isSentRequest, setIsSentRequest] = useState(false);
@@ -33,7 +32,6 @@ export default function Login(props) {
     if (!regisInfo.email
       || !regisInfo.password
       || !regisInfo.sex === -1
-      || !regisInfo.otp
       || !regisInfo.name) {
       setIsSentRequest(false);
       setValidateMsg("Vui lòng điền đầy đủ thông tin !");
@@ -53,14 +51,6 @@ export default function Login(props) {
     }, 1000);
     return () => clearInterval(myTimer)
   })
-  function handleResendOtp() {
-    let arr = [1, 2, 3, 4, 5];
-    let otp = arr.reduce((rs) => rs + (Math.floor(Math.random() * 10)), "");
-    setRegisInfo({ ...regisInfo, otp });
-    if (timer > 0)
-      return;
-    setTimer(2);
-  }
   return (
     <div className="modal center">
       <div className="regis-popup">
@@ -131,35 +121,6 @@ export default function Login(props) {
             </div>
           </div>
         </div>
-        <div style={{ width: "100%", display: "flex", justifyContent: "space-between" }}>
-          <input
-            autoComplete="off"
-            name="otp"
-            type="text"
-            placeholder="Mã xác nhận"
-            value={regisInfo.otp}
-            style={{ width: "calc(100% - 7.5em)" }}
-            onChange={handleInputChange}
-          />
-          <button
-            onClick={handleResendOtp}
-            style={{
-              width: "7em",
-              fontSize: "15px",
-              height: "100%",
-              borderRadius: "0.25em",
-              border: "1px solid #e4e4e4",
-              padding: "0.75em 0em",
-              color: "#757575"
-            }}
-          >
-            {
-              timer ?
-                `Gửi lại (${timer}s)`
-                : "Gửi OTP"
-            }
-          </button>
-        </div>
         {
           validateMsg
           &&
@@ -170,7 +131,18 @@ export default function Login(props) {
         {
           !validateMsg
           &&
-          isSentRequest && !message && <img src="/img/loading1.gif" alt="" />
+          isSentRequest && !message
+          &&
+          <div
+            className="err-msg"
+            style={{
+              fontSize: "12px",
+              textAlign: "center",
+              marginTop: "0",
+              marginBottom: "8px"
+            }}>
+            Vui lòng chờ...
+          </div>
         }
         {
           isSentRequest && message && !validateMsg
@@ -179,7 +151,7 @@ export default function Login(props) {
             {message}
           </div>
         }
-        <button className="next-btn" onClick={handleRegis} style={{ background: appTheme.color_main_1 }}>
+        <button className="next-btn" onClick={handleRegis}>
           Xác nhận
         </button>
         <button className="close-btn" onClick={props.handleClose}>

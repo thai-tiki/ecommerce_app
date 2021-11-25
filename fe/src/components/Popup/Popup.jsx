@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import Login from "./child/Login";
-import OTPInput from "./child/OTPInput";
+import Voucher from "./child/Voucher";
 import Register from "./child/Register";
 import RattingPopup from "./child/Ratting";
 import PhoneCheck from "./child/PhoneCheck";
@@ -21,8 +21,8 @@ function Popup() {
     [c.NO_POPUP]: <div></div>,
     [c.MESSAGE_POPUP]: <MessagePopup />,
     [c.AUTOHIDE_POPUP]: <AutoHidePopup />,
+    [c.VOUCHER_POPUP]: <Voucher handleClose={handleClosePopup} />,
     [c.LOGIN_POPUP]: <Login handleClose={handleClosePopup} />,
-    [c.OTP_POPUP]: <OTPInput handleClose={handleClosePopup} />,
     [c.REGIS_POPUP]: <Register handleClose={handleClosePopup} />,
     [c.PHONE_POPUP]: <PhoneCheck handleClose={handleClosePopup} />,
     [c.ORDER_POPUP]: <OrderSuccess andleClose={handleClosePopup} />,

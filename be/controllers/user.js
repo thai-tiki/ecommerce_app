@@ -119,7 +119,7 @@ exports.addAddress = async (req, res) => {
       return;
     }
     let index = user.address.findIndex((v) => v.is_default);
-    user.address[index].is_default = false;
+    if (index !== -1) user.address[index].is_default = false;
     user.address.push(req.body);
     await user.save();
     res.status(200).json({

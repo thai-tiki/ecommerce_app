@@ -176,18 +176,20 @@ function changeNumberInCart(id, quantity) {
     s.changeNumberInCart(id, quantity).then((res) => {
       if (res.status === c.SUCCESS) {
         if (quantity === 0)
-          dispatch({
-            type: c.CHANGE_POPUP,
-            popupType: c.AUTOHIDE_POPUP,
-            messageInfo: "Xóa sản phẩm khỏi giỏ hàng thành công !",
-          });
+          dispatch(
+            appActions.changePopup(
+              c.AUTOHIDE_POPUP,
+              "Xóa sản phẩm khỏi giỏ hàng thành công !"
+            )
+          );
         dispatch(getCartInfo());
       } else {
-        dispatch({
-          type: c.CHANGE_POPUP,
-          popupType: c.AUTOHIDE_POPUP,
-          messageInfo: "Có lỗi xảy ra vui lòng thử lại sau !",
-        });
+        dispatch(
+          appActions.changePopup(
+            c.AUTOHIDE_POPUP,
+            "Có lỗi xảy ra vui lòng thử lại sau !"
+          )
+        );
       }
     });
   };

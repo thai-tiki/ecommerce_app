@@ -102,7 +102,10 @@ export default function NewsAddForm(props) {
               className="hide"
               onChange={handleFileSelect}
             />
-            <div className="image" onClick={() => myInput.current.click()}>
+            <div
+              className="image"
+              onClick={() => myInput.current.click()}
+            >
               <div className="img-container">
                 <img src={url} alt="" />
               </div>

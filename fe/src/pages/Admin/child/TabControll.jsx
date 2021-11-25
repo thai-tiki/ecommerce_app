@@ -7,7 +7,7 @@ export default function TabControll(props) {
       img: "/img/checklist (1).png"
     },
     {
-      name: "discount",
+      name: "voucher",
       title: "Khuyến mãi",
       img: "/img/voucher.png"
     },
@@ -20,6 +20,11 @@ export default function TabControll(props) {
       name: "order",
       title: "Đơn hàng",
       img: "/img/checklist (2).png"
+    },
+    {
+      name: "news",
+      title: "Bài viết",
+      img: "/img/blog.png"
     },
     {
       name: "profit",
@@ -41,11 +46,6 @@ export default function TabControll(props) {
       title: "Phương thức thanh toán",
       img: "/img/mobile-payment.png"
     },
-    {
-      name: "news",
-      title: "Bài viết",
-      img: "/img/blog.png"
-    }
   ]
   return (
     <div className="tab-controll">

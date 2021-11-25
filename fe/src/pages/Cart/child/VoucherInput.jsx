@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { cartActions as a } from "../../../actions/cartActions";
+import { appActions } from "../../../actions/appActions";
+import { cartActions } from "../../../actions/cartActions";
+import { constants as c } from "../../../constants";
 export default function VoucherInput(props) {
   const dispatch = useDispatch();
   const cartInfo = useSelector(state => state.cart.cartInfo);
@@ -9,17 +11,16 @@ export default function VoucherInput(props) {
     if (!code) return;
     if (!cartInfo.voucher) {
       props.handleChange("voucher", code);
-      dispatch(a.applyDiscount("voucher", code));
+      dispatch(cartActions.applyDiscount("voucher", code));
       return;
     }
     props.handleChange("voucher", "");
-    dispatch(a.applyDiscount("voucher", ""));
+    dispatch(cartActions.applyDiscount("voucher", ""));
   }
   function handleChange(e) {
     setCode(e.target.value);
   }
   useEffect(() => {
-    console.log(cartInfo.voucher);
     setCode(
       cartInfo.voucher
         ? cartInfo.voucher.code
@@ -30,7 +31,7 @@ export default function VoucherInput(props) {
       <h5>Mã giảm giá</h5>
       <button
         className="show-modal-btn"
-        onClick={() => props.handleShowPopup("voucher")}>
+        onClick={() => dispatch(appActions.changePopup(c.VOUCHER_POPUP))}>
         Danh sách voucher
       </button>
       <div className="row">

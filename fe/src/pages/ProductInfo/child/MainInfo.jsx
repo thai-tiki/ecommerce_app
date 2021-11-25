@@ -4,7 +4,6 @@ import { formatPrice, convertMoney } from "../../../helper";
 import { constants as c } from "../../../constants";
 import { appActions } from "../../../actions/appActions";
 import { cartActions } from "../../../actions/cartActions";
-import { userActions } from "../../../actions/userActions";
 import { productActions } from "../../../actions/productActions";
 import { voucherActions } from "../../../actions/voucherActions";
 import { ToastContainer } from "react-toastify";
@@ -122,7 +121,9 @@ export default function MainInfo(props) {
             <div className="row">
               {
                 vouchers.data.map(v =>
-                  <div className="voucher-tag" key={v._id}>
+                  <div className="voucher-tag" key={v._id}
+                    onClick={() => dispatch(appActions.changePopup(c.VOUCHER_POPUP))}
+                  >
                     Giảm&nbsp;
                     {
                       v.type === "VALUE_DISCOUNT"

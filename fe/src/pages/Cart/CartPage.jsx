@@ -51,6 +51,10 @@ function CartPage() {
   };
   function handleOrder() {
     console.log(orderInfo);
+    if (!orderInfo.items || !orderInfo.items.length) {
+      dispatch(appActions.changePopup(c.AUTOHIDE_POPUP, "Vui lòng chọn sản phẩm vào giỏ hàng"));
+      return;
+    }
     dispatch(appActions.changePopup(c.MESSAGE_POPUP, "", { status: c.LOADING }));
     dispatch(cartActions.order(orderInfo));
   };

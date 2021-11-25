@@ -1309,6 +1309,87 @@
     line-height: 30px;
   }
 }
+.voucher-popup {
+  background: white;
+  padding: 2em;
+  border-radius: 0.5em;
+  position: relative;
+  max-width: calc(100% - 1em);
+  .close-btn {
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: white;
+    border-radius: 100%;
+    font-size: 20px;
+    color: $sub-text-color;
+  }
+  .voucher-card {
+    margin-bottom: 1em;
+    border-radius: 0.5em;
+    width: 400px;
+    max-width: 100%;
+    background-color: white;
+    border: dashed 2px #bc0412;
+    position: relative;
+    height: fit-content;
+    .name {
+      width: 120px;
+      height: 120px;
+      padding: 8px;
+      div {
+        height: 100%;
+        width: 100%;
+        border-radius: 0.5em;
+        background: #cc3c4c;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white;
+      }
+    }
+    .info-btn {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      color: white;
+      padding: 0.25em 0.5em;
+      border-radius: 0.25em;
+      opacity: 0.8;
+      background-color: rgba($color: #bc0412, $alpha: 0.5);
+    }
+    .info {
+      padding: 8px;
+      width: calc(100% - 132px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      .value {
+        font-size: 18px;
+        font-weight: 500;
+        color: #333;
+      }
+      .end,
+      .apply,
+      .code {
+        margin-top: 4px;
+        color: $sub-text-color;
+        font-size: 14px;
+      }
+    }
+    h4 {
+      padding: 8px;
+      padding-top: 0;
+      font-weight: lighter;
+    }
+  }
+  .voucher-card:last-of-type {
+    margin-bottom: 0;
+  }
+}
 .phone-popup,
 .message-popup,
 .login-popup,
@@ -1316,8 +1397,9 @@
 .regis-popup,
 .ratting-popup,
 .profile-popup,
+.voucher-popup,
 .order-popup {
-  max-width: calc(100% - 1em);
+  max-width: calc(100vw - 1em);
 }
 .modal {
   .err-msg {

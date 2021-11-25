@@ -2,7 +2,6 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useRef } from "react";
 import { formatPrice, handleImgErr, standardProductLink } from "../helper";
-import { productActions } from "../actions/productActions";
 import { constants } from "../constants";
 export default function ProductCard(props) {
   const myLink = useRef(null);

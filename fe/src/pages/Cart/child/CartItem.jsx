@@ -4,7 +4,7 @@ import { formatPrice } from "../../../helper";
 import { cartActions as a } from "../../../actions/cartActions";
 export default function CartItem(props) {
   const dispatch = useDispatch();
-  let { quantity, images, id, name, before_discount_price, after_discount_price } = props.product;
+  let { quantity, images, _id, name, before_discount_price, after_discount_price } = props.product;
   let avt = "/img/default_product.jpg";
   if (images.length)
     avt = images[0];
@@ -56,43 +56,54 @@ export default function CartItem(props) {
     setCurrentQuantity(0);
   }
   return (
-    currentQuantity === 0 ? (<div style={{ backgroundColor: 'transparent' }}> </div>) :
-      (<div className="cart-item">
-        <div className="row">
-          <div className="image">
-            <div className="img-container">
-              <img src={avt} alt="product1" style={{ background: "url(../img/default_product.jpg)", backgroundSize: "contain" }} />
-            </div>
-          </div>
-          <div className="item-info">
-            <a href={"/san-pham/" + id} className="name">
-              {name}
-            </a>
-            <div className="price">
-              <div className="current-price">
-                ₫ {formatPrice(after_discount_price)}
-              </div>
-              {
-                before_discount_price !==
-                after_discount_price &&
-                <div className="past-price">
-                  ₫ {formatPrice(before_discount_price)}
-                </div>
-              }
-            </div>
-            <div className="row">
-              <button onClick={handleDecrease}>-</button>
-              <input type="number" value={currentQuantity} min={0} max={quantity} onChange={handleChangecurrentQuantity} />
-              <button onClick={handleIncrease}>+</button>
-            </div>
+    <div className="cart-item">
+      <div className="row">
+        <div className="image">
+          <div className="img-container">
+            <img
+              src={avt}
+              alt="product1"
+              style={{
+                background: "url(../img/default_product.jpg)",
+                backgroundSize: "contain"
+              }} />
           </div>
         </div>
-        <button
-          className="delete-btn"
-          onClick={handleRemoveItem}
-        >
-          <i className="fas fa-times"></i>
-        </button>
-      </div>)
+        <div className="item-info">
+          <a href={"/san-pham/" + _id} className="name">
+            {name}
+          </a>
+          <div className="price">
+            <div className="current-price">
+              ₫ {formatPrice(after_discount_price)}
+            </div>
+            {
+              before_discount_price !==
+              after_discount_price &&
+              <div className="past-price">
+                ₫ {formatPrice(before_discount_price)}
+              </div>
+            }
+          </div>
+          <div className="row">
+            <button onClick={handleDecrease}>-</button>
+            <input
+              type="number"
+              value={currentQuantity}
+              min={0}
+              max={quantity}
+              onChange={handleChangecurrentQuantity}
+            />
+            <button onClick={handleIncrease}>+</button>
+          </div>
+        </div>
+      </div>
+      <button
+        className="delete-btn"
+        onClick={handleRemoveItem}
+      >
+        <i className="fas fa-times"></i>
+      </button>
+    </div>
   )
 }

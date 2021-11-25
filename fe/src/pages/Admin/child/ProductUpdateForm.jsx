@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { constants as c } from '../../../constants';
 import { appActions } from "../../../actions/appActions";
 import { productActions } from '../../../actions/productActions';
-import { formatPrice, handleImgErr, showNextElement, hideParentElement, uploadImage } from '../../../helper';
+import { formatPrice, handleImgErr, showNextElement, uploadImage } from '../../../helper';
 import Select from "../../../components/Select";
 export default function ProductUpdateForm(props) {
   const dispatch = useDispatch();

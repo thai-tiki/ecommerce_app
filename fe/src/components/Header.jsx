@@ -209,16 +209,16 @@ export default function Header() {
                       <Link to="/dia-chi">Địa chỉ nhận hàng</Link>
                     </li>
                     <li>
+                      <img src="/img/heart.png" alt="" />
+                      <Link to="/yeu-thich">Sản phẩm yêu thích</Link>
+                    </li>
+                    <li>
                       <img src="/img/star.png" alt="" />
                       <Link to="/san-pham-da-mua">Sản phẩm đã mua</Link>
                     </li>
                     <li>
                       <img src="/img/check-mark.png" alt="" />
                       <Link to="/danh-gia-cua-toi">Đánh giá của tôi</Link>
-                    </li>
-                    <li>
-                      <img src="/img/heart.png" alt="" />
-                      <Link to="/yeu-thich">Sản phẩm yêu thích</Link>
                     </li>
                     {profile.is_collaborator && (
                       <li>

@@ -24,8 +24,8 @@ export default function CategoryTab() {
           <table>
             <thead>
               <tr>
-                <th style={{ width: "70px" }}>No.</th>
-                <th>Tên</th>
+                <th className="id" style={{ width: "70px" }}>No.</th>
+                <th className="name">Tên</th>
                 <th></th>
               </tr>
             </thead>
@@ -33,8 +33,8 @@ export default function CategoryTab() {
               {
                 categories.map((v, i) =>
                   <tr key={v._id} onClick={() => handleEditProduct(v)}>
-                    <td style={{ width: "70px" }}>{i + 1}</td>
-                    <td>{v.name}</td>
+                    <td className="id" style={{ width: "70px" }}>{i + 1}</td>
+                    <td className="name">{v.name}</td>
                     <td>
                       <button>
                         <i className="far fa-edit"></i>

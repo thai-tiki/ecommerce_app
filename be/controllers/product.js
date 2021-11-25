@@ -18,11 +18,7 @@ function handleSuccess(res, code, data) {
   });
 }
 exports.addOne = base.addOne(Product);
-exports.getAll = base.getAll(
-  Product,
-  ["categories"],
-  "-rating -like -description"
-);
+exports.getAll = base.getAll(Product, ["categories"], "-rating -like");
 exports.getOne = async (req, res) => {
   try {
     const data = await Product.findById(req.params.id).lean();
