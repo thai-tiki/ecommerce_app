@@ -11,5 +11,6 @@ router.use(auth.protect);
 router.get("/address", controller.getAddress);
 router.post("/address", controller.addAddress);
 router.put("/address/:index", controller.updateAddress);
+router.put("/:id", controller.updateOne);
 router.delete("/address/:index", controller.deleteAddress);
 module.exports = router;

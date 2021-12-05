@@ -100,7 +100,7 @@ export default function Header() {
                         key={i}
                         onClick={handleCategorySelect}
                         style={{ cursor: "pointer", display: "flex" }}
-                        to={`/danh-sach-san-pham?danh-muc=${v.name.replace(/\s/g, "-")}-${v.id}`}>
+                        to={`/danh-sach-san-pham?danh-muc=${v.name.replace(/[\s&]/g, "-")}-${v._id}`}>
                         <img src={v.image} alt="" />
                         <div>{v.name}</div>
                       </Link>
@@ -212,20 +212,14 @@ export default function Header() {
                       <img src="/img/heart.png" alt="" />
                       <Link to="/yeu-thich">Sản phẩm yêu thích</Link>
                     </li>
-                    <li>
+                    {/* <li>
                       <img src="/img/star.png" alt="" />
                       <Link to="/san-pham-da-mua">Sản phẩm đã mua</Link>
                     </li>
                     <li>
                       <img src="/img/check-mark.png" alt="" />
                       <Link to="/danh-gia-cua-toi">Đánh giá của tôi</Link>
-                    </li>
-                    {profile.is_collaborator && (
-                      <li>
-                        <img src="/img/handshake.png" alt="" />
-                        <Link to="/cong-tac-vien">Ví cộng tác viên</Link>
-                      </li>
-                    )}
+                    </li> */}
                     <li onClick={handleShowProfile}>
                       <img src="/img/refresh.png" alt="" />
                       Cập nhật thông tin

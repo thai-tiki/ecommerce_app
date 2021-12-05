@@ -149,6 +149,41 @@ function deleteUserAddress(id) {
     });
   };
 }
+function updateUserProfile(profile) {
+  return (dispatch) => {
+    s.updateUserProfile(profile).then((res) => {
+      if (res.status === c.SUCCESS) {
+        dispatch(success(res.data));
+        dispatch(
+          appActions.changePopup(
+            c.PROFILE_POPUP,
+            "Cập nhật thông tin thành công!",
+            {
+              status: c.SUCCESS,
+            }
+          )
+        );
+      } else {
+        dispatch(failure(res.msg, res.code));
+        dispatch(
+          appActions.changePopup(c.PROFILE_POPUP, res.msg, {
+            status: c.FAILURE,
+          })
+        );
+      }
+    });
+  };
+  function success(profile) {
+    localStorage.setItem("profile", JSON.stringify(profile));
+    return {
+      type: c.UPDATE_PROFILE_SUCCESS,
+      profile,
+    };
+  }
+  function failure(message, code) {
+    return { type: c.UPDATE_PROFILE_FAILURE, message, code };
+  }
+}
 //OK
 function resetPassword(info) {
   return (dispatch) => {
@@ -165,58 +200,6 @@ function resetPassword(info) {
   }
   function failure(msg) {
     return { type: c.RESET_PASSWORD_FAILURE, msg };
-  }
-}
-function getUserProfile() {
-  return (dispatch) => {
-    s.getUserProfile().then((res) => {
-      if (res.code === 200) {
-        dispatch(success(res.data));
-      } else {
-        dispatch(failure(res.msg, res.code));
-      }
-    });
-  };
-  function success(profile) {
-    localStorage.setItem("profile", JSON.stringify(profile));
-    return {
-      type: c.GET_PROFILE_SUCCESS,
-      profile,
-    };
-  }
-  function failure(message, code) {
-    return { type: c.GET_PROFILE_FAILURE, message, code };
-  }
-}
-function updateUserProfile(profile) {
-  return (dispatch) => {
-    s.updateUserProfile(profile).then((res) => {
-      if (res.code === 200) {
-        dispatch(success(res.data));
-        dispatch({
-          type: c.CHANGE_POPUP,
-          popupType: c.AUTOHIDE_POPUP,
-          messageInfo: "Cập nhật thông tin thành công !",
-        });
-      } else {
-        dispatch(failure(res.msg, res.code));
-        dispatch({
-          type: c.CHANGE_POPUP,
-          popupType: c.AUTOHIDE_POPUP,
-          messageInfo: res.msg,
-        });
-      }
-    });
-  };
-  function success(profile) {
-    localStorage.setItem("profile", JSON.stringify(profile));
-    return {
-      type: c.UPDATE_PROFILE_SUCCESS,
-      profile,
-    };
-  }
-  function failure(message, code) {
-    return { type: c.UPDATE_PROFILE_FAILURE, message, code };
   }
 }
 function getUserReview() {
@@ -239,38 +222,16 @@ function getUserReview() {
     return { type: c.GET_USER_REVIEW_FAILURE, message, code };
   }
 }
-function getUserBadges() {
-  return (dispatch) => {
-    s.getUserBadges().then((res) => {
-      if (res.code === 200) {
-        dispatch(success(res.data));
-      } else {
-        dispatch(failure(res.msg, res.code));
-      }
-    });
-  };
-  function success(data) {
-    return {
-      badges: data,
-      type: c.GET_USER_BADGES_SUCCESS,
-    };
-  }
-  function failure(message, code) {
-    return { type: c.GET_USER_BADGES_FAILURE, message, code };
-  }
-}
 export const userActions = {
   accountCheck,
   accountLogin,
   accountRegis,
   accountLogout,
   resetPassword,
-  getUserProfile,
   getUserAddress,
   addUserAddress,
   updateUserAddress,
   deleteUserAddress,
   updateUserProfile,
   getUserReview,
-  getUserBadges,
 };

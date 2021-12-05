@@ -142,37 +142,17 @@ function deleteUserAddress(index) {
       return {};
     });
 }
-function getUserProfile() {
-  const token = JSON.parse(localStorage.getItem("token"));
-  const requestOptions = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      token: token ? token : "",
-    },
-  };
-  return fetch(`${c.API_URL}/customer/${store_code}/profile`, requestOptions)
-    .then((res) => res.json())
-    .then((json) => {
-      console.log(json);
-      return json;
-    })
-    .catch((err) => {
-      console.log(err);
-      return {};
-    });
-}
 function updateUserProfile(profile) {
   const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
-      "customer-token": token ? token.token : "",
+      token: token ? token : "",
     },
     body: JSON.stringify(profile),
   };
-  return fetch(`${c.API_URL}/customer/${store_code}/profile`, requestOptions)
+  return fetch(`${c.API_URL}/user/${profile._id}`, requestOptions)
     .then((res) => res.json())
     .then((json) => {
       console.log(json);
@@ -183,6 +163,7 @@ function updateUserProfile(profile) {
       return {};
     });
 }
+//OK
 function getUserReview() {
   const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
@@ -274,7 +255,6 @@ export const userServices = {
   accountLogin,
   accountRegis,
   resetPassword,
-  getUserProfile,
   getUserAddress,
   addUserAddress,
   updateUserProfile,

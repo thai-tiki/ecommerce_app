@@ -21,7 +21,7 @@ export default function HomeBanner(props) {
               <Link
                 key={i}
                 style={{ cursor: "pointer", display: "flex" }}
-                to={`/danh-sach-san-pham?danh-muc=${v.name.replace(/\s/g, "-")}-${v._id}`}>
+                to={`/danh-sach-san-pham?danh-muc=${v.name.replace(/[\s&]/g, "-")}-${v._id}`}>
                 <div className="image">
                   <div className="img-container">
                     <img

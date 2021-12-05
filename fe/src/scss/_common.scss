@@ -1042,18 +1042,18 @@
   position: relative;
   .close-popup-btn {
     position: absolute;
-    top: 32px;
-    right: 32px;
+    top: 2px;
+    right: 2px;
     font-size: 24px;
     color: $sub-text-color;
   }
   .submit-btn {
-    margin-top: 16px;
+    margin-top: 4px;
     display: block;
     color: white;
     background-color: $red;
     font-size: 18px;
-    padding: 6px 16px;
+    padding: 6px 20px;
     border-radius: 0.25em;
   }
   h4 {
@@ -1072,42 +1072,43 @@
     display: block;
     border: 1px solid $border-color;
     border-radius: 0.25em;
-    margin-bottom: 1em;
     color: $sub-text-color;
   }
   label {
     color: $sub-text-color;
   }
-  .message {
-    width: 400px;
-    max-width: 100%;
-    margin-bottom: 1em;
-  }
   > .row {
-    label {
-      width: 5em;
+    align-items: center;
+    margin-bottom: 1em;
+    > label {
+      width: 8em;
     }
-    .row {
+    > .row {
+      display: flex;
       align-items: center;
-      margin-bottom: 0.5em;
-      label {
-        width: 3em;
-      }
-      input {
-        width: fit-content !important;
+      > div {
+        display: flex;
+        align-items: center;
+        label {
+          margin: 0 1em 0 0.5em;
+          display: block;
+        }
+        input {
+          width: 17px;
+          height: 17px;
+        }
       }
     }
   }
-  .image {
-    width: 80px;
-    .img-container {
-      width: 100%;
-      padding-top: 100%;
-    }
+  p {
+    color: $main-color;
+    font-size: 13px;
+    text-align: center;
+    line-height: 40px;
   }
-  .blur {
-    color: $sub-text-color;
-    margin-right: 1em;
+  svg {
+    width: 40px;
+    height: 40px;
   }
 }
 .message-popup {

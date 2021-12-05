@@ -44,23 +44,6 @@ export function app(state = initialState, action) {
           additionalInfo: action.additionalInfo,
         },
       };
-    case c.ADD_USER_ADDRESS_FAILURE:
-    case c.UPDATE_USER_ADDRESS_FAILURE:
-    case c.DELETE_USER_ADDRESS_FAILURE:
-    case c.ORDER_FAILURE:
-      return {
-        ...state,
-        messagePopup: {
-          message: action.message,
-          status: c.FAILURE,
-          willReload: false,
-        },
-      };
-    case c.RESET_PASSWORD_FAILURE:
-      return {
-        ...state,
-        message: action.msg,
-      };
     //case c.GET_ORDERS_LIST_FAILURE:
     //case c.GET_ALL_NEWS_FAILURE:
     case c.GET_CART_FAILURE:

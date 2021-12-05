@@ -2,6 +2,7 @@ const { User } = require("../models/user");
 const { Cart } = require("../models/cart");
 const helper = require("../helper");
 const c = require("../constants");
+const base = require("./base");
 const _ = require("lodash");
 exports.phoneCheck = async (req, res) => {
   try {
@@ -189,3 +190,4 @@ exports.updateAddress = async (req, res) => {
     });
   }
 };
+exports.updateOne = base.updateOne(User);
