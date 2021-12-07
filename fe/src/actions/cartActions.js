@@ -1,7 +1,6 @@
 import { constants as c } from "../constants";
 import { cartServices as s } from "../services/cartServices";
 import { toast } from "react-toastify";
-import { userActions } from "./userActions";
 import { appActions } from "./appActions";
 function addCart(product, willShowPopup) {
   return (dispatch) => {
@@ -22,21 +21,17 @@ function addCart(product, willShowPopup) {
             });
           }
         } else {
-          dispatch({
-            type: c.CHANGE_POPUP,
-            popupType: c.AUTOHIDE_POPUP,
-            messageInfo: "Xóa sản phẩm khỏi giỏ hàng thành công !",
-          });
+          dispatch(
+            appActions.changePopup(
+              c.AUTOHIDE_POPUP,
+              "Xóa sản phẩm khỏi giở hàng thành công!"
+            )
+          );
         }
       } else {
         dispatch(failure());
-        dispatch({
-          type: c.CHANGE_POPUP,
-          popupType: c.AUTOHIDE_POPUP,
-          messageInfo: res.msg,
-        });
+        dispatch(appActions.changePopup(c.AUTOHIDE_POPUP, res.msg));
       }
-      dispatch(userActions.getUserBadges());
     });
   };
   function success(cartInfo) {
@@ -117,18 +112,15 @@ function applyDiscount(type, value) {
       if (res.status === c.SUCCESS) {
         localStorage.setItem("cartInfo", JSON.stringify(res.data));
         dispatch(success(res.data));
-        dispatch({
-          type: c.CHANGE_POPUP,
-          popupType: c.AUTOHIDE_POPUP,
-          messageInfo: value ? msg["apply_voucher"] : msg["cancel_voucher"],
-        });
+        dispatch(
+          appActions.changePopup(
+            c.AUTOHIDE_POPUP,
+            value ? msg["apply_voucher"] : msg["cancel_voucher"]
+          )
+        );
       } else {
         dispatch(failure(res.code, res.msg));
-        dispatch({
-          type: c.CHANGE_POPUP,
-          popupType: c.AUTOHIDE_POPUP,
-          messageInfo: res.msg,
-        });
+        dispatch(appActions.changePopup(c.AUTOHIDE_POPUP, res.msg));
       }
     });
   };

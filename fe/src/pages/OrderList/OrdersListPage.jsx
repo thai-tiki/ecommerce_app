@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { formatPrice } from "../../helper";
 import { constants as c } from "../../constants";
 import { cartActions as a } from "../../actions/cartActions";
-import { showNextElement, hideParentElement } from "../../helper";
+import { showNextElement } from "../../helper";
 import OrderCard from "./child/OrderCard";
 import Select from "../../components/Select";
 import Header from "../../components/Header";
@@ -25,11 +24,7 @@ function OrdersListPage() {
     if (ordersList.status === c.LOADING) {
       dispatch(a.getOrdersList(""));
     }
-    console.log(ordersList)
-  });
-  function handleShowInfo(id) {
-    window.location.href = `/don-hang/${id}`;
-  }
+  }, []);
   function handleInputChange(e) {
     setSearchValue(e.target.value);
   }
@@ -43,7 +38,6 @@ function OrdersListPage() {
   function handleSort(option, e) {
     let newQuery = { ...query };
     let keys = [...Object.keys(option)];
-    hideParentElement(e);
     for (let i = 0; i < keys.length; i++) {
       if (keys[i] !== "title") newQuery[keys[i]] = option[keys[i]];
       else {

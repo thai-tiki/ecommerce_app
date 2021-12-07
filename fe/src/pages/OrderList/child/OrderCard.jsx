@@ -1,6 +1,5 @@
 import { formatPrice } from "../../../helper"
 export default function OrderCard(props) {
-  console.log(props)
   const { items, total_after_discount, status } = props;
   const image = items[0].images[0];
   const name = items[0].name;

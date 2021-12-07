@@ -1,7 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { appActions } from "../actions/appActions";
-import { userActions } from "../actions/userActions";
 import { constants as c } from "../constants";
 export default function Footer() {
   const dispatch = useDispatch();
@@ -14,17 +13,8 @@ export default function Footer() {
       dispatch(appActions.changePopup(c.PHONE_POPUP));
     }
   }
-  function handlePostClick(e, id) {
-    if (!id) e.preventDefault();
-  }
-  function handlePolicyClick(id) {
-    if (id) window.location.href = `/tin-tuc/${id}`;
-  }
   function handleShowPhonePopup() {
     dispatch(appActions.changePopup(c.PHONE_POPUP));
-  }
-  function handleLogout() {
-    dispatch(userActions.accountLogout());
   }
   function checkToken(e) {
     if (!token) {
@@ -36,24 +26,20 @@ export default function Footer() {
     <React.Fragment>
       <div className="top-footer">
         <div className="container row">
-          <div className="policy-card"
-            onClick={() => handlePolicyClick(1)}>
+          <div className="policy-card" >
             <i className="far fa-clipboard" ></i>
             Điều khoản - Điều kiện
           </div>
-          <div className="policy-card"
-            onClick={() => handlePolicyClick(1)}>
+          <div className="policy-card" >
             <i className="fas fa-undo" ></i>
             Chính sách đổi trả
           </div>
-          <div className="policy-card"
-            onClick={() => handlePolicyClick(1)}>
+          <div className="policy-card" >
             <i className="far fa-life-ring"
             ></i>
             Chính sách hỗ trợ
           </div>
-          <div className="policy-card"
-            onClick={() => handlePolicyClick(1)}>
+          <div className="policy-card" >
             <i className="fas fa-shield-alt"
             ></i>
             Chính sách bảo mật
@@ -95,23 +81,17 @@ export default function Footer() {
                 Về chúng tôi
               </h2>
               <div>
-                <a href={"/#"}
-                  onClick={(e) => handlePostClick(1)}
-                >
+                <a href={"/#"} >
                   Giới thiệu
                 </a>
               </div>
               <div>
-                <a href={"/#"}
-                  onClick={(e) => handlePostClick(1)}
-                >
+                <a href={"/#"} >
                   Giúp đỡ
                 </a>
               </div>
               <div>
-                <a href={"/#"}
-                  onClick={(e) => handlePostClick(1)}
-                >
+                <a href={"/#"} >
                   Tham gia
                 </a>
               </div>

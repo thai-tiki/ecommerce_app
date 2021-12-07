@@ -20,7 +20,7 @@ export default function OrdersTable(props) {
             (v, i) =>
               v.items.length > 0 && (
                 <tr key={i} onClick={() => handleShowInfo(v._id)}>
-                  <td className="order-id" style={{ minWidth: "160px" }}>
+                  <td className="order-id" style={{ minWidth: "230px" }}>
                     {v._id}
                   </td>
                   <td className="date">{v.date}</td>
@@ -40,7 +40,7 @@ export default function OrdersTable(props) {
                     }
                   </td>
                   <td className="total">
-                    ₫ {formatPrice(v.total_before_discount)}
+                    ₫ {formatPrice(v.total_after_discount)}
                   </td>
                   <td className="status">
                     {v.status.name}

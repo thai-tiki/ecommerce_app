@@ -50,8 +50,8 @@ function CartPage() {
     //dispatch(cartActions.changeNumberInCart(product))
   };
   function handleOrder() {
-    console.log(orderInfo);
-    if (!orderInfo.items || !orderInfo.items.length) {
+    console.log(cartInfo);
+    if (!cartInfo.items || !cartInfo.items.length) {
       dispatch(appActions.changePopup(c.AUTOHIDE_POPUP, "Vui lòng chọn sản phẩm vào giỏ hàng"));
       return;
     }
@@ -90,7 +90,6 @@ function CartPage() {
                     {...v}
                     key={v._id}
                     product={cartInfo.items[i]}
-                    changeQuantity={handleChangeQuantity}
                   />
                 )
               }

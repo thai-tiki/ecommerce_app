@@ -30,10 +30,14 @@ exports.getOne = async (req, res) => {
   }
 };
 exports.getAllCustomer = async (req, res) => {
-  console.log(req.user);
+  console.log(req.query);
   try {
     let page = req.query.page ? req.query.page : 1;
-    let data = await Order.find({ user: req.user._id })
+    let code = req.query.code ? req.query.code : "";
+    let query = { user: req.user._id };
+    if (code) query["status.code"] = code;
+    let data = await Order.find(query)
+      .sort({ _id: -1 })
       .limit(c.PER_PAGE)
       .skip((page - 1) * c.PER_PAGE)
       .populate(["items", "payment_method", "shipment_method"])
