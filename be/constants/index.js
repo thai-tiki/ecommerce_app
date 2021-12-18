@@ -1,4 +1,6 @@
 module.exports = {
+  DB_CONNECTION1:
+    "mongodb+srv://admin:admin@cluster0.coxjg.mongodb.net/ecommerce_app?retryWrites=true&w=majority",
   DB_CONNECTION: "mongodb://localhost:27017/ecommerce_shop",
   //PRODUCT
   IN_STOCK: "IN_STOCK",
@@ -18,6 +20,7 @@ module.exports = {
   NO_CART_ITEM: "Không tồn tại sản phẩm trong giỏ hàng",
   NO_VOUCHER: "Voucher không tồn tại hoặc đã hết hạn",
   NO_ORDER: "Đơn hàng không tồn tại",
+  NO_ROLE: "Không có quyền sử dụng chức năng này!",
   NO_PAYMENT_METHOD: "Phương thức thanh toán không tồn tại",
   NO_SHIPMENT_METHOD: "Phương thức giao hàng không tồn tại",
   ALREADY_COMMENT: "Sản phẩm này đã được đánh giá trước đây",

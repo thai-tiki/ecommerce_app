@@ -20,7 +20,6 @@ export default function RattingPopup(props) {
     "Hài lòng",
     "Rất hài lòng"
   ]
-  console.log(popupInfo)
   async function handleSubmit() {
     let images = [];
     for (let i = 0; i < selectedFiles.length; i++) {
@@ -49,6 +48,12 @@ export default function RattingPopup(props) {
   function handleUpload() {
     myInput.current.click();
   }
+  function handleFileSelect(e) {
+    if (!e.target.files)
+      return;
+    const fileList = Array.prototype.slice.call(e.target.files);
+    setSelectedFiles(fileList);
+  }
   useEffect(() => {
     if (!selectedFiles.length)
       return;
@@ -58,12 +63,6 @@ export default function RattingPopup(props) {
     console.log(imageUrl);
     return () => URL.revokeObjectURL(imageUrl);
   }, [selectedFiles]);
-  function handleFileSelect(e) {
-    if (!e.target.files)
-      return;
-    const fileList = Array.prototype.slice.call(e.target.files);
-    setSelectedFiles(fileList);
-  }
   return (
     <div className="modal center">
       <div className="ratting-popup">

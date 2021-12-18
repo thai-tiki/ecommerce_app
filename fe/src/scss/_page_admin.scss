@@ -206,49 +206,6 @@
         height: 100%;
         box-shadow: 0 0 6px 0 rgb(200, 200, 200);
       }
-      .voucher-add {
-        width: calc(100% - 616px);
-        height: 100%;
-        background-color: white;
-        border-radius: 0.5em;
-        box-shadow: 0 0 6px 0 rgb(200, 200, 200);
-        h4 {
-          padding: 16px;
-          border-bottom: 2px solid rgb(240, 240, 240);
-        }
-        > div {
-          padding: 1em;
-          input {
-            font-size: 16px;
-            padding: 10px;
-            border: 1px solid $border-color;
-            border-radius: 4px;
-            width: 100%;
-            margin-bottom: 1em;
-          }
-          button {
-            display: block;
-            margin: auto;
-            padding: 8px 20px;
-            background: $main-color;
-            color: white;
-            font-size: 16px;
-            border-radius: 4px;
-          }
-          label {
-            width: 8em;
-            font-weight: 500;
-            color: #333;
-          }
-          .row {
-            align-items: center;
-            margin-bottom: 1em;
-            input {
-              margin: 0;
-            }
-          }
-        }
-      }
     }
   }
   .overview {
@@ -324,6 +281,16 @@
         }
       }
     }
+  }
+  .loading {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5em;
+    background-color: white;
+    box-shadow: 0 0 6px 0 rgb(200, 200, 200);
   }
 }
 .form-container {
@@ -543,6 +510,24 @@
     border-bottom: 2px solid rgb(240, 240, 240);
     width: 100%;
   }
+  .form-header {
+    border-bottom: 2px solid rgb(240, 240, 240);
+    margin-bottom: 1em;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    padding: 1em;
+    justify-content: space-between;
+    h3 {
+      width: fit-content;
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
+    button {
+      padding: 4px 6px;
+    }
+  }
   .form-container {
     padding: 0 1em 1em 1em;
     display: flex;
@@ -572,23 +557,41 @@
         .image {
           width: 100px;
           overflow: hidden;
-          margin-right: 0.5em;
           border-radius: 0.25em;
           .img-container {
+            width: 100%;
             padding-top: 100%;
+            > div {
+              position: absolute;
+              top: 0;
+              left: 0;
+              background-color: rgba($color: #000000, $alpha: 1);
+              width: 100%;
+              height: 100%;
+              color: white;
+              opacity: 0.5;
+              font-size: 18px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+            }
           }
         }
       }
     }
   }
-  #submit-btn {
-    padding: 8px 24px;
+  button {
     display: block;
+    padding: 8px 20px;
+    background: $main-color;
+    color: white;
+    border-radius: 4px;
+    height: fit-content;
+  }
+  #submit-btn {
     margin: auto;
     font-size: 16px;
-    border-radius: 0.25em;
-    background-color: $main-color;
-    color: white;
+    padding: 8px 26px;
   }
 }
 .order-form {
@@ -657,6 +660,75 @@
         padding-top: 100%;
         border-radius: 0.25em;
         overflow: hidden;
+      }
+    }
+  }
+}
+.voucher-form {
+  width: calc(100% - 616px);
+  height: 100%;
+  background-color: white;
+  border-radius: 0.5em;
+  box-shadow: 0 0 6px 0 rgb(200, 200, 200);
+  > div:first-of-type {
+    border-bottom: 2px solid rgb(240, 240, 240);
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    h4 {
+      padding: 0;
+    }
+  }
+  > h4 {
+    padding: 16px;
+    border-bottom: 2px solid rgb(240, 240, 240);
+  }
+  > div {
+    padding: 1em;
+    input {
+      font-size: 16px;
+      padding: 10px;
+      border: 1px solid $border-color;
+      border-radius: 4px;
+      width: 100%;
+      margin-bottom: 1em;
+    }
+    button {
+      display: block;
+      margin: auto;
+      padding: 8px 20px;
+      background: $main-color;
+      color: white;
+      font-size: 16px;
+      border-radius: 4px;
+    }
+    label {
+      display: block;
+      color: $sub-text-color;
+      padding-bottom: 1em;
+      padding-left: 10px;
+    }
+    .row {
+      align-items: flex-start !important;
+      margin-bottom: 6px;
+      > div {
+        width: 100%;
+        div {
+          margin-bottom: 10px;
+          display: flex;
+          align-items: center;
+        }
+      }
+      label {
+        padding: 0 20px 0 10px;
+      }
+      input {
+        margin: 0;
+        color: $sub-text-color;
+        width: 16px;
+        height: 16px;
+        margin: 0;
+        margin-right: 10px;
       }
     }
   }

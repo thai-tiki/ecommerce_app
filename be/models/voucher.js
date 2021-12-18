@@ -34,8 +34,7 @@ const validate = (voucher) => {
       name: joi.string().min(1).required(),
       type: joi.string().required(),
       value: joi.number().min(1).required(),
-      min_order_value: joi.number().min(1),
-      description: joi.string(),
+      min_order_value: joi.number().min(0),
       products: joi.array().items(joi.string()),
     })
     .unknown(true);

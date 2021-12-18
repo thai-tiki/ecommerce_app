@@ -51,6 +51,7 @@ export default function NewsTab() {
     };
   }
   useEffect(() => {
+    window.location.hash = "news";
     if (news.status === c.LOADING)
       dispatch(newsActions.getAllNews(""));
     if (news.status === c.SUCCESS) {
@@ -96,7 +97,7 @@ export default function NewsTab() {
             <input
               type="text"
               placeholder="Tiêu đề"
-              value={currentNews}
+              value={currentNews.title}
               onChange={(e) => setCurrentNews({ ...currentNews, title: e.target.value })}
             />
             <button>Cập nhật</button>

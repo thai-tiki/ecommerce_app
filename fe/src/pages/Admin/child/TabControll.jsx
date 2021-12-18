@@ -8,7 +8,7 @@ export default function TabControll(props) {
     },
     {
       name: "voucher",
-      title: "Khuyến mãi",
+      title: "Mã giảm giá",
       img: "/img/voucher.png"
     },
     {

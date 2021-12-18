@@ -38,6 +38,9 @@ function ProductsListPage(props) {
           let id = arr[arr.length - 1];
           query["categories"] = id;
         }
+        if (keys[i] === "ten") {
+          query["name"] = query.ten;
+        }
         else
           query[keys[i]] = option[keys[i]];
       }

@@ -4,7 +4,7 @@ export default function Overview(props) {
       <div className="info">
         <div>
           <span>Sản phẩm</span>
-          <p style={{ color: "#3CAF87" }}>36</p>
+          <p style={{ color: "#3CAF87" }}>{props.info.products}</p>
         </div>
         <div>
           <div
@@ -22,7 +22,7 @@ export default function Overview(props) {
       <div className="info">
         <div>
           <span>Đơn hàng</span>
-          <p style={{ color: "#E8DC8E" }}>126</p>
+          <p style={{ color: "#E8DC8E" }}>0{props.info.orders}</p>
         </div>
         <div>
           <div
@@ -40,7 +40,7 @@ export default function Overview(props) {
       <div className="info">
         <div>
           <span>Khuyến mãi</span>
-          <p style={{ color: "#DCC284" }}>06</p>
+          <p style={{ color: "#DCC284" }}>0{props.info.vouchers}</p>
         </div>
         <div>
           <div
@@ -59,7 +59,10 @@ export default function Overview(props) {
       <div className="info">
         <div>
           <span>Doanh thu</span>
-          <p style={{ color: "#939bab" }}>16<label style={{ fontSize: "20px" }}>Tr</label></p>
+          <p style={{ color: "#939bab" }}>
+            {(props.info.income / 1000000).toFixed(2)}
+            <label style={{ fontSize: "20px" }}>Tr</label>
+          </p>
         </div>
         <div>
           <div

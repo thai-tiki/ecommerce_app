@@ -10,10 +10,9 @@ export default function Header() {
   const [searchValue, setSearchValue] = useState("");
   const [currentActive, setCurrentActive] = useState("");
   const cartInfo = useSelector((state) => state.cart.cartInfo);
-  const categories = useSelector((state) => state.category.categories);
+  const categories = useSelector((state) => state.category.list);
   const location = useSelector((state) => state.app.location);
   const token = useSelector((state) => state.user.token);
-  const badges = useSelector(state => state.user.badges);
   const profile = useSelector((state) => state.user.profile);
   useEffect(() => {
     if (token && cartInfo.status === c.LOADING)
@@ -34,7 +33,7 @@ export default function Header() {
   function handleSearch() {
     if (searchValue !== "")
       window.location.href =
-        window.location.origin + "/danh-sach-san-pham?search=" + searchValue;
+        window.location.origin + "/danh-sach-san-pham?ten=" + searchValue;
   }
   function handleEnter(e) {
     if (e.key === "Enter") handleSearch();
@@ -94,7 +93,7 @@ export default function Header() {
               <h3>Danh mục sản phẩm</h3>
               <ul>
                 {
-                  categories.map((v, i) =>
+                  categories.data.map((v, i) =>
                     <li key={i}>
                       <Link
                         key={i}
@@ -212,18 +211,17 @@ export default function Header() {
                       <img src="/img/heart.png" alt="" />
                       <Link to="/yeu-thich">Sản phẩm yêu thích</Link>
                     </li>
-                    {/* <li>
-                      <img src="/img/star.png" alt="" />
-                      <Link to="/san-pham-da-mua">Sản phẩm đã mua</Link>
-                    </li>
-                    <li>
-                      <img src="/img/check-mark.png" alt="" />
-                      <Link to="/danh-gia-cua-toi">Đánh giá của tôi</Link>
-                    </li> */}
                     <li onClick={handleShowProfile}>
                       <img src="/img/refresh.png" alt="" />
                       Cập nhật thông tin
                     </li>
+                    {
+                      profile.role === c.ADMIN &&
+                      <li>
+                        <img src="/img/admin (1).png" alt="" />
+                        <Link to="/quan-ly">Quản lý cửa hàng</Link>
+                      </li>
+                    }
                     <li onClick={handleLogout}>
                       <img src="/img/log-out.png" alt="" />
                       Thoát tài khoản

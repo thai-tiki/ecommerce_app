@@ -10,7 +10,7 @@ import Select from "../../../components/Select";
 export default function ProductUpdateForm(props) {
   const dispatch = useDispatch();
   const myInput = useRef(null);
-  const categories = useSelector(state => state.category.categories);
+  const categories = useSelector(state => state.category.list);
   const [productInfo, setProductInfo] = useState(props.product);
   console.log(props.product)
   const [selectedFiles, setSelectedFiles] = useState([]);
@@ -181,7 +181,7 @@ export default function ProductUpdateForm(props) {
             <label>Danh mục</label>
             <Select
               values={
-                categories.map(v => {
+                categories.data.map(v => {
                   return { title: v.name, ...v }
                 })
               }

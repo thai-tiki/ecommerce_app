@@ -18,6 +18,7 @@ export default function OrderTab() {
     setCurrentForm("none")
   }
   useEffect(() => {
+    window.location.hash = "order";
     if (orders.status === c.LOADING)
       dispatch(cartActions.getOrdersList("", true));
   }, []);

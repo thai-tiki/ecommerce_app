@@ -1,26 +1,33 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import CateroryAddForm from "./CategoryAddForm";
+import CategoryUpdateForm from "./CategoryUpdateForm";
 export default function CategoryTab() {
-  const categories = useSelector(state => state.category.categories);
-  const products = useSelector(state => state.product.list);
+  const categories = useSelector(state => state.category.list);
   const [currentForm, setCurrentForm] = useState("add");
-  function handleEditProduct(p) {
+  const [currentCategory, setCurrentCategory] = useState({});
+  function handleEditProduct(cate) {
+    setCurrentCategory(cate);
     setCurrentForm("update");
   }
   useEffect(() => {
+    window.location.hash = "category";
   }, []);
   const formList = {
     add: <CateroryAddForm />,
+    update: <CategoryUpdateForm
+      category={currentCategory}
+      onFormChange={(f) => setCurrentForm(f)}
+    />
   }
   return (
-    products.list.length > 0 &&
+    categories.data.length > 0 &&
     <div className="category-tab tab">
       <div className="list-container">
         <div className="row">
           <h4>Danh mục sản phẩm</h4>
         </div>
-        <div className="table-fixed">
+        <div className="table-fixed hide-scroll">
           <table>
             <thead>
               <tr>
@@ -31,7 +38,7 @@ export default function CategoryTab() {
             </thead>
             <tbody style={{}}>
               {
-                categories.map((v, i) =>
+                categories.data.map((v, i) =>
                   <tr key={v._id} onClick={() => handleEditProduct(v)}>
                     <td className="id" style={{ width: "70px" }}>{i + 1}</td>
                     <td className="name">{v.name}</td>

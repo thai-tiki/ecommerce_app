@@ -8,6 +8,9 @@
   text-decoration: none;
   box-sizing: border-box; }
 
+p {
+  display: inline; }
+
 button,
 a {
   cursor: pointer;
@@ -2244,41 +2247,6 @@ body {
       background: white;
       height: 100%;
       box-shadow: 0 0 6px 0 #c8c8c8; }
-    .admin-page .main-view .voucher-tab .voucher-add {
-      width: calc(100% - 616px);
-      height: 100%;
-      background-color: white;
-      border-radius: 0.5em;
-      box-shadow: 0 0 6px 0 #c8c8c8; }
-      .admin-page .main-view .voucher-tab .voucher-add h4 {
-        padding: 16px;
-        border-bottom: 2px solid #f0f0f0; }
-      .admin-page .main-view .voucher-tab .voucher-add > div {
-        padding: 1em; }
-        .admin-page .main-view .voucher-tab .voucher-add > div input {
-          font-size: 16px;
-          padding: 10px;
-          border: 1px solid #e4e4e4;
-          border-radius: 4px;
-          width: 100%;
-          margin-bottom: 1em; }
-        .admin-page .main-view .voucher-tab .voucher-add > div button {
-          display: block;
-          margin: auto;
-          padding: 8px 20px;
-          background: #f04a10;
-          color: white;
-          font-size: 16px;
-          border-radius: 4px; }
-        .admin-page .main-view .voucher-tab .voucher-add > div label {
-          width: 8em;
-          font-weight: 500;
-          color: #333; }
-        .admin-page .main-view .voucher-tab .voucher-add > div .row {
-          align-items: center;
-          margin-bottom: 1em; }
-          .admin-page .main-view .voucher-tab .voucher-add > div .row input {
-            margin: 0; }
   .admin-page .overview {
     margin: 1em 0;
     margin-top: 0;
@@ -2341,6 +2309,15 @@ body {
           right: 7px;
           position: absolute;
           width: 12px; }
+  .admin-page .loading {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5em;
+    background-color: white;
+    box-shadow: 0 0 6px 0 #c8c8c8; }
 
 .form-container {
   position: relative;
@@ -2523,6 +2500,21 @@ body {
     font-weight: 500;
     border-bottom: 2px solid #f0f0f0;
     width: 100%; }
+  .category-form .form-header {
+    border-bottom: 2px solid #f0f0f0;
+    margin-bottom: 1em;
+    align-items: center;
+    display: flex;
+    width: 100%;
+    padding: 1em;
+    justify-content: space-between; }
+    .category-form .form-header h3 {
+      width: fit-content;
+      border: none;
+      margin: 0;
+      padding: 0; }
+    .category-form .form-header button {
+      padding: 4px 6px; }
   .category-form .form-container {
     padding: 0 1em 1em 1em;
     display: flex;
@@ -2550,18 +2542,34 @@ body {
         .category-form .form-container .row .images .image {
           width: 100px;
           overflow: hidden;
-          margin-right: 0.5em;
           border-radius: 0.25em; }
           .category-form .form-container .row .images .image .img-container {
+            width: 100%;
             padding-top: 100%; }
-  .category-form #submit-btn {
-    padding: 8px 24px;
+            .category-form .form-container .row .images .image .img-container > div {
+              position: absolute;
+              top: 0;
+              left: 0;
+              background-color: black;
+              width: 100%;
+              height: 100%;
+              color: white;
+              opacity: 0.5;
+              font-size: 18px;
+              display: flex;
+              justify-content: center;
+              align-items: center; }
+  .category-form button {
     display: block;
+    padding: 8px 20px;
+    background: #f04a10;
+    color: white;
+    border-radius: 4px;
+    height: fit-content; }
+  .category-form #submit-btn {
     margin: auto;
     font-size: 16px;
-    border-radius: 0.25em;
-    background-color: #f04a10;
-    color: white; }
+    padding: 8px 26px; }
 
 .order-form {
   padding: 1em;
@@ -2619,6 +2627,63 @@ body {
         padding-top: 100%;
         border-radius: 0.25em;
         overflow: hidden; }
+
+.voucher-form {
+  width: calc(100% - 616px);
+  height: 100%;
+  background-color: white;
+  border-radius: 0.5em;
+  box-shadow: 0 0 6px 0 #c8c8c8; }
+  .voucher-form > div:first-of-type {
+    border-bottom: 2px solid #f0f0f0;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px; }
+    .voucher-form > div:first-of-type h4 {
+      padding: 0; }
+  .voucher-form > h4 {
+    padding: 16px;
+    border-bottom: 2px solid #f0f0f0; }
+  .voucher-form > div {
+    padding: 1em; }
+    .voucher-form > div input {
+      font-size: 16px;
+      padding: 10px;
+      border: 1px solid #e4e4e4;
+      border-radius: 4px;
+      width: 100%;
+      margin-bottom: 1em; }
+    .voucher-form > div button {
+      display: block;
+      margin: auto;
+      padding: 8px 20px;
+      background: #f04a10;
+      color: white;
+      font-size: 16px;
+      border-radius: 4px; }
+    .voucher-form > div label {
+      display: block;
+      color: #757575;
+      padding-bottom: 1em;
+      padding-left: 10px; }
+    .voucher-form > div .row {
+      align-items: flex-start !important;
+      margin-bottom: 6px; }
+      .voucher-form > div .row > div {
+        width: 100%; }
+        .voucher-form > div .row > div div {
+          margin-bottom: 10px;
+          display: flex;
+          align-items: center; }
+      .voucher-form > div .row label {
+        padding: 0 20px 0 10px; }
+      .voucher-form > div .row input {
+        margin: 0;
+        color: #757575;
+        width: 16px;
+        height: 16px;
+        margin: 0;
+        margin-right: 10px; }
 
 .orders-list-page {
   padding: 1em;

@@ -15,6 +15,7 @@ const cartRoute = require("./routes/cart");
 const userRoute = require("./routes/user");
 const siteRoute = require("./routes/site");
 const newsRoute = require("./routes/news");
+const port = process.env.PORT || 3001;
 const app = express();
 //static file
 app.use(express.static(path.join(__dirname, "/shared")));
@@ -25,7 +26,7 @@ app.use(cors());
 //bodt parser
 app.use(express.json());
 helper.dbConnect();
-app.listen(3001, () => {
+app.listen(port, () => {
   console.log("server started");
 });
 app.use("/api/user", userRoute);

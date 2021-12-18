@@ -4,23 +4,18 @@ const initialState = {
   home: {
     status: c.LOADING,
   },
+  admin: {
+    status: c.LOADING,
+  },
   popup: {
     msg: "",
     type: c.NO_POPUP,
     additionalInfo: {},
   },
-  rattingPopup: {
-    id: "",
-    name: "",
-    orderCode: "",
-    status: c.LOADING,
-  },
   location: {
     status: c.LOADING,
     data: location ? JSON.parse(location) : [],
   },
-  chatStatus: "",
-  orderPopup: {},
 };
 export function app(state = initialState, action) {
   switch (action.type) {
@@ -48,6 +43,7 @@ export function app(state = initialState, action) {
     //case c.GET_ALL_NEWS_FAILURE:
     case c.GET_CART_FAILURE:
     case c.GET_NEWS_FAILURE:
+    case c.GET_ADMIN_FAILURE:
     case c.GET_PRODUCT_FAILURE:
     case c.GET_PROFILE_FAILURE:
     case c.GET_PRODUCTS_FAILURE:
@@ -59,10 +55,13 @@ export function app(state = initialState, action) {
       //window.location.href = `/${action.code}?code=${action.code}&message=${action.msg}`;
       break;
     }
-    case c.TOGGLE_CHAT_STATUS:
+    case c.GET_ADMIN_SUCCESS:
       return {
         ...state,
-        chatStatus: action.status,
+        admin: {
+          status: c.SUCCESS,
+          overall: action.data,
+        },
       };
     case c.LOGIN_FAILURE:
       return {

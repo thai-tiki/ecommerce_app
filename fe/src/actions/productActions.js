@@ -41,7 +41,7 @@ function updateProduct(product) {
       if (res.status === c.SUCCESS) {
         dispatch(success(res.data));
         dispatch({
-          msg: res.msg,
+          msg: "Cập nhật thông tin sản phẩm thành công!",
           additionalInfo: {
             status: c.SUCCESS,
             willReloadAfterClose: true,

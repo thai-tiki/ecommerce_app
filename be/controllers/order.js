@@ -72,7 +72,6 @@ exports.getAllAdmin = base.getAll(Order, [
   "shipment_method",
 ]);
 exports.updateOne = async (req, res) => {
-  console.log(req.body, req.user);
   try {
     const filter = { _id: req.params.id };
     if (req.user.role !== c.ADMIN) filter.user = req.user._id;

@@ -4,11 +4,10 @@ import { uploadImage } from "../../../helper";
 import { constants as c } from "../../../constants";
 import { appActions } from "../../../actions/appActions";
 import { categoryActions } from "../../../actions/categoryActions";
-export default function CategoryAddForm() {
+export default function CategoryUpdateForm(props) {
   const myInput = useRef(null);
   const dispatch = useDispatch();
-  const [name, setName] = useState("");
-  const [previewImage, setPreviewImage] = useState("");
+  const [info, setInfo] = useState({ ...props.category });
   const [selectedFile, setSelectedFile] = useState(null);
   function handleFileSelect(e) {
     if (!e.target.files)
@@ -21,21 +20,28 @@ export default function CategoryAddForm() {
     let url = await uploadImage(formData);
     dispatch(appActions.changePopup(c.MESSAGE_POPUP, "", { status: c.LOADING }));
     dispatch(categoryActions.addCategory({
-      name,
+      ...info,
       image: url
     }));
   }
   useEffect(() => {
-    if (!selectedFile)
-      return;
-    let imageUrl = URL.createObjectURL(selectedFile);
-    setPreviewImage(imageUrl);
-    console.log(imageUrl);
-    return () => URL.revokeObjectURL(imageUrl);
-  }, [selectedFile]);
+    if (selectedFile) {
+      let imageUrl = URL.createObjectURL(selectedFile);
+      setInfo({ ...info, image: imageUrl });
+      return () => URL.revokeObjectURL(imageUrl);
+    }
+    if (props.category._id !== info._id)
+      setInfo({ ...props.category });
+  }, [selectedFile, props]);
   return (
     <div className="category-form">
-      <h3>Thêm danh mục</h3>
+      <div className="form-header">
+        <h3>Thông tin danh mục</h3>
+        <button
+          onClick={() => props.onFormChange("add")}>
+          Thêm mới <i className="fas fa-plus"></i>
+        </button>
+      </div>
       <div className="form-container">
         <div className="row">
           <label htmlFor="name">Tên danh mục</label>
@@ -44,8 +50,8 @@ export default function CategoryAddForm() {
             name="name"
             id="name"
             autoComplete="off"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={info.name}
+            onChange={(e) => setInfo({ ...info, name: e.target.value })}
           />
         </div>
         <div className="row" style={{ alignItems: "flex-start" }}>
@@ -66,10 +72,10 @@ export default function CategoryAddForm() {
               />
               <div className="img-container">
                 {
-                  previewImage
+                  info.image
                     ?
                     <>
-                      <img src={previewImage} alt="" />
+                      <img src={info.image} alt="" />
                       <div>Thay đổi</div>
                     </>
                     :

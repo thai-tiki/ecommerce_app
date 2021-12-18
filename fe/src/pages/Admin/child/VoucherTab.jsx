@@ -3,16 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { voucherActions } from "../../../actions/voucherActions";
 import { constants as c } from "../../../constants";
 import { formatPrice } from "../../../helper";
-import NewsAddForm from "./NewsAddForm";
+import VoucherAddForm from "./VoucherAddForm";
+import VoucherUpdateForm from "./VoucherUpdateForm";
 export default function VoucherTab() {
   const dispatch = useDispatch();
   const vouchers = useSelector(state => state.voucher.list);
-  const [currentForm, setCurrentForm] = useState("none");
+  const [currentForm, setCurrentForm] = useState("add");
+  const [currentVoucher, setCurrentVoucher] = useState({});
   const forms = {
-    "none": <></>,
-    "add": <NewsAddForm handleClose={() => setCurrentForm("none")} />
+    "add": <VoucherAddForm />,
+    "update": <VoucherUpdateForm
+      voucher={currentVoucher}
+      onFormChange={(f) => setCurrentForm(f)}
+    />
   }
   useEffect(() => {
+    window.location.hash = "voucher";
     if (vouchers.status === c.LOADING)
       dispatch(voucherActions.getAllVoucher());
   }, []);
@@ -20,7 +26,7 @@ export default function VoucherTab() {
     <div className="voucher-tab tab">
       <div className="row">
         <div className="vouchers-list">
-          <h4>Danh sách khuyến mãi</h4>
+          <h4>Danh sách mã giảm giá</h4>
           <div className="table-fixed">
             <table>
               <thead>
@@ -35,7 +41,15 @@ export default function VoucherTab() {
               <tbody style={{}}>
                 {
                   vouchers.data.map((v, i) =>
-                    <tr key={v._id} onClick={() => { }}>
+                    <tr
+                      key={v._id}
+                      onClick={
+                        () => {
+                          setCurrentVoucher(v);
+                          setCurrentForm("update")
+                        }
+                      }
+                    >
                       <td className="id" style={{ width: "45px" }}>{i + 1}</td>
                       <td className="name" style={{ width: "130px" }}>{v.name}</td>
                       <td style={{ width: "140px" }}>{v.code}</td>
@@ -54,48 +68,8 @@ export default function VoucherTab() {
             </table>
           </div>
         </div>
-        <div className="voucher-add">
-          <h4>Danh sách khuyến mãi</h4>
-          <div>
-            <input
-              type="text"
-              placeholder="Tên khuyến mãi"
-              value={""}
-              onChange={(e) => { }}
-            />
-            <input
-              type="text"
-              placeholder="Mã khuyến mãi"
-              value={""}
-              onChange={(e) => { }}
-            />
-            <input
-              type="text"
-              placeholder="Loại"
-              value={""}
-              onChange={(e) => { }}
-            />
-            <input
-              type="text"
-              placeholder="Giá trị"
-              value={""}
-              onChange={(e) => { }}
-            />
-            <div className="row">
-              <label htmlFor="end">Ngày hết hạn</label>
-              <input
-                type="date"
-                name="end"
-                placeholder="Ngày hết hạn"
-                value={""}
-                onChange={(e) => { }}
-              />
-            </div>
-            <button>Thêm</button>
-          </div>
-        </div>
+        {forms[currentForm]}
       </div>
-      {forms[currentForm]}
     </div>
   )
 }

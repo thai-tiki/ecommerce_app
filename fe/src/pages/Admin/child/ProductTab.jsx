@@ -22,6 +22,7 @@ export default function ProductTab() {
     setCurrentForm("none")
   }
   useEffect(() => {
+    window.location.hash = "product";
     if (products.status === c.LOADING)
       dispatch(productActions.getAllProducts(""));
   }, []);
@@ -41,7 +42,7 @@ export default function ProductTab() {
           Sản phẩm mới <i className="fas fa-plus"></i>
         </button>
       </div>
-      <div className="table-fixed">
+      <div className="table-fixed hide-scroll">
         {
           products.status === c.SUCCESS
             ?
@@ -56,7 +57,7 @@ export default function ProductTab() {
                   <th></th>
                 </tr>
               </thead>
-              <tbody style={{}}>
+              <tbody style={{}} className="hide-scroll">
                 {
                   products.list.map((v, i) =>
                     <tr key={v._id} onClick={() => handleEditProduct(v)}>

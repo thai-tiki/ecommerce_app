@@ -1,6 +1,4 @@
 import { constants as c } from "../constants";
-import { appServices } from "./appServices";
-const store_code = appServices.store_code;
 function addCart(product) {
   const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
@@ -208,57 +206,6 @@ function updateOrder(orderInfo) {
       return {};
     });
 }
-//OK
-function cancelOrder(info) {
-  const token = JSON.parse(localStorage.getItem("token"));
-  const requestOptions = {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "customer-token": token ? token : "",
-    },
-    body: JSON.stringify(info),
-  };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/carts/orders/cancel`,
-    requestOptions
-  )
-    .then((res) => res.json())
-    .then((json) => {
-      console.log(json);
-      return json;
-    })
-    .catch((err) => {
-      console.log(err);
-      return {};
-    });
-}
-function changePaymentMethod(info) {
-  const token = JSON.parse(localStorage.getItem("token"));
-  const requestOptions = {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      "customer-token": token ? token : "",
-    },
-    body: JSON.stringify({
-      payment_method_id: info.paymentMethodId,
-    }),
-  };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/carts/orders/change_payment_method/${info.orderCode}`,
-    requestOptions
-  )
-    .then((res) => res.json())
-    .then((json) => {
-      console.log(json);
-      return json;
-    })
-    .catch((err) => {
-      console.log(err);
-      return {};
-    });
-}
 export const cartServices = {
   order,
   addCart,
@@ -270,6 +217,4 @@ export const cartServices = {
   getOrdersList,
   getOrderInfo,
   applyDiscount,
-  cancelOrder,
-  changePaymentMethod,
 };

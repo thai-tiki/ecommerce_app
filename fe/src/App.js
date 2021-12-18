@@ -25,13 +25,13 @@ import { AdminPage } from "./pages/Admin";
 import { constants as c } from "./constants";
 function App() {
   const dispatch = useDispatch();
-  const categoryStatus = useSelector((state) => state.category.status);
+  const categories = useSelector((state) => state.category.list);
   useEffect(() => {
-    if (categoryStatus === c.LOADING) {
+    if (categories.status === c.LOADING) {
       dispatch(categoryActions.getCategories());
     }
   }, []);
-  return categoryStatus === c.SUCCESS ? (
+  return categories.status === c.SUCCESS ? (
     <React.Fragment>
       <BrowserRouter>
         <Switch>
@@ -58,7 +58,7 @@ function App() {
       <Footer />
     </React.Fragment>
   ) : (
-    categoryStatus === c.FAILURE && <ErrorPage location="/" />
+    categories.status === c.FAILURE && <ErrorPage location="/" />
   );
 }
 

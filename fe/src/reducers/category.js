@@ -1,22 +1,29 @@
 import { constants as c } from "../constants";
 let categories = JSON.parse(localStorage.getItem("categories"));
 const initialState = {
-  categories: categories ? categories : [],
-  status: c.LOADING,
+  list: {
+    status: c.LOADING,
+    data: categories ? categories : [],
+  },
 };
 export function category(state = initialState, action) {
   switch (action.type) {
     case c.GET_CATEGORY_SUCCESS: {
       return {
         ...state,
-        categories: action.data,
-        status: c.SUCCESS,
+        list: {
+          status: c.SUCCESS,
+          data: action.data,
+        },
       };
     }
     case c.GET_CATEGORY_FAILURE:
       return {
         ...state,
-        status: c.FAILURE,
+        list: {
+          status: c.FAILURE,
+          data: [],
+        },
       };
     default:
       return state;

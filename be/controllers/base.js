@@ -18,12 +18,23 @@ exports.addOne = (Model) => async (req, res) => {
 exports.getAll = (Model, populate, select) => async (req, res) => {
   try {
     let page = req.query.page ? req.query.page : 1;
-    const data = await Model.find(req.query ? req.query : {})
+    let query = { ...req.query };
+    let sortOptions = { _id: -1 };
+    if (query.name) query.name = { $regex: req.query.name, $options: "i" };
+    if (query.sort_by)
+      sortOptions = {
+        [query.sort_by]: query.descending === "false" ? 1 : -1,
+      };
+    if (sortOptions.price)
+      sortOptions = {
+        after_discount_price: sortOptions.price,
+      };
+    const data = await Model.find(req.query ? query : {})
       .limit(c.PER_PAGE)
       .skip((page - 1) * c.PER_PAGE)
       .populate(populate)
       .select(select)
-      .sort({ _id: -1 })
+      .sort(sortOptions)
       .lean();
     let total = await Model.count({}).lean();
     let total_page = Math.ceil(total / c.PER_PAGE);

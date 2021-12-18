@@ -6,4 +6,5 @@ const controller = require("../controllers/voucher");
 router.post("/", validator(validate), controller.addOne);
 router.get("/:id", controller.getOne);
 router.get("/", controller.getAll);
+router.put("/:id", validator(validate), controller.updateOne);
 module.exports = router;
