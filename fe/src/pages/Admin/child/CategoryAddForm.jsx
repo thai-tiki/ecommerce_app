@@ -16,10 +16,21 @@ export default function CategoryAddForm() {
     setSelectedFile(e.target.files[0]);
   }
   async function handleSubmit() {
+    let msg = "";
+    dispatch(appActions.changePopup(c.MESSAGE_POPUP, "", { status: c.LOADING }));
+    if (!selectedFile)
+      msg = "Vui lòng chọn ảnh cho danh mục!";
+    if (!name)
+      msg = "Vui lòng điền đầy đủ thông tin!";
     let formData = new FormData();
     formData.append("image", selectedFile);
     let url = await uploadImage(formData);
-    dispatch(appActions.changePopup(c.MESSAGE_POPUP, "", { status: c.LOADING }));
+    if (!url)
+      msg = "Có lỗi xảy ra vui lòng thử lại sau!";
+    if (msg) {
+      dispatch(appActions.changePopup(c.AUTOHIDE_POPUP, msg));
+      return;
+    }
     dispatch(categoryActions.addCategory({
       name,
       image: url

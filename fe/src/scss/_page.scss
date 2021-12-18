@@ -1443,41 +1443,8 @@
       .categories-column {
         display: none;
       }
-      .discount-products {
-        width: 100%;
-        .row {
-          flex-direction: row;
-          height: fit-content;
-          flex-wrap: wrap;
-          justify-content: space-between;
-          .discount-product-card {
-            width: calc(50% - 4px);
-          }
-        }
-      }
       .middle {
         width: 100%;
-        .categories-row {
-          .card-container {
-            width: 33.333%;
-            padding-left: 4px;
-            padding-right: 4px;
-          }
-          .category-card {
-            width: 100%;
-            margin-bottom: 1em;
-            .image {
-              width: calc(100% - 1em);
-            }
-            .title {
-              padding-left: 2px;
-              padding-right: 2px;
-            }
-          }
-          .slick-list {
-            margin: 0;
-          }
-        }
       }
     }
     .product-section {

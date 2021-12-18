@@ -39,7 +39,30 @@ function addCategory(info) {
     });
   };
 }
+function updateCategory(info) {
+  return (dispatch) => {
+    s.updateCategory(info).then((res) => {
+      if (res.status === c.SUCCESS) {
+        dispatch(
+          appActions.changePopup(
+            c.MESSAGE_POPUP,
+            "Cập nhật thông tin thành công!",
+            { status: c.SUCCESS, willReloadAfterClose: true }
+          )
+        );
+        return;
+      }
+      dispatch(
+        appActions.changePopup(c.MESSAGE_POPUP, res.msg, {
+          status: c.FAILURE,
+          willReloadAfterClose: false,
+        })
+      );
+    });
+  };
+}
 export const categoryActions = {
-  getCategories,
   addCategory,
+  getCategories,
+  updateCategory,
 };

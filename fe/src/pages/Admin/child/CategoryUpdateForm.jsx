@@ -15,14 +15,15 @@ export default function CategoryUpdateForm(props) {
     setSelectedFile(e.target.files[0]);
   }
   async function handleSubmit() {
-    let formData = new FormData();
-    formData.append("image", selectedFile);
-    let url = await uploadImage(formData);
     dispatch(appActions.changePopup(c.MESSAGE_POPUP, "", { status: c.LOADING }));
-    dispatch(categoryActions.addCategory({
-      ...info,
-      image: url
-    }));
+    let updateInfo = { ...info };
+    if (selectedFile) {
+      let formData = new FormData();
+      formData.append("image", selectedFile);
+      let url = await uploadImage(formData);
+      updateInfo.image = url;
+    }
+    dispatch(categoryActions.updateCategory(updateInfo));
   }
   useEffect(() => {
     if (selectedFile) {

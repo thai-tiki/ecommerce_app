@@ -7,4 +7,6 @@ const controller = require("../controllers/category");
 router.get("/", controller.getAll);
 router.get("/:id", controller.getOne);
 router.post("/", validator(validate), controller.addOne);
+router.put("/:id", controller.updateOne);
+
 module.exports = router;

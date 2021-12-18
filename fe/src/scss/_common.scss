@@ -541,6 +541,7 @@
           margin-bottom: 1em;
           font-size: 13px;
           display: flex;
+          flex-wrap: wrap;
           span,
           a {
             color: #f2f3f8;
@@ -1607,8 +1608,7 @@
         text-align: center;
         .row {
           padding-right: 0;
-          img:last-of-type {
-            margin-right: 0;
+          img {
             margin: 0.5em;
           }
         }
@@ -1619,6 +1619,25 @@
         align-items: center;
         flex-direction: column;
         text-align: center;
+        > div {
+          h2 {
+            margin-bottom: 1em;
+            margin-top: 1em;
+          }
+          span {
+            width: 100% !important;
+          }
+          a {
+            width: 100%;
+            text-align: center;
+          }
+          > div div {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin: 0.5em 0 0 0;
+          }
+        }
         .row {
           justify-content: center;
         }

@@ -688,7 +688,8 @@ body {
         color: #f2f3f8;
         margin-bottom: 1em;
         font-size: 13px;
-        display: flex; }
+        display: flex;
+        flex-wrap: wrap; }
         .footer .container > div:last-of-type > div div span,
         .footer .container > div:last-of-type > div div a {
           color: #f2f3f8;
@@ -1601,8 +1602,7 @@ body {
       text-align: center; }
       .footer .container > div:first-of-type .row {
         padding-right: 0; }
-        .footer .container > div:first-of-type .row img:last-of-type {
-          margin-right: 0;
+        .footer .container > div:first-of-type .row img {
           margin: 0.5em; }
     .footer .container > div:last-of-type {
       width: 100%;
@@ -1610,6 +1610,19 @@ body {
       align-items: center;
       flex-direction: column;
       text-align: center; }
+      .footer .container > div:last-of-type > div h2 {
+        margin-bottom: 1em;
+        margin-top: 1em; }
+      .footer .container > div:last-of-type > div span {
+        width: 100% !important; }
+      .footer .container > div:last-of-type > div a {
+        width: 100%;
+        text-align: center; }
+      .footer .container > div:last-of-type > div > div div {
+        display: block;
+        width: 100%;
+        text-align: center;
+        margin: 0.5em 0 0 0; }
       .footer .container > div:last-of-type .row {
         justify-content: center; }
   .footer-mobile {
@@ -4926,31 +4939,8 @@ body {
     flex-direction: column; }
     .home-page .home-banner .categories-column {
       display: none; }
-    .home-page .home-banner .discount-products {
-      width: 100%; }
-      .home-page .home-banner .discount-products .row {
-        flex-direction: row;
-        height: fit-content;
-        flex-wrap: wrap;
-        justify-content: space-between; }
-        .home-page .home-banner .discount-products .row .discount-product-card {
-          width: calc(50% - 4px); }
     .home-page .home-banner .middle {
       width: 100%; }
-      .home-page .home-banner .middle .categories-row .card-container {
-        width: 33.333%;
-        padding-left: 4px;
-        padding-right: 4px; }
-      .home-page .home-banner .middle .categories-row .category-card {
-        width: 100%;
-        margin-bottom: 1em; }
-        .home-page .home-banner .middle .categories-row .category-card .image {
-          width: calc(100% - 1em); }
-        .home-page .home-banner .middle .categories-row .category-card .title {
-          padding-left: 2px;
-          padding-right: 2px; }
-      .home-page .home-banner .middle .categories-row .slick-list {
-        margin: 0; }
   .home-page .product-section {
     padding: 0.5em; }
     .home-page .product-section h3 {

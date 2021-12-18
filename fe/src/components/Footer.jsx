@@ -67,13 +67,22 @@ export default function Footer() {
                 Liên hệ
               </h2>
               <div>
-                <span>Địa chỉ:</span>  Z06, Đường 13, P. Tân Thuận Đông, Q.7, Tp.HCM
+                <span>Địa chỉ:</span>
+                <div>
+                  Z06, Đường 13, P. Tân Thuận Đông, Q.7, Tp.HCM
+                </div>
               </div>
               <div>
-                <span>Điện thoại:</span> 0357-857-086
+                <span>Điện thoại:</span>
+                <div>
+                  0357-857-086
+                </div>
               </div>
               <div>
-                <span>Email:</span>  magento@email.vn
+                <span>Email:</span>
+                <div>
+                  magento@email.vn
+                </div>
               </div>
             </div>
             <div>
