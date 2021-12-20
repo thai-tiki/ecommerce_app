@@ -12,14 +12,23 @@ export default function Paginate(props) {
   ];
   const middle = [
     currentPage - 1 > 0 &&
-    <button onClick={() => handlePageSelect({ page: currentPage - 1 })} key="middle-01">
+    <button
+      onClick={() => handlePageSelect({ page: currentPage - 1 })}
+      key="middle-01"
+    >
       {currentPage - 1}
     </button>,
-    <button className="active" key="middle-02">
+    <button
+      className="active"
+      key="middle-02"
+    >
       {currentPage}
     </button>,
     currentPage + 1 <= totalPage &&
-    <button onClick={() => handlePageSelect({ page: currentPage + 1 })} key="middle-03">
+    <button
+      onClick={() => handlePageSelect({ page: currentPage + 1 })}
+      key="middle-03"
+    >
       {currentPage + 1}
     </button>
   ];

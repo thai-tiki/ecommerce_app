@@ -36,7 +36,7 @@ exports.getAll = (Model, populate, select) => async (req, res) => {
       .select(select)
       .sort(sortOptions)
       .lean();
-    let total = await Model.count({}).lean();
+    let total = await Model.count(req.query ? query : {}).lean();
     let total_page = Math.ceil(total / c.PER_PAGE);
     res.status(200).json({
       data,
@@ -44,7 +44,7 @@ exports.getAll = (Model, populate, select) => async (req, res) => {
       total_page,
       msg: c.SUCCESS,
       status: c.SUCCESS,
-      current_page: page,
+      current_page: page ? parseInt(page) : page,
     });
   } catch (err) {
     console.log(err);

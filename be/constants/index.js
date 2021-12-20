@@ -1,7 +1,7 @@
 module.exports = {
-  DB_CONNECTION1:
+  DB_CONNECTION:
     "mongodb+srv://admin:admin@cluster0.coxjg.mongodb.net/ecommerce_app?retryWrites=true&w=majority",
-  DB_CONNECTION: "mongodb://localhost:27017/ecommerce_shop",
+  DB_CONNECTION1: "mongodb://localhost:27017/ecommerce_shop",
   //PRODUCT
   IN_STOCK: "IN_STOCK",
   OUT_OF_STOCK: "OUT_OF_STOCK",

@@ -1,20 +1,20 @@
 import queryString from "query-string";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Header from "../../components/Header";
-import Select from "../../components/Select";
 import { showNextElement } from "../../helper";
 import { constants as c } from "../../constants";
+import { productActions as a } from "../../actions/productActions";
+import { CategoriesColumn } from "../../components/CategoriesColumn";
+import Header from "../../components/Header";
+import Select from "../../components/Select";
 import Paginate from "../../components/Paginate";
 import ProductCard from "../../components/ProductCard";
 import PageLoading from "../../components/PageLoading";
-import { productActions as a } from "../../actions/productActions";
-import { CategoriesColumn } from "../../components/CategoriesColumn";
 function ProductsListPage(props) {
   const dispatch = useDispatch();
   let query = queryString.parse(props.location.search);
   const pageInfo = useSelector(state => state.product.list);
-  const categories = useSelector((state) => state.category.categories);
+  const categories = useSelector((state) => state.category.list);
   const [prevLocation, setPrevLocation] = useState(props.location.state);
   const [currentQuery, setCurrentQuery] = useState(createQueryString(query));
   const sortValues = [
@@ -52,7 +52,6 @@ function ProductsListPage(props) {
   useEffect(() => {
     document.title = "Danh sách sản phẩm";
     let queryStr = createQueryString(query);
-    console.log(pageInfo);
     if ((queryStr !== currentQuery || prevLocation !== window.location.pathname)) {
       dispatch({ type: c.RESET_PRODUCTS_LIST_STATUS });
       setCurrentQuery(queryStr);
@@ -86,7 +85,7 @@ function ProductsListPage(props) {
               showDetail={showNextElement} />
           </div>
           <div className="row">
-            <CategoriesColumn categories={categories} title="Danh mục" />
+            <CategoriesColumn categories={categories.data} title="Danh mục" />
             <div className="products-list">
               <div className="sort-option row">
                 <span>
@@ -99,11 +98,13 @@ function ProductsListPage(props) {
                 />
               </div>
               <div className="row">
-                {pageInfo.list.map((v, i) =>
-                  <ProductCard
-                    key={i}
-                    product={v}
-                  />)}
+                {
+                  pageInfo.list.map((v, i) =>
+                    <ProductCard
+                      key={i}
+                      product={v}
+                    />)
+                }
               </div>
               <Paginate
                 handlePageSelect={handleSort}
