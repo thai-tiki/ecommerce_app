@@ -39,19 +39,20 @@ export function app(state = initialState, action) {
           additionalInfo: action.additionalInfo,
         },
       };
-    //case c.GET_ORDERS_LIST_FAILURE:
-    //case c.GET_ALL_NEWS_FAILURE:
     case c.GET_CART_FAILURE:
     case c.GET_NEWS_FAILURE:
     case c.GET_ADMIN_FAILURE:
     case c.GET_PRODUCT_FAILURE:
     case c.GET_PROFILE_FAILURE:
     case c.GET_PRODUCTS_FAILURE:
+    case c.GET_ALL_NEWS_FAILURE:
     case c.GET_ORDER_INFO_FAILURE:
+    case c.GET_ORDERS_LIST_FAILURE:
     case c.GET_NEWS_CATEGORY_FAILURE:
     case c.GET_FAVORITE_PRODUCT_FAILURE:
     case c.GET_COLLABORATOR_INFO_FAILURE:
     case c.GET_PURCHASED_PRODUCTS_FAILURE: {
+      window.location.href = `/`;
       //window.location.href = `/${action.code}?code=${action.code}&message=${action.msg}`;
       break;
     }

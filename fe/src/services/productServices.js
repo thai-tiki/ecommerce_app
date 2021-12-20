@@ -1,9 +1,11 @@
 import { constants as c } from "../constants";
-import { appServices } from "./appServices";
-const store_code = appServices.store_code;
 function getAllProducts(queryString) {
+  const token = JSON.parse(localStorage.getItem("token"));
   const requestOptions = {
     method: "GET",
+    headers: {
+      token: token ? token : "",
+    },
   };
   return fetch(`${c.API_URL}/product${queryString}`, requestOptions)
     .then((res) => res.json())
@@ -170,29 +172,6 @@ function getFavoriteProducts() {
       return {};
     });
 }
-//OK
-function getPurchasedProducts() {
-  const token = JSON.parse(localStorage.getItem("token"));
-  const requestOptions = {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "customer-token": token ? token.token : "",
-    },
-  };
-  return fetch(
-    `${c.API_URL}/customer/${store_code}/purchased_products`,
-    requestOptions
-  )
-    .then((res) => res.json())
-    .then((data) => {
-      return data;
-    })
-    .catch((err) => {
-      console.log(err);
-      return {};
-    });
-}
 export const productServices = {
   addProduct,
   updateProduct,
@@ -202,6 +181,5 @@ export const productServices = {
   toggleWishList,
   reviewProduct,
   getFavoriteProducts,
-  getPurchasedProducts,
   getProductReview,
 };

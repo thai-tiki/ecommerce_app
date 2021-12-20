@@ -6,7 +6,7 @@ import { constants as c } from "../../constants";
 import { useEffect } from "react";
 function ErrorPage(props) {
   let query = queryString.parse(props.location.search);
-  const categoryStatus = useSelector((state) => state.category.status);
+  const categories = useSelector((state) => state.category.list);
   useEffect(() => {
     if (Object.keys(query).length > 0) {
       document.title = query.message
@@ -17,18 +17,20 @@ function ErrorPage(props) {
   return (
     <React.Fragment>
       {
-        categoryStatus === c.SUCCESS && <Header />
+        categories.status === c.SUCCESS && <Header />
       }
-      {Object.keys(query).length > 0 ?
-        <div className="err-page">
-          {query.code} <br />
-          {query.message}
-        </div>
-        :
-        <div className="err-page">
-          404 <br />
-          Trang không tồn tại
-        </div>}
+      {
+        Object.keys(query).length > 0 ?
+          <div className="err-page">
+            {query.code} <br />
+            {query.message}
+          </div>
+          :
+          <div className="err-page">
+            404 <br />
+            Trang không tồn tại
+          </div>
+      }
     </React.Fragment>
   )
 }

@@ -5,7 +5,7 @@ const auth = require("../middlewares/auth");
 const validator = require("../middlewares/validate");
 const controller = require("../controllers/product");
 const commentValidate = require("../models/comment").validate;
-router.get("/", controller.getAll);
+router.get("/", auth.readToken, controller.getAll);
 router.get("/similar/:id", controller.getSimilar);
 router.get("/rating/:id", controller.getAllComment);
 router.get("/favorite", auth.protect, controller.getFavorite);

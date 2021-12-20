@@ -17,9 +17,10 @@ exports.addOne = (Model) => async (req, res) => {
 };
 exports.getAll = (Model, populate, select) => async (req, res) => {
   try {
-    let page = req.query.page ? req.query.page : 1;
+    let perPage = c.PER_PAGE;
     let query = { ...req.query };
     let sortOptions = { _id: -1 };
+    let page = req.query.page ? req.query.page : 1;
     if (query.name) query.name = { $regex: req.query.name, $options: "i" };
     if (query.sort_by)
       sortOptions = {
@@ -29,8 +30,10 @@ exports.getAll = (Model, populate, select) => async (req, res) => {
       sortOptions = {
         after_discount_price: sortOptions.price,
       };
+    console.log(req.user);
+    if (req.user && req.user.role === c.ADMIN) perPage = 1000;
     const data = await Model.find(req.query ? query : {})
-      .limit(c.PER_PAGE)
+      .limit(perPage)
       .skip((page - 1) * c.PER_PAGE)
       .populate(populate)
       .select(select)
