@@ -1,6 +1,7 @@
 exports.constants = {
   //STATUS
-  API_URL: "http://localhost:3001/api",
+  API_URL: "https://immense-shelf-19793.herokuapp.com/api",
+  API_URL1: "http://localhost:3001/api",
   CLEAR_MESSAGE: "CLEAR_MESSAGE",
   LOADING: "LOADING",
   NONE: "NONE",
