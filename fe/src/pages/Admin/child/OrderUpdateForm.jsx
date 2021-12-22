@@ -6,6 +6,7 @@ import { appActions } from "../../../actions/appActions";
 import { cartActions } from "../../../actions/cartActions";
 import Select from "../../../components/Select";
 export default function OrderUpdateForm(props) {
+  console.log(props.order)
   const {
     date,
     items,

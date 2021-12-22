@@ -96,3 +96,31 @@ exports.updateOne = async (req, res) => {
     });
   }
 };
+exports.cancel = async (req, res) => {
+  try {
+    const data = await Order.findByIdAndUpdate(req.params.id, {
+      status: {
+        name: "Đã hủy",
+        code: c.CUSTOMER_CANCELED,
+      },
+    });
+    if (!data) {
+      res.status(401).json({
+        status: c.FAILURE,
+        msg: c.NO_ORDER,
+      });
+      return;
+    }
+    res.status(200).json({
+      status: c.SUCCESS,
+      msg: c.UPDATE_ORDER_SUCCCESS,
+      data,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      status: c.FAILURE,
+      msg: c.CODE_500,
+    });
+  }
+};
