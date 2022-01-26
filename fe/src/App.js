@@ -1,7 +1,8 @@
-import "./App.css";
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+
+import "./App.css";
 import Footer from "./components/Footer";
 import Popup from "./components/Popup/Popup";
 import CartPage from "./pages/Cart/CartPage";

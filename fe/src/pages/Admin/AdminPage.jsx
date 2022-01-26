@@ -22,7 +22,6 @@ function AdminPage(props) {
     "voucher": <VoucherTab />
   };
   useEffect(() => {
-    console.log(props);
     document.title = "Quản lý";
     document.getElementsByTagName("BODY")[0].style.height = "100vh";
     document.getElementsByTagName("BODY")[0].style.overflow = "hidden";
